@@ -18,7 +18,7 @@
   <meta name="author" content="Suixiang Chen">
   <meta name="keywords" content="">
   
-  <title>GO的单元测试 - 陈随想</title>
+  <title>GO环境配置（VSCODE篇） - 陈随想</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="GO的单元测试">
+            <span class="h2" id="subtitle" title="GO环境配置（VSCODE篇）">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-02 12:19" pubdate>
-        2021年8月2日 中午
+      <time datetime="2021-08-02 22:37" pubdate>
+        2021年8月2日 晚上
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      276 字
+      827 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      10
        分钟
     </span>
   
@@ -225,22 +225,55 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">GO的单元测试</h1>
+            <h1 style="display: none">GO环境配置（VSCODE篇）</h1>
             
             <div class="markdown-body">
-              <h4 id="关键点纪要"><a href="#关键点纪要" class="headerlink" title="关键点纪要"></a>关键点纪要</h4><ul>
-<li><p>文件必须以  <code>_test.go</code>  结尾，函数名必须以  <code>Test</code>  开头。举栗子：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go">my2_test.<span class="hljs-keyword">go</span>，<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Test2</span><span class="hljs-params">()</span></span>&#123;&#125;<br>my_test.<span class="hljs-keyword">go</span>, <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Test</span><span class="hljs-params">()</span></span>&#123;&#125;<br>特别注意，根据习惯，很容易犯错如下：<br>my_test2.<span class="hljs-keyword">go</span>, <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">myTest</span><span class="hljs-params">()</span></span>&#123;&#125;<span class="hljs-comment">//注意这是错误的</span><br></code></pre></td></tr></table></figure></li>
-<li><p>比如和测试代码同一个包</p>
-  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go">--websockets（文件夹）<br>    --client.<span class="hljs-keyword">go</span>(<span class="hljs-keyword">package</span> websockets)<br>    --clinet_test.<span class="hljs-keyword">go</span><br>    	<span class="hljs-keyword">package</span> websockets<br>        <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;testing&quot;</span><br>        <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Test_client</span><span class="hljs-params">(t *testing.T)</span></span>&#123;<br>            <span class="hljs-comment">//测试client.go中的func</span><br>        &#125;<br></code></pre></td></tr></table></figure></li>
-<li><p><code>go test -v  my_test.go</code>  或者  <code>go test -v  .</code>   （注意-v可以打印详细测试结果）</p>
-  <figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pf">PS D:\go&gt; go test -v .\websockets\my_test.go<br>=== RUN   Test1<br>map[<span class="hljs-number">1012</span>:&#123;<span class="hljs-keyword">state</span>:&#123;NoUnkeyedLiterals:&#123;&#125; DoNotCompare:[] DoNotCopy:[] atomicMessageInfo:<span class="hljs-variable">&lt;nil&gt;</span>&#125; sizeCache:<span class="hljs-number">0</span> <span class="hljs-literal">unknown</span>Fields:[] PlotIds:[]&#125; <span class="hljs-number">9999</span>:&#123;<span class="hljs-keyword">state</span>:&#123;NoUnkeyedLiterals:&#123;&#125; DoNotCompare:[] DoNotCopy:[] atomicMessageInfo:<span class="hljs-variable">&lt;nil&gt;</span>&#125; sizeCache:<span class="hljs-number">0</span> <span class="hljs-literal">unknown</span>Fields:[] MessageId:<span class="hljs-variable">&lt;nil&gt;</span> ClientIndex:<span class="hljs-variable">&lt;nil&gt;</span> Data:[]&#125;]@<span class="hljs-comment">#@#@#--- PASS: Test1 (0.00s)</span><br>PASS<br>ok      command-line-arguments  <span class="hljs-number">0.106</span>s<br>PS D:\go&gt;<br></code></pre></td></tr></table></figure></li>
-<li><p>在命令行中添加<code>-benchmem</code>参数以显示内存分配情况（暂时没有实操过）</p>
+              <h4 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h4><p>公司电脑虽然早已配好go环境，但是家里笔记本还没呢。搞一下，顺带记录实操过程。</p>
+<h4 id="go下载安装："><a href="#go下载安装：" class="headerlink" title="go下载安装："></a>go下载安装：</h4><p>官网：<a target="_blank" rel="noopener" href="https://golang.google.cn/">https://golang.google.cn/</a></p>
+<p>建议下载windows安装包，安装过程改路径：D:\Program Files\Go\</p>
+<p>确认系统变量path变量多了：D:\Program Files\Go\bin</p>
+<p>在cmd窗口中执行go，确认go命令生效。</p>
+<h4 id="VS-code配置："><a href="#VS-code配置：" class="headerlink" title="VS code配置："></a>VS code配置：</h4><p>我在D盘新建了文件夹gowork（最好不要出现空格，养成习惯）</p>
+<ul>
+<li><p>vs code安装code run插件</p>
+</li>
+<li><p>用vs code打开gowork文件夹</p>
+</li>
+<li><p>在文件夹新建main.go，此时vs code提示是否安装go扩展以及gopls，最后安装失败（如果没有科学上网肯定失败）</p>
+</li>
+<li><p>设置代理go env -w GOPROXY=<a target="_blank" rel="noopener" href="https://goproxy.cn,direct(也有其他代理,可以上网查)/">https://goproxy.cn,direct（也有其他代理，可以上网查）</a></p>
+</li>
+<li><p>重启vs code，仍然提示上图。那么继续点击install all。这次全部成功，同时可以在go path路径下找到下载的gopls</p>
 </li>
 </ul>
-<h4 id="建议收藏"><a href="#建议收藏" class="headerlink" title="建议收藏"></a>建议收藏</h4><p><a target="_blank" rel="noopener" href="http://c.biancheng.net/view/124.html">http://c.biancheng.net/view/124.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/391478681">https://zhuanlan.zhihu.com/p/391478681</a></p>
-<p>注意多利用单元测试来测试写的func，避免一直通过在main中调用测试，养成习惯！</p>
+<p><img src="/img/image-20210802221338830.png" srcset="/img/loading.gif" lazyload alt="image-20210802221338830"></p>
+<h4 id="go-mod环境："><a href="#go-mod环境：" class="headerlink" title="go mod环境："></a>go mod环境：</h4><p>简单测试下go可以运行：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	fmt.Printf(<span class="hljs-string">&quot;@@@&quot;</span>)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>接下来新建文件夹以及文件employee.go</p>
+<p><img src="/img/image-20210802221637262.png" srcset="/img/loading.gif" lazyload alt="image-20210802221637262"></p>
+<p>employee.go内容：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> employee<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>)<br><br><span class="hljs-keyword">type</span> Employee <span class="hljs-keyword">struct</span> &#123;<br>	FirstName   <span class="hljs-keyword">string</span><br>	LastName    <span class="hljs-keyword">string</span><br>	TotalLeaves <span class="hljs-keyword">int</span><br>	LeavesTaken <span class="hljs-keyword">int</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(e Employee)</span> <span class="hljs-title">LeavesRemaining</span><span class="hljs-params">()</span></span> &#123;<br>	fmt.Printf(<span class="hljs-string">&quot;%s %s has %d leaves remaining&quot;</span>, e.FirstName, e.LastName, (e.TotalLeaves - e.LeavesTaken))<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>main.go内容改为：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;employee&quot;</span><br><span class="hljs-comment">//（后面修改为import &quot;test/employee&quot;，这里test为go mod init test的对应包名）</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	e := employee.Employee&#123;<br>		FirstName:   <span class="hljs-string">&quot;Sam&quot;</span>,<br>		LastName:    <span class="hljs-string">&quot;Adolf&quot;</span>,<br>		TotalLeaves: <span class="hljs-number">30</span>,<br>		LeavesTaken: <span class="hljs-number">20</span>,<br>	&#125;<br>	e.LeavesRemaining()<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>此时运行main.go失败，会提示包找不到（默认从GOROOT中找包），我们需要用go mod来管理新建的package employee。</p>
+<p>在这个工作目录workspace命令窗口下执行<code>go mod init test</code>（test可以自己命名，同时注意会多出一个go.mod文件）,然后导入包修改为<code>import &quot;test/employee&quot;</code>这里的test必须和<code>go mod init test</code>创建的一致。最后运行Main.go成功（不截图了）。</p>
+<p><img src="/img/image-20210802222315069.png" srcset="/img/loading.gif" lazyload alt="image-20210802222315069"></p>
+<p>到了这里，你已经配置好基本环境，也能够利用go mod来管理包了。接下来试一下如何import第三方包。</p>
+<h4 id="外部包引用："><a href="#外部包引用：" class="headerlink" title="外部包引用："></a>外部包引用：</h4><p>修改main.go内容为：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br><br>	<span class="hljs-string">&quot;github.com/jinzhu/configor&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	fmt.Println(<span class="hljs-string">&quot;hello world&quot;</span>)<br>	fmt.Println(<span class="hljs-string">&quot;使用外部包测试：&quot;</span>, configor.Config&#123;&#125;)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>运行提示：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs go">main.<span class="hljs-keyword">go</span>:<span class="hljs-number">6</span>:<span class="hljs-number">2</span>: no required module provides <span class="hljs-keyword">package</span> github.com/jinzhu/configor; to add it:<br><br>  <span class="hljs-keyword">go</span> get github.com/jinzhu/configor<br></code></pre></td></tr></table></figure>
+
+<p>好的，那么我们按照提示在vs code终端执行（也可以cmd执行）：<code>go get github.com/jinzhu/configor</code></p>
+<p>在上文提到的go path路径下可以发现<code>github.com/jinzhu/configor</code>包成功下载到了本地。执行main.go成功，如下：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crystal">hello world<br>使用外部包测试： &#123;  <span class="hljs-literal">false</span> <span class="hljs-literal">false</span> <span class="hljs-literal">false</span> <span class="hljs-literal">false</span> <span class="hljs-number">0</span>s &lt;<span class="hljs-literal">nil</span>&gt; <span class="hljs-literal">false</span>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="附言："><a href="#附言：" class="headerlink" title="附言："></a>附言：</h4><p>网上很多说改vscode的setting.json，其实可以不用的，改setting.json无非就是改全局设置或者工作目录下新增一个作为单独用户配置，等有需要的时候再行设置即可。总的来说，现在go mod的包管理已经相比以前很优秀了。</p>
+<p>另外，为啥我用vs code不用jetbrain呢？因为JetBrains已经成立中国公司捷并思了，万一哪天不让各位破解用，那还不如趁早熟悉免费的vs code。</p>
 
             </div>
             <hr>
@@ -268,18 +301,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/02/GO%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88VSCODE%E7%AF%87%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">GO环境配置（VSCODE篇）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/20/%E6%88%B7%E5%A4%96%E5%B1%A5%E5%8E%86/">
-                        <span class="hidden-mobile">户外履历</span>
+                      <a href="/2021/08/02/GO%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+                        <span class="hidden-mobile">GO的单元测试</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
