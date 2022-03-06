@@ -17,7 +17,7 @@
   <meta name="author" content="Suixiang Chen">
   <meta name="keywords" content="">
   
-  <title>paramiko踩坑 - 陈随想</title>
+  <title>转行后首次使用Jmeter----基本使用 - 陈随想</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -161,7 +161,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="paramiko踩坑">
+            <span class="h2" id="subtitle" title="转行后首次使用Jmeter----基本使用">
               
             </span>
 
@@ -171,8 +171,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-11-25 23:00" pubdate>
-        2021年11月25日 晚上
+      <time datetime="2022-03-06 23:30" pubdate>
+        2022年3月6日 晚上
       </time>
     </span>
   
@@ -183,7 +183,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      606 字
+      541 字
     </span>
   
 
@@ -193,7 +193,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      7
        分钟
     </span>
   
@@ -223,15 +223,57 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">paramiko踩坑</h1>
+            <h1 style="display: none">转行后首次使用Jmeter----基本使用</h1>
             
             <div class="markdown-body">
-              <h4 id="paramiko踩坑：远程上传下载以及linux命令执行"><a href="#paramiko踩坑：远程上传下载以及linux命令执行" class="headerlink" title="paramiko踩坑：远程上传下载以及linux命令执行"></a>paramiko踩坑：远程上传下载以及linux命令执行</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> paramiko<br><span class="hljs-keyword">import</span> parse_config<br><span class="hljs-keyword">import</span> pysvn<br>tran = paramiko.Transport(<span class="hljs-string">&#x27;XXX&#x27;</span>)<br>tran.connect(username=<span class="hljs-string">&#x27;XXX&#x27;</span>, password=<span class="hljs-string">&quot;XXX&quot;</span>)<br><span class="hljs-comment"># 获取SFTP实例</span><br>sftp = paramiko.SFTPClient.from_transport(tran)<br><br>local_excel = <span class="hljs-string">&quot;XXX&quot;</span><br>remotepath = <span class="hljs-string">&quot;XXX&quot;</span><br><br>svnclient = pysvn.Client(local_excel)<br>changes = svnclient.status(local_excel)<br><span class="hljs-comment">#这里是获取svn modified，我主要是获取改动的excel文件</span><br>change_exc = [f.path <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> changes <span class="hljs-keyword">if</span> f.text_status == pysvn.wc_status_kind.modified]<br><br><span class="hljs-comment">#我自己做的一些其他处理，可不管</span><br>parconf = parse_config.parsetable<br>need_parese = []<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> change_exc:<br>    xls_name = i.split(<span class="hljs-string">&quot;文档\\&quot;</span>)[<span class="hljs-number">1</span>].replace(<span class="hljs-string">&#x27;\\&#x27;</span>, <span class="hljs-string">&#x27;/&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(xls_name)<br>    targetpath = remotepath + xls_name<br>    localpath = i.replace(<span class="hljs-string">&#x27;\\&#x27;</span>, <span class="hljs-string">&#x27;/&#x27;</span>)<br>    <span class="hljs-comment"># print(&quot;本地位置----&quot;, localpath, &quot;目标位置----&quot;, targetpath)</span><br>    sftp.put(localpath, targetpath)<br>    parse_file = <span class="hljs-string">&quot;文档\\&quot;</span> + xls_name<br>    <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> parconf.items():<br>        <span class="hljs-keyword">for</span> ls <span class="hljs-keyword">in</span> v:<br>            <span class="hljs-keyword">if</span> ls[<span class="hljs-string">&quot;parse_file&quot;</span>] == parse_file:<br>                need_parese.append(k)<br>                <span class="hljs-keyword">break</span><br><span class="hljs-built_in">print</span>(need_parese)<br>tran.close()<br><br><span class="hljs-comment"># 配置私人密钥文件位置</span><br><span class="hljs-comment"># private = paramiko.RSAKey.from_private_key_file(&#x27;D:/dev_rsa/id_rsa_2048&#x27;, password=&#x27;123456&#x27;)</span><br><span class="hljs-comment"># 实例化SSHClient</span><br>client = paramiko.SSHClient()<br><br><span class="hljs-comment"># 自动添加策略，保存服务器的主机名和密钥信息，如果不添加，那么不再本地know_hosts文件中记录的主机将无法连接</span><br>client.set_missing_host_key_policy(paramiko.AutoAddPolicy())<br><span class="hljs-comment">#</span><br><span class="hljs-comment"># 连接SSH服务端，以用户名和密码进行认证</span><br>client.connect(hostname=<span class="hljs-string">&#x27;1XXX&#x27;</span>, username=<span class="hljs-string">&#x27;XXX&#x27;</span>, password=<span class="hljs-string">&quot;XXX&quot;</span>)<br><br><span class="hljs-comment"># parse_com = &quot;./tools/parse_local_table.py&quot;</span><br>parse_com = <span class="hljs-string">&quot;git branch&quot;</span><br><span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> need_parese:<br>    parse_com = parse_com + <span class="hljs-string">&quot; &quot;</span> + k<br><br><span class="hljs-comment"># stdin1, stdout1, stderr1 = client.exec_command(&#x27;cd qqsj_qc01/logic/;./tools/parse_local_table.py activity_theme&#x27;)</span><br>cmd = <span class="hljs-string">&quot;bash --login -c &#x27;cd qqsj_qc01/logic/;&#123;&#125;&#x27;&quot;</span>.<span class="hljs-built_in">format</span>(parse_com)<br><span class="hljs-built_in">print</span>(cmd)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;--------------开始执行导表----------------&quot;</span>)<br>stdin1, stdout1, stderr1 = client.exec_command(cmd, get_pty=<span class="hljs-literal">True</span>)<br><br><span class="hljs-built_in">print</span>(stdout1.read().decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br>client.close()<br><br><br><span class="hljs-comment"># 执行上传下载动作</span><br><span class="hljs-comment"># sftp.put(i, remotepath)</span><br><span class="hljs-comment"># sftp.get(remote_parseconfig, local_parseconfig)</span><br><br></code></pre></td></tr></table></figure>
+              <h4 id="Jmeter上下文引用"><a href="#Jmeter上下文引用" class="headerlink" title="Jmeter上下文引用"></a>Jmeter上下文引用</h4><p>变量引用：${para},  比如用于请求头，或者参数化请求body；</p>
+<p>引用jmeter系统变量：**${__property(para)}**</p>
+<p><a target="_blank" rel="noopener" href="https://jmeter.apache.org/usermanual/functions.html#__property">https://jmeter.apache.org/usermanual/functions.html#__property</a></p>
+<p>那么如何设置变量？</p>
+<p>eg: </p>
 <ul>
-<li> 踩坑点1：远程Linux命令执行，会出现command Not found，因为执行的path不对。必须采用bash –login登陆方式（这个方式表示用户登陆时，输入用户名和密码后启动的shell）。</li>
-<li> 踩坑点2：执行命令要一并执行，中间用,分割，否则不是同一个会话。如果分开执行client.exec_command(cd home/my)和client.exec_command(ls)，最后列出目录并不是my下面文件</li>
+<li>jsonpath提取值</li>
+<li>元器：用户参数、信息头管理器</li>
+<li>functions语法设置：${__setProperty(sessionToken, ${sessiontoken},)}，将${sessiontoken}该引用变量设置为Jmeter系统变量sessionToken，之后就可以${sessiontoken}来引用</li>
 </ul>
-<p>Bash 的激活选项<br>-c string 该选项表明string中包含了一条命令.如 bash -c ls ~；bash –login -c ‘cd /home/my,ls’<br>-i 使Bash以交互式方式运行<br>-r 使Bash以受限方式运行<br>–login 使Bash以登录Shell方式运行<br>–posix 使Bash遵循POSIX标准<br>–verbose 使Bash显示所有其读入的输入行<br>–help 打印Bash的使用信息<br>–version 打印版本信息<br>–noprofile<br>–norc<br>–rcfile file</p>
+<h4 id="Jmeter-Functions-and-Variables"><a href="#Jmeter-Functions-and-Variables" class="headerlink" title="Jmeter: Functions and Variables"></a>Jmeter: Functions and Variables</h4><p>食用方法：**${__functionName(var1,var2,var3)}**</p>
+<p>特别注意：在代码中食用方式如下：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nix">正确例子：var <span class="hljs-attr">person</span> = <span class="hljs-string">&quot;啊哈<span class="hljs-subst">$&#123;__threadNum&#125;</span>&quot;</span><br><br>错误例子：var <span class="hljs-attr">person</span> = <span class="hljs-string">&quot;啊哈&quot;</span> + $&#123;__threadNum&#125;.<span class="hljs-built_in">toString</span>()<br></code></pre></td></tr></table></figure>
+
+
+
+<p>常用函数举例：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-variable">$&#123;__time(dd/MM/yyyy,)&#125;</span><br><span class="hljs-comment">#如果在 2018 年 1 月 21 日运行， 将返回21/01/2018</span><br><br><span class="hljs-variable">$&#123;__CSVRead(random.txt,0)&#125;</span><br><span class="hljs-comment">#适用小文件</span><br></code></pre></td></tr></table></figure>
+
+<p>更多食用方法参考函数助手：</p>
+<p><img src="D:\Myblog\mistyrain520.github.io/source/img/image-20220214203401644.png" srcset="/img/loading.gif" lazyload alt="image-20220214203401644"></p>
+<p>值得注意的是，在脚本中直接引用jmeter函数，应当作为变量来使用，而不是已知变量：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stata"># 正确写法<br><span class="hljs-keyword">var</span> <span class="hljs-variable">$&#123;__CSVRead</span>(<span class="hljs-keyword">D</span>:\<span class="hljs-keyword">test</span>.csv,0)&#125; = <span class="hljs-string">&quot;卡库拉&quot;</span>;<br>错误写法,报错XXX未定义<br><span class="hljs-keyword">var</span> aa = <span class="hljs-variable">$&#123;__CSVRead</span>(<span class="hljs-keyword">D</span>:\<span class="hljs-keyword">test</span>.csv,0)&#125;;<br></code></pre></td></tr></table></figure>
+
+
+
+<p><img src="D:\Myblog\mistyrain520.github.io/source/img/image-20220214205219976.png" srcset="/img/loading.gif" lazyload alt="image-20220214205219976"></p>
+<h5 id="官网参考网址"><a href="#官网参考网址" class="headerlink" title="官网参考网址:"></a>官网参考网址:</h5><p><a target="_blank" rel="noopener" href="https://jmeter.apache.org/usermanual/functions.html#">https://jmeter.apache.org/usermanual/functions.html#</a></p>
+<h4 id="JSR223-预处理程序"><a href="#JSR223-预处理程序" class="headerlink" title="JSR223 预处理程序"></a>JSR223 预处理程序</h4><p>先认识一下老的BeanShell处理程序</p>
+<p><a target="_blank" rel="noopener" href="https://jmeter.apache.org/usermanual/functions.html#__BeanShell">https://jmeter.apache.org/usermanual/functions.html#__BeanShell</a></p>
+<p><a target="_blank" rel="noopener" href="https://jmeter.apache.org/usermanual/component_reference.html#BeanShell_Sampler">https://jmeter.apache.org/usermanual/component_reference.html#BeanShell_Sampler</a></p>
+<ul>
+<li><strong>ctx</strong> - <a target="_blank" rel="noopener" href="https://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html">JMeterContext</a> object，以ctx为例，是Jmetercontext类，便可以找到该类下的方法，举例，可以通过ctx.getCurrentSampler()去引用</li>
+<li><strong>vars</strong> - <a target="_blank" rel="noopener" href="https://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a> object，这个涉及到最基础的变量使用方式，比如<strong>var.put(key,value),var.get(key)</strong></li>
+<li><strong>props</strong> - JMeterProperties (class <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"><strong>java.util.Properties</strong></a>) object</li>
+<li><strong>threadName</strong> - the threadName (String)</li>
+<li><strong>Sampler</strong> - the current <a target="_blank" rel="noopener" href="https://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html">Sampler</a>, if any</li>
+<li><strong>SampleResult</strong> - the current <a target="_blank" rel="noopener" href="https://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html">SampleResult</a>,</li>
+<li><strong>props</strong> - JMeterProperties (class <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"><strong>java.util.Properties</strong></a>) 该方法也很重要。</li>
+<li>补充区别：vars 只能在当前线程内使用，props 可以跨线程组使用<br>vars 只能保存 String 或者 Object，props 是 Hashtable 对象</li>
+</ul>
+<p>接下来看下JSR223处理器</p>
+<p><a target="_blank" rel="noopener" href="https://jmeter.apache.org/usermanual/component_reference.html#JSR223_Sampler">https://jmeter.apache.org/usermanual/component_reference.html#JSR223_Sampler</a></p>
+<p>值得注意的是这几句话：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">When using this feature, ensure your <span class="hljs-keyword">script </span>code does not use <span class="hljs-keyword">JMeter </span>variables <span class="hljs-keyword">or </span><span class="hljs-keyword">JMeter </span>function calls <span class="hljs-keyword">directly </span>in <span class="hljs-keyword">script </span>code as caching would only <span class="hljs-keyword">cache </span>first replacement. <span class="hljs-keyword">Instead </span>use <span class="hljs-keyword">script </span>parameters.<br><br>To <span class="hljs-keyword">benefit </span>from caching <span class="hljs-keyword">and </span>compilation, the language engine used for <span class="hljs-keyword">scripting </span>must implement <span class="hljs-keyword">JSR223 </span>Compilable interface (Groovy is one of these, <span class="hljs-keyword">java, </span><span class="hljs-keyword">beanshell </span><span class="hljs-keyword">and </span><span class="hljs-keyword">javascript </span>are not)<br></code></pre></td></tr></table></figure>
+
+
+
 
             </div>
             <hr>
@@ -242,9 +284,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/python/">python</a>
-                    
-                      <a class="hover-with-bg" href="/tags/paramiko/">paramiko</a>
+                      <a class="hover-with-bg" href="/tags/jmeter/">jmeter</a>
                     
                   </div>
                 
@@ -261,9 +301,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/06/python%E4%B8%AD%E4%B8%89%E9%87%8D%E5%BC%95%E5%8F%B7%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%8D%A0%E4%BD%8D%E7%AC%A6/">
+                      <a href="/2022/03/06/Fiddler%E6%8B%A6%E6%88%AA%E6%93%8D%E4%BD%9C/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">python中三重引号的使用</span>
+                        <span class="hidden-mobile">Fiddler拦截操作</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -271,8 +311,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/11/16/Println%E6%9C%94%E6%BA%90/">
-                        <span class="hidden-mobile">go println朔源</span>
+                      <a href="/2022/03/06/python%E4%B8%AD%E4%B8%89%E9%87%8D%E5%BC%95%E5%8F%B7%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%8D%A0%E4%BD%8D%E7%AC%A6/">
+                        <span class="hidden-mobile">python中三重引号的使用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

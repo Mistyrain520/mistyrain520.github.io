@@ -4,6 +4,63 @@
   
   
   <entry>
+    <title>Fiddler拦截操作</title>
+    <link href="/2022/03/06/Fiddler%E6%8B%A6%E6%88%AA%E6%93%8D%E4%BD%9C/"/>
+    <url>/2022/03/06/Fiddler%E6%8B%A6%E6%88%AA%E6%93%8D%E4%BD%9C/</url>
+    
+    <content type="html"><![CDATA[<h3 id="Fiddler拦截操作"><a href="#Fiddler拦截操作" class="headerlink" title="Fiddler拦截操作"></a>Fiddler拦截操作</h3><h4 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h4><ul><li>bps 200 中断200状态的所有请求；bps（不加参数）取消所有bps中断</li><li>bpafter  aaa 中断包含aaa的URL（也可以直接写整个URL），通常用来做中断，修改返回值用</li><li>bpu同bpafter作用相似，同理，bpu不带参数，则是取消所有设置的中断</li><li>go 让当前中断的请求全部继续执行跳过中断</li><li>select可以选择URL，比如select image，选择image的URL</li></ul><h4 id="拦截请求修改返回的几种方法"><a href="#拦截请求修改返回的几种方法" class="headerlink" title="拦截请求修改返回的几种方法"></a>拦截请求修改返回的几种方法</h4><h5 id="方式一：先bpafter-url；重新加载请求后会在该url中断，修改Inspectors下TextView的值即可；不需要更改content-length；"><a href="#方式一：先bpafter-url；重新加载请求后会在该url中断，修改Inspectors下TextView的值即可；不需要更改content-length；" class="headerlink" title="方式一：先bpafter url；重新加载请求后会在该url中断，修改Inspectors下TextView的值即可；不需要更改content-length；"></a>方式一：先bpafter url；重新加载请求后会在该url中断，修改Inspectors下TextView的值即可；不需要更改content-length；</h5><h5 id="方式二（推荐）"><a href="#方式二（推荐）" class="headerlink" title="方式二（推荐）:"></a>方式二（推荐）:</h5><p>save ResponseBody，然后AutoRespender中启用即可，可以随意更改返回json中的内容；不建议用Entire ResponseBody，因为实际使用增加了接口返回长度，需要修改content-length，否则会导致返回内容被截断。</p><p><img src="D:\Myblog\mistyrain520.github.io/source/img/image-20220130171807524.png" alt="image-20220130171807524"></p><p><img src="D:\Myblog\mistyrain520.github.io/source/img/image-20220130172101062.png" alt="image-20220130172101062"></p><p>参考：<a href="https://blog.csdn.net/weixin_42380194/article/details/84314181">https://blog.csdn.net/weixin_42380194/article/details/84314181</a></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>fiddler</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>转行后首次使用Jmeter----基本使用</title>
+    <link href="/2022/03/06/Jmeter%20Functions%20and%20Variables/"/>
+    <url>/2022/03/06/Jmeter%20Functions%20and%20Variables/</url>
+    
+    <content type="html"><![CDATA[<h4 id="Jmeter上下文引用"><a href="#Jmeter上下文引用" class="headerlink" title="Jmeter上下文引用"></a>Jmeter上下文引用</h4><p>变量引用：${para},  比如用于请求头，或者参数化请求body；</p><p>引用jmeter系统变量：**${__property(para)}**</p><p><a href="https://jmeter.apache.org/usermanual/functions.html#__property">https://jmeter.apache.org/usermanual/functions.html#__property</a></p><p>那么如何设置变量？</p><p>eg: </p><ul><li>jsonpath提取值</li><li>元器：用户参数、信息头管理器</li><li>functions语法设置：${__setProperty(sessionToken, ${sessiontoken},)}，将${sessiontoken}该引用变量设置为Jmeter系统变量sessionToken，之后就可以${sessiontoken}来引用</li></ul><h4 id="Jmeter-Functions-and-Variables"><a href="#Jmeter-Functions-and-Variables" class="headerlink" title="Jmeter: Functions and Variables"></a>Jmeter: Functions and Variables</h4><p>食用方法：**${__functionName(var1,var2,var3)}**</p><p>特别注意：在代码中食用方式如下：</p><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nix">正确例子：var <span class="hljs-attr">person</span> = <span class="hljs-string">&quot;啊哈<span class="hljs-subst">$&#123;__threadNum&#125;</span>&quot;</span><br><br>错误例子：var <span class="hljs-attr">person</span> = <span class="hljs-string">&quot;啊哈&quot;</span> + $&#123;__threadNum&#125;.<span class="hljs-built_in">toString</span>()<br></code></pre></td></tr></table></figure><p>常用函数举例：</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-variable">$&#123;__time(dd/MM/yyyy,)&#125;</span><br><span class="hljs-comment">#如果在 2018 年 1 月 21 日运行， 将返回21/01/2018</span><br><br><span class="hljs-variable">$&#123;__CSVRead(random.txt,0)&#125;</span><br><span class="hljs-comment">#适用小文件</span><br></code></pre></td></tr></table></figure><p>更多食用方法参考函数助手：</p><p><img src="D:\Myblog\mistyrain520.github.io/source/img/image-20220214203401644.png" alt="image-20220214203401644"></p><p>值得注意的是，在脚本中直接引用jmeter函数，应当作为变量来使用，而不是已知变量：</p><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stata"># 正确写法<br><span class="hljs-keyword">var</span> <span class="hljs-variable">$&#123;__CSVRead</span>(<span class="hljs-keyword">D</span>:\<span class="hljs-keyword">test</span>.csv,0)&#125; = <span class="hljs-string">&quot;卡库拉&quot;</span>;<br>错误写法,报错XXX未定义<br><span class="hljs-keyword">var</span> aa = <span class="hljs-variable">$&#123;__CSVRead</span>(<span class="hljs-keyword">D</span>:\<span class="hljs-keyword">test</span>.csv,0)&#125;;<br></code></pre></td></tr></table></figure><p><img src="D:\Myblog\mistyrain520.github.io/source/img/image-20220214205219976.png" alt="image-20220214205219976"></p><h5 id="官网参考网址"><a href="#官网参考网址" class="headerlink" title="官网参考网址:"></a>官网参考网址:</h5><p><a href="https://jmeter.apache.org/usermanual/functions.html#">https://jmeter.apache.org/usermanual/functions.html#</a></p><h4 id="JSR223-预处理程序"><a href="#JSR223-预处理程序" class="headerlink" title="JSR223 预处理程序"></a>JSR223 预处理程序</h4><p>先认识一下老的BeanShell处理程序</p><p><a href="https://jmeter.apache.org/usermanual/functions.html#__BeanShell">https://jmeter.apache.org/usermanual/functions.html#__BeanShell</a></p><p><a href="https://jmeter.apache.org/usermanual/component_reference.html#BeanShell_Sampler">https://jmeter.apache.org/usermanual/component_reference.html#BeanShell_Sampler</a></p><ul><li><strong>ctx</strong> - <a href="https://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterContext.html">JMeterContext</a> object，以ctx为例，是Jmetercontext类，便可以找到该类下的方法，举例，可以通过ctx.getCurrentSampler()去引用</li><li><strong>vars</strong> - <a href="https://jmeter.apache.org/api/org/apache/jmeter/threads/JMeterVariables.html">JMeterVariables</a> object，这个涉及到最基础的变量使用方式，比如<strong>var.put(key,value),var.get(key)</strong></li><li><strong>props</strong> - JMeterProperties (class <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"><strong>java.util.Properties</strong></a>) object</li><li><strong>threadName</strong> - the threadName (String)</li><li><strong>Sampler</strong> - the current <a href="https://jmeter.apache.org/api/org/apache/jmeter/samplers/Sampler.html">Sampler</a>, if any</li><li><strong>SampleResult</strong> - the current <a href="https://jmeter.apache.org/api/org/apache/jmeter/samplers/SampleResult.html">SampleResult</a>,</li><li><strong>props</strong> - JMeterProperties (class <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"><strong>java.util.Properties</strong></a>) 该方法也很重要。</li><li>补充区别：vars 只能在当前线程内使用，props 可以跨线程组使用<br>vars 只能保存 String 或者 Object，props 是 Hashtable 对象</li></ul><p>接下来看下JSR223处理器</p><p><a href="https://jmeter.apache.org/usermanual/component_reference.html#JSR223_Sampler">https://jmeter.apache.org/usermanual/component_reference.html#JSR223_Sampler</a></p><p>值得注意的是这几句话：</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">When using this feature, ensure your <span class="hljs-keyword">script </span>code does not use <span class="hljs-keyword">JMeter </span>variables <span class="hljs-keyword">or </span><span class="hljs-keyword">JMeter </span>function calls <span class="hljs-keyword">directly </span>in <span class="hljs-keyword">script </span>code as caching would only <span class="hljs-keyword">cache </span>first replacement. <span class="hljs-keyword">Instead </span>use <span class="hljs-keyword">script </span>parameters.<br><br>To <span class="hljs-keyword">benefit </span>from caching <span class="hljs-keyword">and </span>compilation, the language engine used for <span class="hljs-keyword">scripting </span>must implement <span class="hljs-keyword">JSR223 </span>Compilable interface (Groovy is one of these, <span class="hljs-keyword">java, </span><span class="hljs-keyword">beanshell </span><span class="hljs-keyword">and </span><span class="hljs-keyword">javascript </span>are not)<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>jmeter</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>python中三重引号的使用</title>
+    <link href="/2022/03/06/python%E4%B8%AD%E4%B8%89%E9%87%8D%E5%BC%95%E5%8F%B7%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%8D%A0%E4%BD%8D%E7%AC%A6/"/>
+    <url>/2022/03/06/python%E4%B8%AD%E4%B8%89%E9%87%8D%E5%BC%95%E5%8F%B7%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%8D%A0%E4%BD%8D%E7%AC%A6/</url>
+    
+    <content type="html"><![CDATA[<h3 id="python中三重引号中如何使用占位符"><a href="#python中三重引号中如何使用占位符" class="headerlink" title="python中三重引号中如何使用占位符"></a>python中三重引号中如何使用占位符</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> string <span class="hljs-keyword">import</span> Template<br>data = <span class="hljs-string">&#x27;&#x27;&#x27;&#123;</span><br><span class="hljs-string">          &quot;name&quot;: $para,</span><br><span class="hljs-string">          &quot;workspace&quot;: &#123;</span><br><span class="hljs-string">            &quot;__type&quot;: &quot;Pointer&quot;,</span><br><span class="hljs-string">            &quot;className&quot;: &quot;Workspace&quot;,</span><br><span class="hljs-string">            &quot;objectId&quot;: &quot;HQQAJJlYXV&quot;</span><br><span class="hljs-string">          &#125;</span><br><span class="hljs-string">        &#125;</span><br><span class="hljs-string">        &#x27;&#x27;&#x27;</span><br>    s = Template(data)<br>    result = s.substitute(para=<span class="hljs-string">&#x27;tim&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(result)<br> <span class="hljs-comment"># 输入</span><br>&#123;<br>         <span class="hljs-string">&quot;name&quot;</span>: tim,<br>         <span class="hljs-string">&quot;workspace&quot;</span>: &#123;<br>           <span class="hljs-string">&quot;__type&quot;</span>: <span class="hljs-string">&quot;Pointer&quot;</span>,<br>           <span class="hljs-string">&quot;className&quot;</span>: <span class="hljs-string">&quot;Workspace&quot;</span>,<br>           <span class="hljs-string">&quot;objectId&quot;</span>: <span class="hljs-string">&quot;HQQAJJlYXV&quot;</span><br>         &#125;<br>       &#125;<br></code></pre></td></tr></table></figure><p>参考官网文档：<a href="https://docs.python.org/3/library/string.html#string-formatting">https://docs.python.org/3/library/string.html#string-formatting</a></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>paramiko踩坑</title>
     <link href="/2021/11/25/paramiko%E8%B8%A9%E5%9D%91/"/>
     <url>/2021/11/25/paramiko%E8%B8%A9%E5%9D%91/</url>
