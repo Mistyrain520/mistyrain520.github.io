@@ -246,13 +246,13 @@
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-variable">$&#123;__time(dd/MM/yyyy,)&#125;</span><br><span class="hljs-comment">#如果在 2018 年 1 月 21 日运行， 将返回21/01/2018</span><br><br><span class="hljs-variable">$&#123;__CSVRead(random.txt,0)&#125;</span><br><span class="hljs-comment">#适用小文件</span><br></code></pre></td></tr></table></figure>
 
 <p>更多食用方法参考函数助手：</p>
-<p><img src="D:\Myblog\mistyrain520.github.io/source/img/image-20220214203401644.png" srcset="/img/loading.gif" lazyload alt="image-20220214203401644"></p>
+<p><img src="/img/image-20220214203401644.png" srcset="/img/loading.gif" lazyload alt="image-20220214203401644"></p>
 <p>值得注意的是，在脚本中直接引用jmeter函数，应当作为变量来使用，而不是已知变量：</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stata"># 正确写法<br><span class="hljs-keyword">var</span> <span class="hljs-variable">$&#123;__CSVRead</span>(<span class="hljs-keyword">D</span>:\<span class="hljs-keyword">test</span>.csv,0)&#125; = <span class="hljs-string">&quot;卡库拉&quot;</span>;<br>错误写法,报错XXX未定义<br><span class="hljs-keyword">var</span> aa = <span class="hljs-variable">$&#123;__CSVRead</span>(<span class="hljs-keyword">D</span>:\<span class="hljs-keyword">test</span>.csv,0)&#125;;<br></code></pre></td></tr></table></figure>
 
 
 
-<p><img src="D:\Myblog\mistyrain520.github.io/source/img/image-20220214205219976.png" srcset="/img/loading.gif" lazyload alt="image-20220214205219976"></p>
+<p><img src="/img/image-20220214205219976.png" srcset="/img/loading.gif" lazyload alt="image-20220214205219976"></p>
 <h5 id="官网参考网址"><a href="#官网参考网址" class="headerlink" title="官网参考网址:"></a>官网参考网址:</h5><p><a target="_blank" rel="noopener" href="https://jmeter.apache.org/usermanual/functions.html#">https://jmeter.apache.org/usermanual/functions.html#</a></p>
 <h4 id="JSR223-预处理程序"><a href="#JSR223-预处理程序" class="headerlink" title="JSR223 预处理程序"></a>JSR223 预处理程序</h4><p>先认识一下老的BeanShell处理程序</p>
 <p><a target="_blank" rel="noopener" href="https://jmeter.apache.org/usermanual/functions.html#__BeanShell">https://jmeter.apache.org/usermanual/functions.html#__BeanShell</a></p>
