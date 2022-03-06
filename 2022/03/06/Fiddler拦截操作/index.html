@@ -235,7 +235,7 @@
 </ul>
 <h4 id="拦截请求修改返回的几种方法"><a href="#拦截请求修改返回的几种方法" class="headerlink" title="拦截请求修改返回的几种方法"></a>拦截请求修改返回的几种方法</h4><h5 id="方式一：先bpafter-url；重新加载请求后会在该url中断，修改Inspectors下TextView的值即可；不需要更改content-length；"><a href="#方式一：先bpafter-url；重新加载请求后会在该url中断，修改Inspectors下TextView的值即可；不需要更改content-length；" class="headerlink" title="方式一：先bpafter url；重新加载请求后会在该url中断，修改Inspectors下TextView的值即可；不需要更改content-length；"></a>方式一：先bpafter url；重新加载请求后会在该url中断，修改Inspectors下TextView的值即可；不需要更改content-length；</h5><h5 id="方式二（推荐）"><a href="#方式二（推荐）" class="headerlink" title="方式二（推荐）:"></a>方式二（推荐）:</h5><p>save ResponseBody，然后AutoRespender中启用即可，可以随意更改返回json中的内容；不建议用Entire ResponseBody，因为实际使用增加了接口返回长度，需要修改content-length，否则会导致返回内容被截断。</p>
 <p><img src="/img/image-20220130171807524.png" srcset="/img/loading.gif" lazyload alt="image-20220130171807524"></p>
-<p><img src="D:\Myblog\mistyrain520.github.io/source/img/image-20220130172101062.png" srcset="/img/loading.gif" lazyload alt="image-20220130172101062"></p>
+<p><img src="/img/image-20220130172101062.png" srcset="/img/loading.gif" lazyload alt="image-20220130172101062"></p>
 <p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42380194/article/details/84314181">https://blog.csdn.net/weixin_42380194/article/details/84314181</a></p>
 
             </div>
