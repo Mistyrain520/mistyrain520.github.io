@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Suixiang Chen">
+  <meta name="keywords" content="">
+  
+  <title>web性能 - 陈随想</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"mistyrain520.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":140,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>陈随想</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/background1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="web性能">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-08-12 17:38" pubdate>
+        2023年8月12日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">web性能</h1>
+            
+            <div class="markdown-body">
+              <h4 id="什么是内存泄露"><a href="#什么是内存泄露" class="headerlink" title="什么是内存泄露"></a>什么是内存泄露</h4><p>不再用到的对象内存，没有及时被回收时,就会产生内存泄露</p>
+<h4 id="常见的内存泄漏"><a href="#常见的内存泄漏" class="headerlink" title="常见的内存泄漏"></a>常见的内存泄漏</h4><ul>
+<li>不正常闭包<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn2</span>(<span class="hljs-params"></span>)</span>&#123;<br>  <span class="hljs-keyword">let</span> test = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(<span class="hljs-number">1000</span>).fill(<span class="hljs-string">&#x27;isboyjc&#x27;</span>)<br>  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-built_in">console</span>.log(test)<br>    <span class="hljs-keyword">return</span> test<br>  &#125;<br>&#125;<br><span class="hljs-keyword">let</span> fn2Child = fn2()<br>fn2Child()<br><span class="hljs-comment">//return 的函数中存在函数 fn2 中的 test 变量引用，所以 test 并不会被回收，也就造成了内存泄漏,避免这个问题，后续添加fn2Child = null即可解决</span><br>fn2Child = <span class="hljs-literal">null</span><br></code></pre></td></tr></table></figure></li>
+<li>隐式全局变量<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>)</span>&#123;<br>  <span class="hljs-comment">// 没有声明从而制造了隐式全局变量test1</span><br>  test1 = <span class="hljs-keyword">new</span> <span class="hljs-keyword">Array</span>(<span class="hljs-number">1000</span>).fill(<span class="hljs-string">&#x27;isboyjc1&#x27;</span>)<br>  <br>  <span class="hljs-comment">// 函数内部this指向window，制造了隐式全局变量test2</span><br>  this.test2 = <span class="hljs-keyword">new</span> <span class="hljs-keyword">Array</span>(<span class="hljs-number">1000</span>).fill(<span class="hljs-string">&#x27;isboyjc2&#x27;</span>)<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params"></span>)</span><br></code></pre></td></tr></table></figure></li>
+<li>游离DOM引用<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;root&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;ul&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;li3&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"></span><br><span class="javascript">  <span class="hljs-keyword">let</span> root = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#root&#x27;</span>)</span><br><span class="javascript">  <span class="hljs-keyword">let</span> ul = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#ul&#x27;</span>)</span><br><span class="javascript">  <span class="hljs-keyword">let</span> li3 = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#li3&#x27;</span>)</span><br><span class="javascript">  </span><br><span class="javascript">  <span class="hljs-comment">// 由于ul变量存在，整个ul及其子元素都不能GC</span></span><br><span class="javascript">  root.removeChild(ul)</span><br><span class="javascript">  </span><br><span class="javascript">  <span class="hljs-comment">// 虽置空了ul变量，但由于li3变量引用ul的子节点，所以ul元素依然不能被GC</span></span><br><span class="javascript">  ul = <span class="hljs-literal">null</span></span><br><span class="javascript">  </span><br><span class="javascript">  <span class="hljs-comment">// 已无变量引用，此时可以GC</span></span><br><span class="javascript">  li3 = <span class="hljs-literal">null</span></span><br><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li>遗忘的定时器、监听器、监听者模式<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 获取数据</span><br><span class="hljs-keyword">let</span> someResource = getData()<br><span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">const</span> node = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;Node&#x27;</span>)<br>	<span class="hljs-keyword">if</span>(node) &#123;<br>    node.innerHTML = <span class="hljs-built_in">JSON</span>.stringify(someResource))<br>	&#125;<br>&#125;, <span class="hljs-number">1000</span>)<br><span class="hljs-comment">//setInterval 没有结束前，回调函数里的变量以及回调函数本身都无法被回收。</span><br><span class="hljs-comment">//什么才叫结束呢？也就是调用了 clearInterval。如果没有被 clear 掉的话，就会造成内存泄漏。不仅如此，如果回调函数没有被回收，那么回调函数内依赖的变量也没法被回收。所以在上例中，someResource 就没法被回收。</span><br></code></pre></td></tr></table></figure></li>
+<li>遗忘的Map、Set对象<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span> obj是一个强引用，对象存于内存，可用<br>let obj = &#123;id: <span class="hljs-number">1</span>&#125;<br><br><span class="hljs-regexp">//</span> 重写obj引用<br>obj = null <br><span class="hljs-regexp">//</span> 对象从内存移除，回收 &#123;id: <span class="hljs-number">1</span>&#125; 对象<br></code></pre></td></tr></table></figure>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs qml"><span class="hljs-keyword">let</span> obj = &#123;<span class="hljs-attribute">id:</span><span class="hljs-string"> 1&#125;</span><br><span class="hljs-string">let</span> user = &#123;<span class="hljs-attribute">info</span>: obj&#125;<br><span class="hljs-keyword">let</span> set = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>([obj])<br><span class="hljs-keyword">let</span> map = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>([[obj, <span class="hljs-string">&#x27;hahaha&#x27;</span>]])<br><br><span class="hljs-comment">// 重写obj</span><br>obj = <span class="hljs-literal">null</span> <br><br><span class="hljs-built_in">console</span>.log(user.info) <span class="hljs-comment">// &#123;id: 1&#125;</span><br><span class="hljs-built_in">console</span>.log(set)<br><span class="hljs-built_in">console</span>.log(map)<br>&lt;!-- 重写 obj 以后，&#123;<span class="hljs-attribute">id:</span><span class="hljs-string"> 1&#125; 依然会存在于内存中，因为 user</span> 对象以及后面的 set/map 都强引用了它，<span class="hljs-built_in">Set</span>/<span class="hljs-built_in">Map</span>、对象、数组对象等都是强引用，所以我们仍然可以获取到 &#123;<span class="hljs-attribute">id:</span><span class="hljs-string"> 1&#125; ，我们想要清除那就只能重写所有引用将其置空了。 --&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li>未清理的Console输出<h4 id="内存泄漏排查、定位与修复"><a href="#内存泄漏排查、定位与修复" class="headerlink" title="内存泄漏排查、定位与修复"></a>内存泄漏排查、定位与修复</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;click&quot;</span>&gt;</span>click<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;content&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br><br>  <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"></span><br><span class="javascript">    <span class="hljs-keyword">let</span> click = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;#click&quot;</span>);</span><br><span class="javascript">    <span class="hljs-keyword">let</span> content = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;#content&quot;</span>)</span><br><span class="javascript">    <span class="hljs-keyword">let</span> arr = []</span><br><span class="javascript"></span><br><span class="javascript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">closures</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">      <span class="hljs-keyword">let</span> test = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(<span class="hljs-number">1000</span>).fill(<span class="hljs-string">&#x27;isboyjc&#x27;</span>)</span><br><span class="javascript"></span><br><span class="javascript">      <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">        <span class="hljs-keyword">return</span> test</span><br><span class="javascript">      &#125;</span><br><span class="javascript">    &#125;</span><br><span class="javascript"></span><br><span class="javascript">    click.addEventListener(<span class="hljs-string">&quot;click&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">      arr.push(closures())</span><br><span class="javascript">      arr.push(closures())</span><br><span class="javascript"></span><br><span class="javascript">      content.innerHTML = arr.length</span><br><span class="javascript">    &#125;);</span><br><span class="javascript"></span><br><span class="javascript">  </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<ol>
+<li>快照</li>
+</ol>
+<ul>
+<li>Summary：按照构造函数进行分组，捕获对象和其使用内存的情况，可理解为一个内存摘要，用于跟踪定位DOM节点的内存泄漏</li>
+<li>Comparison：对比某个操作前后的内存快照区别，分析操作前后内存释放情况等，便于确认内存是否存在泄漏及造成原因</li>
+<li>Containment：探测堆的具体内容，提供一个视图来查看对象结构，有助分析对象引用情况，可分析闭包及更深层次的对象分析</li>
+<li>Statistics：统计视图</li>
+</ul>
+<ol start="2">
+<li>Summary</li>
+</ol>
+<ul>
+<li>Constructor：显示所有的构造函数，点击每一个构造函数可以查看由该构造函数创建的所有对象</li>
+<li>Distance：显示通过最短的节点路径到根节点的距离，引用层级</li>
+<li>Shallow Size：显示对象所占内存，不包含内部引用的其他对象所占的内存</li>
+<li>Retained Size：显示对象所占的总内存，包含内部引用的其他对象所占的内存</li>
+</ul>
+<ol start="3">
+<li>Comparison</li>
+</ol>
+<ul>
+<li>New：新建了多少个对象</li>
+<li>Deleted：回收了多少个对象</li>
+<li>Delta：新建的对象数 减去 回收的对象数</li>
+</ul>
+<ol start="4">
+<li><a target="_blank" rel="noopener" href="https://developer.chrome.com/docs/devtools/performance/">performance工具</a><h4 id="三个重要的名词"><a href="#三个重要的名词" class="headerlink" title="三个重要的名词"></a>三个重要的名词</h4></li>
+</ol>
+<ul>
+<li><p>内存泄露</p>
+</li>
+<li><p>内存膨胀</p>
+</li>
+<li><p>频繁GC</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">GC</span> 执行的特别频繁，一般出现在频繁使用大的临时变量导致新生代空间被装满的速度极快，而每次新生代装满时就会触发 <span class="hljs-built_in">GC</span>，频繁 <span class="hljs-built_in">GC</span> 同样会导致页面卡顿，想要避免的话就不要搞太多的临时变量，因为临时变量不用了就会被回收，这和我们内存泄漏中说避免使用全局变量冲突，其实，只要把握好其中的度，不太过分就 OK。<br></code></pre></td></tr></table></figure>
+<h4 id="前端web性能指标"><a href="#前端web性能指标" class="headerlink" title="前端web性能指标"></a>前端web性能指标</h4><p>指标有点多，我们关注核心的几个</p>
+</li>
+<li><p>FCP (First Contentful Paint)首次内容绘制</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">浏览器首次绘制来自DOM的内容的时间，内容必须包括文本，图片，非白色的<span class="hljs-selector-tag">canvas</span>或svg，也包括带有正在加载中的web字体文本。这是用户第一次看到的内容。<br><br>注意：performance<span class="hljs-selector-class">.timing</span>已过时，无法获取所有异步加载资源。现在不适用了。<br></code></pre></td></tr></table></figure></li>
+<li><p>LCP (Largest Contentful Paint)最大内容绘制</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//可视区域中最大的内容元素呈现到屏幕上的时间，用以估算页面的主要内容对用户的可见时间。img图片，video元素的封面，通过url加载到的北京，文本节点等，为了提供更好的用户体验，网站应该在2.5s以内或者更短的时间最大内容绘制。</span><br><span class="hljs-keyword">new</span> PerformanceObserver(<span class="hljs-function">(<span class="hljs-params">entryList</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> entry <span class="hljs-keyword">of</span> entryList.getEntries()) &#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;LCP candidate:&#x27;</span>, entry.startTime, entry);<br>    &#125;<br>&#125;).observe(&#123;<span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;largest-contentful-paint&#x27;</span>, <span class="hljs-attr">buffered</span>: <span class="hljs-literal">true</span>&#125;);<br></code></pre></td></tr></table></figure></li>
+<li><p>FID(First Input Delay), 可用<a target="_blank" rel="noopener" href="https://web.dev/tbt/?utm_source=devtools">TBT总阻塞时长</a>代替衡量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//首次输入延迟，从用户第一次与页面进行交互到浏览器实际能够响应该交互的时间，输入延迟是因为浏览器的主线程正忙于做其他事情，所以不能响应用户，发生这种情况的一个常见原因是浏览器正忙于解析和执行应用程序加载的大量计算的JavaScript。</span><br><span class="hljs-keyword">new</span> PerformanceObserver(<span class="hljs-function">(<span class="hljs-params">entryList</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> entry <span class="hljs-keyword">of</span> entryList.getEntries()) &#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;FID:&#x27;</span>, entry.processingStart - entry.startTime);<br>    &#125;<br>&#125;).observe(&#123;<span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;first-input&#x27;</span>, <span class="hljs-attr">buffered</span>: <span class="hljs-literal">true</span>&#125;);<br></code></pre></td></tr></table></figure></li>
+<li><p>CLS (Cumulative Layout Shift)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//累计布局位移，CLS会测量在页面整个生命周期中发生的每个意外的布局移位的所有单独布局移位分数的总和，他是一种保证页面的视觉稳定性从而提升用户体验的指标方案。</span><br>用人话来说就是当点击页面中的某个元素的时候，突然布局变了，手指点到了其它位置。比如想点击页面的链接，突然出现了一个banner。这种情况可能是因为尺寸未知的图像或者视频。<br><span class="hljs-keyword">let</span> cls = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">new</span> PerformanceObserver(<span class="hljs-function">(<span class="hljs-params">entryList</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> entry <span class="hljs-keyword">of</span> entryList.getEntries()) &#123;<br>        <span class="hljs-keyword">if</span> (!entry.hadRecentInput) &#123;<br>            cls += entry.value;<br>        &#125;<br>    &#125;<br>&#125;).observe(&#123;<span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;layout-shift&#x27;</span>, <span class="hljs-attr">buffered</span>: <span class="hljs-literal">true</span>&#125;);<br></code></pre></td></tr></table></figure>
+<h4 id="常用优化手法"><a href="#常用优化手法" class="headerlink" title="常用优化手法"></a>常用优化手法</h4></li>
+<li><p>减少 HTTP 请求</p>
+</li>
+<li><p>资源压缩</p>
+</li>
+<li><p>惰性加载<br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7252684645979111461#heading-6">给你十万条数据，给我顺滑的渲染出来！</a></p>
+</li>
+<li><p>服务端渲染</p>
+</li>
+<li><p>将 CSS 放在文件头部，JavaScript 文件放在底部</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">CSS 执行会阻塞渲染，阻止 <span class="hljs-keyword">JS </span>执行<br><span class="hljs-keyword">JS </span>加载和执行会阻塞 HTML 解析，阻止 CSSOM 构建<br></code></pre></td></tr></table></figure></li>
+<li><p>缓存</p>
+</li>
+<li><p>减少重绘重排</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">----什么操作会导致重排？<br>添加或删除可见的 DOM 元素<br>元素位置改变<br>元素尺寸改变<br>内容改变<br>浏览器窗口尺寸改变<br>----如何减少重排重绘？<br>用 JavaScript 修改样式时，最好不要直接写样式，而是替换 <span class="hljs-keyword">class</span> 来改变样式。<br>如果要对 <span class="hljs-symbol">DOM</span> 元素执行一系列操作，可以将 <span class="hljs-symbol">DOM</span> 元素脱离文档流，修改完成后，再将它带回文档。推荐使用隐藏元素（<span class="hljs-symbol">display:<span class="hljs-symbol">none</span></span>）或文档碎片（<span class="hljs-symbol">DocumentFragement</span>），都能很好的实现这个方案。<br></code></pre></td></tr></table></figure></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/12/go-%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8D%A0%E4%BD%8D%E7%AC%A6%E3%80%81net%E7%94%A8%E6%B3%95/">
+                        <span class="hidden-mobile">go``中使用占位符、net用法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

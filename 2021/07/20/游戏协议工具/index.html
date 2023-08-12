@@ -1,0 +1,498 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Suixiang Chen">
+  <meta name="keywords" content="">
+  
+  <title>pb数据的使用--游戏协议工具实战 - 陈随想</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"mistyrain520.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":140,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>陈随想</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/background1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="pb数据的使用--游戏协议工具实战">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-20 23:06" pubdate>
+        2021年7月20日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      30
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">pb数据的使用--游戏协议工具实战</h1>
+            
+            <div class="markdown-body">
+              <h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>其实之前已经用python实现过了（协议工具），最近又用go重构了一遍（刚入门go）。所以本篇会分别从go（详细讲）以及py(粗略讲)两方面讲叙。由于鄙人也是小小白，因此会讲的没那么高大上，尽可能俗一点，让其他刚进入游戏的老铁也能看个明白。</p>
+<h4 id="背景分析："><a href="#背景分析：" class="headerlink" title="背景分析："></a>背景分析：</h4><ul>
+<li><p>通讯协议是使用pb数据，而且没有做进一步的二次封装数据包。如果程序做进一步的数据包封装，去约定一些特定规则，加个头啊加个尾什么的，那么就需要去找程序了解这个规则了。</p>
+</li>
+<li><p>用户注册是另外的http服务</p>
+</li>
+<li><p>proto协议文件挺多的，而且内容指不定就变了</p>
+</li>
+</ul>
+<h4 id="需求与方案制定："><a href="#需求与方案制定：" class="headerlink" title="需求与方案制定："></a>需求与方案制定：</h4><p>至少需要实现：从客户端那边log输出中复制所有“发送协议–&gt;&gt;XXX”协议内容，通过工具可以实现并发去创建多个账号并执行这些协议内容。</p>
+<p>为了应对协议内容的增删改变化，决定偷懒，不一一通过原有协议数据执行序列化与反序列化，而是全部通过GM协议执行。好处是可以偷懒，不需要采用其他方式（比如动态import去导入对应需要的xx.pd.go），坏处是不能够对所有协议作反序列化。但是这个并不影响我的核心需求。</p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs protobuf"><span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">CmdGMReqMsg</span> </span>&#123;<br>    <span class="hljs-keyword">required</span> <span class="hljs-built_in">string</span> command = <span class="hljs-number">1</span>; <br>&#125;<br><span class="hljs-class"><span class="hljs-keyword">message</span> <span class="hljs-title">CmdGMRspMsg</span> </span>&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>接下来请看代码实战。</p>
+<center><b><font color=black size=6>GO篇</font></b></center>
+
+<h4 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h4><p>“net/http”包使用</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Get</span><span class="hljs-params">(yoururl <span class="hljs-keyword">string</span>, data <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">string</span>)</span> <span class="hljs-title">map</span>[<span class="hljs-title">string</span>]<span class="hljs-title">interface</span></span>&#123;&#125; &#123;<br>	request, err := http.NewRequest(<span class="hljs-string">&quot;GET&quot;</span>, yoururl, <span class="hljs-literal">nil</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Println(<span class="hljs-string">&quot;err-&gt;&quot;</span>, err)<br>	&#125;<br>	<span class="hljs-comment">//加入get参数</span><br>	q := request.URL.Query()<br>	<span class="hljs-keyword">for</span> key, value := <span class="hljs-keyword">range</span> data &#123;<br>		q.Add(key, value)<br>	&#125;<br>	request.URL.RawQuery = q.Encode()<br>	resp, err := http.DefaultClient.Do(request)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Println(<span class="hljs-string">&quot;err-&gt;&quot;</span>, err)<br>	&#125;<br>	<span class="hljs-keyword">defer</span> resp.Body.Close()<br>	data1, err := ioutil.ReadAll(resp.Body)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Println(<span class="hljs-string">&quot;err-&gt;&quot;</span>, err)<br>	&#125;<br>	rdata := <span class="hljs-keyword">string</span>(data1)<br>	result := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">interface</span>&#123;&#125;)<br>	err1 := json.Unmarshal([]<span class="hljs-keyword">byte</span>(rdata), &amp;result)<br>	<span class="hljs-keyword">if</span> err1 != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(err)<br>	&#125;<br>	<span class="hljs-keyword">return</span> result<br></code></pre></td></tr></table></figure>
+
+<h4 id="proto文件处理"><a href="#proto文件处理" class="headerlink" title="proto文件处理"></a>proto文件处理</h4><p>最简单直接的办法，从官网直接拉protoc.exe文件，通过命令行转换即可。</p>
+<p>举个栗子：</p>
+<p><code>protoc --proto_path=..\\protos --python_out=..\\protos ..\\protos\XXX.proto</code></p>
+<p>转换成go之后得到文件：XX.pb.go，接着如何根据协议内容创建结构体呢？稍微看一下官方例子就不难写出：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Gmmsg</span><span class="hljs-params">(gm <span class="hljs-keyword">string</span>)</span> []<span class="hljs-title">byte</span></span> &#123;<br>	gm_mess := &amp;pb.CmdGMReqMsg&#123;<br>		Command: &amp;gm,<br>	&#125;<br>	<span class="hljs-comment">//通过&quot;google.golang.org/protobuf/proto&quot;序列化</span><br>	out, _ := proto.Marshal(gm_mess)<br>	<span class="hljs-keyword">return</span> out<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我这边根据实际项目内容分析，协议最后都是嵌套作为message ClientCmdData中 data值，那么也不难写出：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Clientmsg</span><span class="hljs-params">(data []<span class="hljs-keyword">byte</span>)</span> []<span class="hljs-title">byte</span></span> &#123;<br>	clinetmsg := &amp;pb.ClientCmdData&#123;<br>		<span class="hljs-comment">//部分字段省略</span><br>		Data:        data,<br>	&#125;<br>	out, _ := proto.Marshal(clinetmsg)<br>	<span class="hljs-keyword">return</span> out<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="websocket连接"><a href="#websocket连接" class="headerlink" title="websocket连接"></a>websocket连接</h4><p>主要使用包：<code>&quot;github.com/gorilla/websocket&quot;</code>。这个去github学习一下，基本都能写出基础的websocket链接。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">connect</span><span class="hljs-params">()</span> <span class="hljs-params">(c *websocket.Conn)</span></span> &#123;<br>	<span class="hljs-keyword">var</span> addr <span class="hljs-keyword">string</span> = <span class="hljs-string">&quot;冬天的秘密&quot;</span><br>	<span class="hljs-keyword">var</span> u = url.URL&#123;Scheme: <span class="hljs-string">&quot;ws&quot;</span>, Host: addr, Path: <span class="hljs-string">&quot;冬天的秘密&quot;</span>&#125;<br>	c, _, err := websocket.DefaultDialer.Dial(u.String(), <span class="hljs-literal">nil</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatal(<span class="hljs-string">&quot;dial:&quot;</span>, err)<br>	&#125;<br>	log.Printf(<span class="hljs-string">&quot;connecting to %s&quot;</span>, u.String())<br>	<span class="hljs-keyword">return</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>发送与接收，以及反序列化尝试</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Send</span><span class="hljs-params">(t []<span class="hljs-keyword">byte</span>, c *websocket.Conn)</span> *<span class="hljs-title">pb</span>.<span class="hljs-title">ServerCmdData</span></span> &#123;<br>	c.WriteMessage(websocket.BinaryMessage, t)<br>	time.Sleep(<span class="hljs-number">500</span> * time.Millisecond)<br>	_, message, _ := c.ReadMessage()<br>	serdata := &amp;pb.ServerCmdData&#123;&#125;<br>	<span class="hljs-keyword">if</span> err := proto.Unmarshal(message, serdata); err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatalln(<span class="hljs-string">&quot;failed----------:&quot;</span>, err)<br>	&#125;<br>    <span class="hljs-comment">//在我有需要的时候去掉注释，可以针对指定协议反序列化拿到服务器返回的数据</span><br>	<span class="hljs-comment">// if *serdata.MessageId == int32(协议号) &#123;</span><br>	<span class="hljs-comment">// 	temp := &amp;pb.XXXXX&#123;&#125;</span><br>	<span class="hljs-comment">// 	if err := proto.Unmarshal(serdata.Data, temp); err != nil &#123;</span><br>	<span class="hljs-comment">// 		log.Fatalln(&quot;failed----------:&quot;, err)</span><br>	<span class="hljs-comment">// 	&#125;</span><br>	<span class="hljs-comment">// 	fmt.Printf(&quot;%+v#####&quot;, temp)</span><br>	<span class="hljs-comment">// &#125;</span><br>	<span class="hljs-keyword">return</span> serdata<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上面注释代码举例了某个协议号的反序列化，得到反序列化后服务器的返回数据：<br><img src="/img/%E6%B8%B8%E6%88%8F%E5%8D%8F%E8%AE%AE%E5%B7%A5%E5%85%B71.PNG" srcset="/img/loading.gif" lazyload><br>实际游戏的所有协议反序列化则不再详叙。</p>
+<p>另外可以根据需要，多加点实用的功能，比如我增加的：如果服务器处理协议失败可以重发10次，超过10次不管；协议数据中最多会涉及到一个变化的playerid，这个是需要根据实际注册账号得到的playerid的；还有其他小细节可以在工具使用过程中慢慢改善。</p>
+<h4 id="协议Log内容处理"><a href="#协议Log内容处理" class="headerlink" title="协议Log内容处理"></a>协议Log内容处理</h4><p>处理从客户端复制下来的一大批协议内容：发送协议:&gt; XXXXXXX</p>
+<p>这块主要涉及go文件处理</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Handfile</span><span class="hljs-params">()</span> <span class="hljs-params">(result []<span class="hljs-keyword">string</span>)</span></span> &#123;<br>	file := <span class="hljs-string">&quot;冬天的秘密.log&quot;</span><br>	f, err := os.Open(file)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatal(err)<br>	&#125;<br>	<span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>		<span class="hljs-keyword">if</span> err = f.Close(); err != <span class="hljs-literal">nil</span> &#123;<br>			log.Fatal(err)<br>		&#125;<br>	&#125;()<br>	s := bufio.NewScanner(f)<br>	<span class="hljs-keyword">for</span> s.Scan() &#123;<br>		result = <span class="hljs-built_in">append</span>(result, s.Text())<br>	&#125;<br>	err = s.Err()<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatal(err)<br>	&#125;<br>	<span class="hljs-keyword">return</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>接收log内容，做一定处理（根据需要）然后发送；接收nickname，根据nickname注册并创建nickname游戏角色</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Handmess</span><span class="hljs-params">(nickname <span class="hljs-keyword">string</span>, mess []<span class="hljs-keyword">string</span>)</span></span> &#123;<br>	<span class="hljs-comment">//涉及协议内容格式，不敢放太多</span><br>	con := connect()<br>	loginmsg := Clientmsg(<span class="hljs-number">1001</span>, Loginmessage(token, accountid))<br>	Resend(loginmsg, con)<br>	registmsg := Clientmsg(<span class="hljs-number">1000</span>, Regist(nickname, token, accountid))<br>	serverrsg := Resend(registmsg, con)<br>	<span class="hljs-keyword">if</span> !*serverrsg.Result &#123;<br>		log.Printf(<span class="hljs-string">&quot;%s注册失败，该账号可能已经注册并在游戏中创建了账号(或者账号非法)&quot;</span>, nickname)<br>		<span class="hljs-keyword">return</span><br>	&#125;<br>	<span class="hljs-comment">//省略mess处理与发送</span><br>	time.Sleep(<span class="hljs-number">1</span> * time.Second)<br>	con.Close()<br>｝<br></code></pre></td></tr></table></figure>
+
+<h4 id="go的并发（太香了）"><a href="#go的并发（太香了）" class="headerlink" title="go的并发（太香了）"></a>go的并发（太香了）</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Glimit <span class="hljs-keyword">struct</span> &#123;<br>    n <span class="hljs-keyword">int</span><br>    c <span class="hljs-keyword">chan</span> <span class="hljs-keyword">struct</span>&#123;&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">New</span><span class="hljs-params">(n <span class="hljs-keyword">int</span>)</span> *<span class="hljs-title">Glimit</span></span> &#123;<br>    <span class="hljs-keyword">return</span> &amp;Glimit&#123;<br>        n: n,<br>        c: <span class="hljs-built_in">make</span>(<span class="hljs-keyword">chan</span> <span class="hljs-keyword">struct</span>&#123;&#125;, n),<br>    &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(g *Glimit)</span> <span class="hljs-title">Run</span><span class="hljs-params">(f <span class="hljs-keyword">func</span>()</span>)</span> &#123;<br>    g.c &lt;- <span class="hljs-keyword">struct</span>&#123;&#125;&#123;&#125;<br>    <span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>        f()<br>        &lt;-g.c<br>    &#125;()<br>&#125;<br>g := New(<span class="hljs-number">20</span>)<br>log.Printf(<span class="hljs-string">&quot;start-------------&quot;</span>)<br>filemess := websockets_test.Handfile()<br><span class="hljs-keyword">var</span> wg sync.WaitGroup<br><span class="hljs-keyword">for</span> i := <span class="hljs-number">100</span>; i &lt; <span class="hljs-number">200</span>; i++ &#123;<br>    wg.Add(<span class="hljs-number">1</span>)<br>    value := strconv.Itoa(i)<br>    gofunc := <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>        websockets_test.Handmess(<span class="hljs-string">&quot;newnick&quot;</span>+value, filemess)<br>        log.Printf(<span class="hljs-string">&quot;end-------------%s&quot;</span>, <span class="hljs-string">&quot;newnick&quot;</span>+value)<br>        wg.Done()<br>    &#125;<br>    g.Run(gofunc)<br>&#125;<br>wg.Wait()<br>log.Printf(<span class="hljs-string">&quot;end-------------&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="实战结果"><a href="#实战结果" class="headerlink" title="实战结果"></a>实战结果</h4><p><img src="/img/%E6%B8%B8%E6%88%8F%E5%8D%8F%E8%AE%AE%E5%B7%A5%E5%85%B72.PNG" srcset="/img/loading.gif" lazyload><br>根据图中reg_time可以明确知道，我们的并发成功了，游戏中已经如实创建了我们想要的数据账号。快登录游戏享受吧！</p>
+<center><b><font color=black size=6>Python篇</font></b></center>
+
+<p>相信大伙的python都比我厉害，因此Python篇会简略一点。</p>
+<ul>
+<li>http请求用request</li>
+<li>proto文件处理同go</li>
+<li>websockets这个也不难</li>
+<li>asyncio使用</li>
+<li>log文件处理相信大家都会了</li>
+<li>config文件</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#以下举例代码为多个文件代码，实际是分开在不同文件中的</span><br><span class="hljs-comment"># asyncio</span><br><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span>():</span><br>    semaphore = asyncio.Semaphore(<span class="hljs-number">15</span>)<br>    to_get = [main_logic(i, semaphore) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num)]<br>    <span class="hljs-keyword">await</span> asyncio.wait(to_get)<br>loop = asyncio.get_event_loop()<br>loop.run_until_complete(run())<br>    <span class="hljs-comment"># websockets</span><br>    <span class="hljs-keyword">async</span> <span class="hljs-keyword">with</span> websockets.connect(_server_ws_url) <span class="hljs-keyword">as</span> ws:<br>        <span class="hljs-comment"># ws.close_timeout = 200</span><br>        <span class="hljs-keyword">await</span> send_message(XXXXXX)<br>    <span class="hljs-comment"># pd数据的引用</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">clientmsg</span>(<span class="hljs-params">self, messageid, msg=<span class="hljs-literal">None</span></span>):</span><br>        cmsg = Cmd_pb2.ClientCmdData()<br>        cmsg.messageId = messageid<br>        cmsg.clientIndex = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">if</span> msg:<br>            cmsg.data = msg<br>        <span class="hljs-keyword">return</span> cmsg<br></code></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python">[config]<br><span class="hljs-comment"># 服务器id</span><br>serverid = 冬天的秘密<br>_server_ws_url = 冬天的秘密<br><span class="hljs-comment"># 平台id</span><br>platformId = 冬天的秘密<br><span class="hljs-comment"># 你想要登录的账号，如果不存在会自动注册</span><br>nickname = nihao<br>start = <span class="hljs-number">39</span><br>num = <span class="hljs-number">1</span><br><span class="hljs-comment"># playerid（自增id），进阶功能，可以将协议数据中所有用到playerid替换为该player的正确playerid</span><br>playerid = 冬天的秘密<br>log = 高级账号.log<br></code></pre></td></tr></table></figure>
+
+<p>另外还有一套配置用于jenkins：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">config</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        server = &#123;<br>            <span class="hljs-string">&quot;A服&quot;</span>: <span class="hljs-string">&#x27;冬天的秘密&#x27;</span>,<br>            <span class="hljs-string">&quot;B网&quot;</span>: <span class="hljs-string">&#x27;冬天的秘密&#x27;</span>,<br>        &#125;<br>        serverid = &#123;<br>            <span class="hljs-string">&quot;A服&quot;</span>: XXX,<br>            <span class="hljs-string">&quot;B网&quot;</span>: XX,<br>        &#125;<br>        platformId = &#123;<br>            <span class="hljs-string">&quot;A服&quot;</span>: XX,<br>            <span class="hljs-string">&quot;B网&quot;</span>: XX,<br>        &#125;<br>        log = &#123;<br>            <span class="hljs-string">&quot;高级账号&quot;</span>: <span class="hljs-string">&quot;D:/高级账号.log&quot;</span>,<br>            <span class="hljs-string">&quot;创建新号&quot;</span>: <span class="hljs-string">&quot;D:/创建新号.log&quot;</span>,<br>            <span class="hljs-string">&quot;XX&quot;</span>: <span class="hljs-string">&quot;D:/XX.log&quot;</span>,<br>        &#125;<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.getenv(<span class="hljs-string">&quot;choice_server&quot;</span>):<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;你没有选择服务器！！！&quot;</span>)<br>            sys.exit(<span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.getenv(<span class="hljs-string">&quot;可选协议&quot;</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> os.getenv(<span class="hljs-string">&quot;protos&quot;</span>):<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;你没有填写任何协议内容！！！&quot;</span>)<br>            sys.exit(<span class="hljs-number">0</span>)<br>        self.serverid = serverid[os.getenv(<span class="hljs-string">&quot;choice_server&quot;</span>)]<br>        self.platformId = platformId[os.getenv(<span class="hljs-string">&quot;choice_server&quot;</span>)]<br>        gamename = re.split(<span class="hljs-string">r&#x27;\n&#x27;</span>,os.getenv(<span class="hljs-string">&quot;gamename&quot;</span>))<br>        self.nickname = gamename[<span class="hljs-number">0</span>]<br>        self.num = gamename[<span class="hljs-number">2</span>]<br>        self.start = gamename[<span class="hljs-number">1</span>]<br>        <span class="hljs-keyword">if</span> os.getenv(<span class="hljs-string">&quot;可选协议&quot;</span>):<br>            self.log = linecache.getlines(log[os.getenv(<span class="hljs-string">&quot;可选协议&quot;</span>)])<br>        <span class="hljs-keyword">else</span>:<br>            self.log = re.split(<span class="hljs-string">r&#x27;\n&#x27;</span>, os.getenv(<span class="hljs-string">&quot;protos&quot;</span>))<br>        self._server_ws_url = server[os.getenv(<span class="hljs-string">&quot;choice_server&quot;</span>)]<br></code></pre></td></tr></table></figure>
+
+<h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><p>将ws接受单独出来作为单独协程处理接受服务器数据，该协程写在ws创建连接之后func connect() (c *websocket.Conn) {}</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">connect</span><span class="hljs-params">()</span> <span class="hljs-params">(c *websocket.Conn)</span></span> &#123;<br>	<span class="hljs-comment">//省略创建连接</span><br>	<span class="hljs-keyword">go</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">for</span>&#123;<br>        <span class="hljs-comment">//如果ws断开，则break</span><br>        <span class="hljs-comment">//否则根据协议id作对应反序列化处理</span><br>        <span class="hljs-comment">//写入log日志，记录服务器返回内容</span><br>        &#125;	<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src="/img/%E6%B8%B8%E6%88%8F%E5%8D%8F%E8%AE%AE%E5%B7%A5%E5%85%B73.jpg" srcset="/img/loading.gif" lazyload><br>同时把客户端发送的协议内容也一并写入Log日志，效果如上</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/go/">go</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%B8%B8%E6%88%8F%E5%8D%8F%E8%AE%AE/">游戏协议</a>
+                    
+                      <a class="hover-with-bg" href="/tags/protobuf/">protobuf</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/20/%E6%88%B7%E5%A4%96%E5%B1%A5%E5%8E%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">户外履历</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

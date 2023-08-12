@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Suixiang Chen">
+  <meta name="keywords" content="">
+  
+  <title>想做最好的策划配表检查工具 - 陈随想</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"mistyrain520.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":140,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>陈随想</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/background1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="想做最好的策划配表检查工具">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-03 22:25" pubdate>
+        2021年8月3日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">想做最好的策划配表检查工具</h1>
+            
+            <div class="markdown-body">
+              <h4 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h4><p>很多项目组也都有自己的检配表查方法，我也见过两个项目组的两种不同做法，但是我是不太认同的。我综合考虑出另外一种做法（个人觉得是不错的，而且目前实行起来深得我意），但是由于某些原因，我没有在原来项目中去推动我的想法实现。</p>
+<p>这个想法两年前就有了，可惜一直没机会实践。2020年4月的时候终于迎来一次机会，于是把想法付诸实际。如今回望，也是颇有感慨。写一写我怎么做的吧。</p>
+<h4 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h4><p>我需要去考虑的一些点：</p>
+<ul>
+<li>配表改动可能会很频繁，包括但不限于增删表头、改数据格式等</li>
+<li>配表可能会有多文件夹同名表格（SLG多赛季，不同赛季会有season1、season2文件夹，而且season下也可能有同名表）</li>
+<li>当配置表多、规则多的情况下，需不需要去考虑效率问题。小几分钟出检查结果，我可以接受，10以上是不能接受的。</li>
+<li>简单、方便快捷支持规则配置，规则增删</li>
+<li>简单明了输出错误问题</li>
+<li>要不要考虑平台化</li>
+<li>……</li>
+</ul>
+<h4 id="尝试实现："><a href="#尝试实现：" class="headerlink" title="尝试实现："></a>尝试实现：</h4><p>不知道咋想的，当时就有一个想法，通过规则表映射去检查配表（刚好满足很多我的需求）。具体做法是：</p>
+<ul>
+<li>新建规则检查文件夹</li>
+<li>将需要检查的表格复制过来，删除表格内容，在对应列配置规则</li>
+</ul>
+<p>这个做法在落实之后也有一些小问题持续优化，这点后面说。先说下核心做法的实现：</p>
+<h5 id="main函数"><a href="#main函数" class="headerlink" title="main函数"></a>main函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    table = Table()<br>    //这里用xlsx作为规则配置表，是因为后面优化有自动写入功能，相比xls，xlsx会更方便一些<br>    excel = file.File.get_file_dir(config.RULE_DIR, file_type=<span class="hljs-string">&quot;.xlsx&quot;</span>)<br>    d_excel = file.File.get_file_dir(config.DOC_DIR, file_type=<span class="hljs-string">&quot;.xls&quot;</span>)<br>    dd_excel = [i+<span class="hljs-string">&quot;x&quot;</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> d_excel]<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;策划配置表有但是规则表没有的表格（注意补充）：&quot;</span>, <span class="hljs-built_in">list</span>(<span class="hljs-built_in">set</span>(dd_excel).difference(<span class="hljs-built_in">set</span>(excel))))<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;规则表有但是策划配置表没有的表格（可以删除）：&quot;</span>, <span class="hljs-built_in">list</span>(<span class="hljs-built_in">set</span>(excel).difference(<span class="hljs-built_in">set</span>(dd_excel))))<br>    <span class="hljs-keyword">for</span> every_excel <span class="hljs-keyword">in</span> excel:<br>        <span class="hljs-comment"># if every_excel != &quot;\K卡牌突破表.xlsx&quot;:</span><br>        <span class="hljs-comment">#     continue</span><br>        check_excel(every_excel)<br></code></pre></td></tr></table></figure>
+
+<h5 id="check-excel方法核心代码"><a href="#check-excel方法核心代码" class="headerlink" title="check_excel方法核心代码"></a>check_excel方法核心代码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> head_name <span class="hljs-keyword">in</span> head_list:<br>    <span class="hljs-keyword">if</span> head_name == <span class="hljs-string">&#x27;&#x27;</span>:<br>        <span class="hljs-keyword">continue</span><br>    <span class="hljs-keyword">if</span> head_name <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> d_head_list:<br>        <span class="hljs-built_in">print</span>(head_name, excel_name, <span class="hljs-string">&quot;规则表的表头不存在配置表的表头&quot;</span>)<br>        <span class="hljs-keyword">continue</span><br>    d_col = d_head_list.index(head_name)<br>    col = head_list.index(head_name)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(config.ROW_START, sheet.nrows):<br>        <span class="hljs-keyword">if</span> sheet.cell_value(i, col) <span class="hljs-keyword">is</span> <span class="hljs-string">&quot;&quot;</span>:<br>            <span class="hljs-keyword">continue</span><br>        cell = <span class="hljs-built_in">str</span>(sheet.cell_value(i, col)).replace(<span class="hljs-string">&#x27;\r&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>).replace(<span class="hljs-string">&#x27;\n&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>).replace(<span class="hljs-string">&#x27;\\&#x27;</span>, <span class="hljs-string">&#x27;\\\\&#x27;</span>)<br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-comment"># value_dict = json.loads(cell)</span><br>            value_dict = json.loads(cell, strict=<span class="hljs-literal">False</span>)<br>        <span class="hljs-keyword">except</span> ValueError:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;@@@@@@@@@@@@@@@@@@@规则配置错误&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(cell), excel_name)<br>        (key, value), = value_dict.items()<br>        <span class="hljs-comment"># 传参：所检查的表的相关信息</span><br>        <span class="hljs-built_in">getattr</span>(rule, config.switch[key])(value, excel_name=excel_name[:-<span class="hljs-number">1</span>], sheet_name=sheet_name, col_index=d_col)<br></code></pre></td></tr></table></figure>
+
+<h5 id="Rule规则定义与代码实现"><a href="#Rule规则定义与代码实现" class="headerlink" title="Rule规则定义与代码实现"></a>Rule规则定义与代码实现</h5><p>我希望把rule分别归类，这样会非常容易去找到我对应的规则。我在config中会配置有多少类规则，比如In类规则，泛指A列存在B列、当A=X，B列存在C列…此类规则；Match规则，包含A列满足正则表达、当A列=X，B列满足正则表达这两种规则。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">switch = &#123;<br>    <span class="hljs-string">&quot;_Only&quot;</span>: <span class="hljs-string">&quot;Only&quot;</span>,<br>    <span class="hljs-string">&quot;_In&quot;</span>: <span class="hljs-string">&quot;Ainb&quot;</span>,<br>    <span class="hljs-string">&quot;_Equal&quot;</span>: <span class="hljs-string">&quot;Equal&quot;</span>,<br>    <span class="hljs-string">&quot;_Match&quot;</span>: <span class="hljs-string">&quot;Match&quot;</span>,<br>    <span class="hljs-string">&quot;_Dict&quot;</span>: <span class="hljs-string">&quot;Dictionary&quot;</span>,<br>    <span class="hljs-string">&quot;_Condition&quot;</span>: <span class="hljs-string">&quot;Condition&quot;</span>,<br>    <span class="hljs-string">&quot;_Increasing&quot;</span>: <span class="hljs-string">&quot;Increasing&quot;</span>,<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>接下来我以In类为例，说下我的做法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ainb</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, *args, **kwargs</span>):</span><br>        <span class="hljs-comment"># **kwargs 记录正在检查的表格的相关信息</span><br>        <span class="hljs-comment"># r_wbk  指数据配置表中对应规则表的那个表（也就是数据表）</span><br>        <span class="hljs-comment"># d_wbk  指数据配置表中对应规则表配置的规则所指向的那个表（也就是我配的规则里指向的那个表）</span><br>        self.excel_name = kwargs[<span class="hljs-string">&quot;excel_name&quot;</span>]<br>        self.sheet_name = kwargs[<span class="hljs-string">&quot;sheet_name&quot;</span>]<br>        self.col_index = kwargs[<span class="hljs-string">&quot;col_index&quot;</span>]<br>        self.args = args<br>        self.r_wbk = table.open_workbook(config.DOC_DIR, self.excel_name)<br>        self.r_sheet = self.r_wbk.sheet_by_name(self.sheet_name)<br>        r_head = self.r_sheet.row_values(config.HEAD_CN)<br>        self.col_index_name = r_head[self.col_index]<br>        temp = &#123;<span class="hljs-string">&quot;All&quot;</span>: <span class="hljs-string">&quot;all_in&quot;</span>,<br>                <span class="hljs-string">&quot;Assign&quot;</span>: <span class="hljs-string">&quot;assign_in&quot;</span>,<br>                <span class="hljs-string">&quot;Part&quot;</span>: <span class="hljs-string">&quot;part_in&quot;</span>,<br>                <span class="hljs-string">&quot;Sequence&quot;</span>: <span class="hljs-string">&quot;sequence&quot;</span>,<br>                <span class="hljs-string">&quot;Whenassign&quot;</span>: <span class="hljs-string">&quot;whenassign&quot;</span>,<br>                <span class="hljs-string">&quot;Whenpoint&quot;</span>: <span class="hljs-string">&quot;whenpoint&quot;</span>,<br>                <span class="hljs-string">&quot;Every&quot;</span>: <span class="hljs-string">&quot;every_in&quot;</span>,<br>                <span class="hljs-string">&quot;Neighbor&quot;</span>: <span class="hljs-string">&quot;neighbor&quot;</span>,<br>                <span class="hljs-string">&quot;Allpoint&quot;</span>: <span class="hljs-string">&quot;allpoint&quot;</span>&#125;<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(self.args[<span class="hljs-number">0</span>], <span class="hljs-built_in">dict</span>):<br>            (key, value), = self.args[<span class="hljs-number">0</span>].items()<br>            self.__getattribute__(temp[key])(value)<br><br>    <span class="hljs-comment"># 每个单元格都in指定的表格指定列的合集</span><br>    <span class="hljs-comment"># &#123;&quot;_In&quot;:&#123;&quot;All&quot;:[&quot;/冬天的秘密.xls&quot;,&quot;冬天的秘密--sheet&quot;,&quot;冬天的秘密--colname&quot;]&#125;&#125;</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">all_in</span>(<span class="hljs-params">self, _value</span>):</span><br>        d_wbk = table.open_workbook(config.DOC_DIR, _value[<span class="hljs-number">0</span>])<br>        d_sheet = d_wbk.sheet_by_name(_value[<span class="hljs-number">1</span>])<br>        d_head = d_sheet.row_values(config.HEAD)<br>        d_index = d_head.index(_value[<span class="hljs-number">2</span>])<br>        d_col_list = table.get_content_by_col(<br>            config.DOC_DIR, _value[<span class="hljs-number">0</span>], _value[<span class="hljs-number">1</span>], d_index)<br>        d_col_list1 = [<span class="hljs-built_in">str</span>(j) <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> d_col_list]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(config.ROW_START, self.r_sheet.nrows):<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> agent.pass_empty(i, self.r_sheet, self.col_index):<br>                <span class="hljs-keyword">continue</span><br>            temp = Common.change_format(<br>                self.r_sheet.cell_value(<br>                    i, self.col_index))<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">str</span>(temp) <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> d_col_list1:<br>                agent.pri_excel(<br>                    self.excel_name,<br>                    self.sheet_name,<br>                    i,<br>                    self.col_index_name)<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;规则：每个单元格都in指定的表格指定列的合集。数据:::&#123;&#125;--&#123;&#125;&quot;</span>. <span class="hljs-built_in">format</span>(<br>                    <span class="hljs-built_in">str</span>(self.r_sheet.cell_value(i, self.col_index)), _value))<br></code></pre></td></tr></table></figure>
+
+<p>如上代码，In为大类，大类包含小类。In类型规则，包含All类规则（每个单元格都in指定的表格指定列的合集）、Assign类规则（每个单元格都存在于由你设定的合集）等等（其他规则就不详细说了）。<code>self.__getattribute__(temp[key])(value)</code>会根据映射关系去执行对应方法来做检查。<code>all_in</code>方法会打印错误的规则以及错误数据；<code>pri_excel</code>方法负责通用打印，主要打印错误位置。下面给出打印结果示例。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">    @staticmethod</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pri_excel</span>(<span class="hljs-params">name, sheet, row=<span class="hljs-string">&#x27;&#x27;</span>, col=<span class="hljs-string">&#x27;&#x27;</span></span>):</span><br>        <span class="hljs-keyword">if</span> row == <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">and</span> col == <span class="hljs-string">&#x27;&#x27;</span>:<br>            <span class="hljs-built_in">print</span>(<br>                <span class="hljs-string">&quot;表格位置----------------------------------&#123;&#125;-------------------------&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(name, sheet,))<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(<br>                <span class="hljs-string">&quot;表格位置----------------------------------&#123;&#125;--------------------------&#123;&#125;--行&#123;&#125;--列&#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<br>                    name,<br>                    sheet,<br>                    row,<br>                    col))<br>//规则：每个单元格都<span class="hljs-keyword">in</span>指定的表格指定列的合集。数据:::<span class="hljs-number">208</span>--[<span class="hljs-string">&#x27;/冬天的秘密--表.xls&#x27;</span>, <span class="hljs-string">&#x27;冬天的秘密--Sheet1&#x27;</span>, <span class="hljs-string">&#x27;冬天的秘密--列&#x27;</span>]<br>//表格位置----------------------------------\XXX表.xls--------------------------Sheet1--行<span class="hljs-number">712</span>--列XXX（冬天的秘密--列名，注意不是列的index哦，列名，直接让你快速找到位置）<br></code></pre></td></tr></table></figure>
+
+<h5 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h5><ul>
+<li>遍历规则表</li>
+<li>根据配置在规则表对应列下的规则，找到对应需要检查的配置表，以及规则中指向需要配合检查的另一个配置表（如果有的话）</li>
+<li>按照规则执行检查，打印错误输出</li>
+</ul>
+<h4 id="实际应用与优化："><a href="#实际应用与优化：" class="headerlink" title="实际应用与优化："></a>实际应用与优化：</h4><h5 id="好的方面："><a href="#好的方面：" class="headerlink" title="好的方面："></a>好的方面：</h5><ul>
+<li>目前我有的规则类，在上文中的<code>switch</code>可以看出来，有7大类，每个类下可能有不定数量的规则，总体来说99%满足了我的日常需要了。</li>
+<li>代码结构支持随时自定义规则，你想增加删除规则，也是分分钟的事。你的想法有多优秀，规则就可以有多优秀。</li>
+<li>配规则很简单。有多简单？找到对应规则表位置，打开，写入规则，完事了。规则很复杂吗？看你自己定义了。我日常做法：复制规则，改规则中的excel name，sheet name,col name三个参数，完事。</li>
+<li>输出结果一目了然。错在哪，哪一行，列名是什么，因为什么规则错了，统统都有，会有人看不明白？看不明白的话，那我是真的佛了。</li>
+</ul>
+<h5 id="优化："><a href="#优化：" class="headerlink" title="优化："></a>优化：</h5><p>问题一：表头经常改动，列名也经常变化，规则表的表头就得手动更改保证和配置表一样（我强迫症，我就想一样，这样子很容易找位置）。比如原来配置表ABCD列，规则表也是ABCD列，后来迭代多次表变成了ABCFG列，我就又要手动删除D，又要手动补充FG。麻烦。于是自动同步表头配置脚本，又应运而生了。</p>
+<p>这个脚本主要做什么事？帮我把D删除，帮我新建FG，如果AB之间多了个小三，那么也会自动把B列（以及B列下的所有规则）往后挪，小三则按照顺序放在A之后。总之，就是同步表头，同时把对应表头下的规则跟着表头一起挪动。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 只支持xlsx</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">write_excel</span>(<span class="hljs-params">excel, df</span>):</span><br>    <span class="hljs-comment"># 先清除格式，再写入，才能成功</span><br>    pd.io.formats.excel.header_style = <span class="hljs-literal">None</span><br>    <span class="hljs-keyword">with</span> pd.ExcelWriter(excel) <span class="hljs-keyword">as</span> writer:<br>        df.to_excel(writer, sheet_name=<span class="hljs-string">&#x27;Sheet1&#x27;</span>, startrow=<span class="hljs-number">0</span>, index=<span class="hljs-literal">False</span>, header=<span class="hljs-literal">False</span>)<br>        workbook = writer.book<br>        worksheets = writer.sheets<br>        worksheet = worksheets[<span class="hljs-string">&#x27;Sheet1&#x27;</span>]<br>        worksheet.set_column(<span class="hljs-string">&#x27;A:AD&#x27;</span>, <span class="hljs-number">20</span>)<br>        format1 = workbook.add_format(&#123;<br>            <span class="hljs-comment"># &#x27;bold&#x27;: True,  # 字体加粗</span><br>            <span class="hljs-comment"># &#x27;border&#x27;: 20,  # 单元格边框宽度</span><br>            <span class="hljs-comment"># &#x27;align&#x27;: &#x27;left&#x27;,  # 水平对齐方式</span><br>            <span class="hljs-comment"># &#x27;valign&#x27;: &#x27;vcenter&#x27;,  # 垂直对齐方式</span><br>            <span class="hljs-string">&#x27;fg_color&#x27;</span>: <span class="hljs-string">&#x27;#FFC000&#x27;</span>,  <span class="hljs-comment"># 单元格背景颜色</span><br>            <span class="hljs-comment"># &#x27;text_wrap&#x27;: True,  # 是否自动换行</span><br>        &#125;)<br>        <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, <span class="hljs-number">5</span>):<br>            worksheet.set_row(k, <span class="hljs-number">20</span>, format1)<br>        format2 = workbook.add_format(&#123;<span class="hljs-string">&#x27;fg_color&#x27;</span>: <span class="hljs-string">&#x27;#5B9BD5&#x27;</span>&#125;)<br>        worksheet.set_row(<span class="hljs-number">1</span>, <span class="hljs-number">20</span>, format2)<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>, <span class="hljs-number">15</span>):<br>            worksheet.set_row(j, <span class="hljs-number">20</span>)<br></code></pre></td></tr></table></figure>
+
+<p>弄完之后，所有表长得一模一样，还有背景颜色，一家人就要整整齐齐，真开心。</p>
+<p><img src="/img/image-20210803223027137.png" srcset="/img/loading.gif" lazyload alt="image-20210803223027137"></p>
+<p>问题二：平台化？</p>
+<p>不打算，不建议搞，于是我砍掉了这个优化。我出于以下考虑：</p>
+<ul>
+<li><p>游戏行业人员会更喜欢和excel打交道</p>
+</li>
+<li><p>表头过多，web很难操作，样式也没excel好看。excel和策划配置表长的一样，容易形成习惯，有助于规则配置。</p>
+</li>
+<li><p>平台化的化，需要数据库。那就又要重新优化问题一了（又要写自动同步数据库表头的脚本）</p>
+</li>
+<li><p>我懒，不想搞平台。就是懒，咋的啦。</p>
+</li>
+</ul>
+<p>问题三：工具运行中，某些规则兼容性不好，报错，就阻断了后面的检查。</p>
+<p>举个例子，你配置一个<code>Dict</code>类规则，默认这个表格内容是可以转换为<code>json</code>或者<code>python dict</code>去做检查，但是配表数据出现了问题，导致报错，阻断后面流程（然后有人就会来找我说报错啦）。我目前的做法是，持续优化规则代码，增加兼容性，提前检查必要的数据格式，或者对易报错代码使用<code>try</code>。现在持续优化后，已经很少出现报错阻断了。一个字，美滋滋（三个字）。</p>
+<p>问题四：效率问题？</p>
+<p>目前100+表格，各种规则配置起来也蛮多的，但是运行时间不需要超过1分钟。所以暂时不用管了。</p>
+<p>其实我也蛮期待，在更多表格数据、规则数据的情况下，工具的运行效率。我也提前预想过一些优化方案来提高效率。</p>
+<p>问题五：规则维护问题—-会不会出现同个规则存在很多表，然后你需要一个一个去更改这些规则的写法？</p>
+<p>我认为是不会出现的。在定义规则之前，就已经考虑通用性了，后续基本不会变动原有规则的写法，最多只会新增新的规则写法。所以旧的规则写法永远不需要去改动，也不建议去改动。如果实在要改动，建议改动代码去兼容原有规则写法。反正至今我都没改动过。</p>
+<p>其他: 有点想把取出来的规则归类整理，再<code>getattr</code>一个类，跑完一个类的检查，再做下一个类，而不是现在混着检查（简单说就是检查顺序跟着大类走）。不过检查顺序又想着跟着表走也好，输出结果也能按照表顺序，也蛮好的。也有点想加入协程，但是涉及<code>open</code>同个表的问题，需要上锁，麻烦，算了，先这样，反正几十秒出结果了，效率能接受。</p>
+<h4 id="附言："><a href="#附言：" class="headerlink" title="附言："></a>附言：</h4><p>仁者见仁智者见智，希望这个工具，成为比较好的配置表检查方案，也期待有人告诉我更好的方案。</p>
+<p>首发于TesterHome:  <a target="_blank" rel="noopener" href="https://testerhome.com/topics/30737">https://testerhome.com/topics/30737</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/08/25/tops%E5%92%8Cdumpsys/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">tops和dumpsys</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/03/GO%E5%86%85%E9%83%A8%E5%8C%85/">
+                        <span class="hidden-mobile">GO内部包</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Suixiang Chen">
+  <meta name="keywords" content="">
+  
+  <title>tops和dumpsys - 陈随想</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"mistyrain520.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":140,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>陈随想</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/background1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="tops和dumpsys">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-25 23:40" pubdate>
+        2021年8月25日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">tops和dumpsys</h1>
+            
+            <div class="markdown-body">
+              <h3 id="top命令详解"><a href="#top命令详解" class="headerlink" title="top命令详解"></a>top命令详解</h3><p>基本使用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs shell">D:\Program Files (x86)\Android\android-sdk\platform-tools&gt;adb -s 7PR4C19912015805 shell top --help<br>usage: top [-Hbq] [-k FIELD,] [-o FIELD,] [-s SORT] [-n NUMBER] [-m LINES] [-d SECONDS] [-p PID,] [-u USER,]<br><br>Show process activity in real time.<br><br>-H      Show threads<br>-k      Fallback sort FIELDS (default -S,-%CPU,-ETIME,-PID)<br>-o      Show FIELDS (def PID,USER,PR,NI,VIRT,RES,SHR,S,%CPU,%MEM,TIME+,CMDLINE)<br>-O      Add FIELDS (replacing PR,NI,VIRT,RES,SHR,S from default)<br>-s      Sort by field number (1-X, default 9)<br>-b      Batch mode (no tty)<br>-d      Delay SECONDS between each cycle (default 3)<br>-m      Maximum number of tasks to show<br>-n      Exit after NUMBER iterations<br>-p      Show these PIDs<br>-u      Show these USERs<br>-q      Quiet (no header lines)<br><br>Cursor LEFT/RIGHT to change sort, UP/DOWN move list, space to force<br>update, R to reverse sort, Q to exit.<br></code></pre></td></tr></table></figure>
+
+<p>结合findstr(windows用findstr，linux用grep)使用，其中<code>-s 7PR4C19912015805</code>指定设备名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">adb -s 7PR4C19912015805 shell top  -d 1<br>//结合findstr或者grep使用，注意有些包名太长系统不会显示全名，此时搜索全名包名可能搜不到，建议搜索部分包名<br>adb -s 7PR4C19912015805 shell top  -d 1 | findstr com.XXX.XXX<br>//把top输出保存到adb工具的当前目录下1257.txt文件<br>adb -s 7PR4C19912015805 shell &quot;top  -d 1|grep com.XXX.XXX&quot; &gt;1257.txt<br></code></pre></td></tr></table></figure>
+
+<h3 id="top重要参数含义"><a href="#top重要参数含义" class="headerlink" title="top重要参数含义"></a>top重要参数含义</h3><p>**VIRT：virtual memory usage 虚拟内存<br>**1、进程“需要的”虚拟内存大小，包括进程使用的库、代码、数据等。VIRT=SWAP（交换内存）+RES</p>
+<p>2、假如进程申请100m的内存，但实际只使用了10m，那么它会增长100m，而不是实际的使用量</p>
+<p><strong>RES：resident memory usage 常驻内存</strong><br>1、进程当前使用的内存大小，但不包括swap out<br>2、包含其他进程的共享<br>3、如果申请100m的内存，实际使用10m，它只增长10m，与VIRT相反<br>4、关于库占用内存的情况，它只统计加载的库文件所占内存大小</p>
+<p><strong>SHR：shared memory 共享内存</strong><br>1、除了自身进程的共享内存，也包括其他进程的共享内存<br>2、虽然进程只使用了几个共享库的函数，但它包含了整个共享库的大小<br>3、计算某个进程所占的物理内存大小公式：RES – SHR<br>4、swap out后，它将会降下来</p>
+<p>参考连接：</p>
+<p><a target="_blank" rel="noopener" href="https://javawind.net/p131">https://javawind.net/p131</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/flyingcode/p/13690223.html">https://www.cnblogs.com/flyingcode/p/13690223.html</a></p>
+<h3 id="dumpsys-meminfo详解"><a href="#dumpsys-meminfo详解" class="headerlink" title="dumpsys meminfo详解"></a>dumpsys meminfo详解</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs shell">adb shell dumpsys meminfo [pkg/pid]<br>D:\Program Files (x86)\Android\android-sdk\platform-tools&gt;adb -s 7PR4C19912015805 shell dumpsys meminfo -h<br>meminfo dump options: [-a] [-d] [-c] [-s] [--oom] [process]<br>  -a: include all available information for each process.<br>  -d: include dalvik details.<br>  -c: dump in a compact machine-parseable representation.<br>  -s: dump only summary of application memory usage.<br>  -S: dump also SwapPss.<br>  --oom: only show processes organized by oom adj.<br>  --local: only collect details locally, don&#x27;t call process.<br>  --package: interpret process arg as package, dumping all<br>             processes that have loaded that package.<br>  --checkin: dump data for a checkin<br>  --proto: dump data to proto<br>If [process] is specified it can be the name or<br>pid of a specific process to dump.<br></code></pre></td></tr></table></figure>
+
+<p>其他常用服务信息查询</p>
+<ul>
+<li><p>内存 adb shell dumpsys meminfo</p>
+</li>
+<li><p>CPU adb shell dumpsys cpuinfo</p>
+</li>
+<li><p>帧率 adb shell dumpsys gfxinfo</p>
+</li>
+<li><p>显示 adb shell dumpsys display</p>
+</li>
+<li><p>电源 adb shell dumpsys power</p>
+</li>
+<li><p>电池状态 adb shell dumpsys batterystats</p>
+</li>
+<li><p>电池 adb shell dumpsys battery</p>
+</li>
+<li><p>闹钟 adb shell dumpsys alarm</p>
+</li>
+<li><p>位置 adb shell dumpsys location</p>
+</li>
+</ul>
+<p>Uptime</p>
+<p>表示启动到现在的时长，不包含休眠的时间，单位毫秒(ms)</p>
+<p>Realtime</p>
+<p>表示启动到现在的时长，包含休眠的时间，单位毫秒(ms)</p>
+<p>Native Heap</p>
+<p>指c 中malloc出来的堆空间</p>
+<p>扩展：c++申请的内存为native process，java申请的内存：java process</p>
+<p>Dalvik Heap</p>
+<p>指java中new出来的java堆空间</p>
+<p>只是占用的虚拟内存的空间</p>
+<p>Pss Total</p>
+<p>指占用了真实的物理内存的空间</p>
+<p>private dirty</p>
+<p>指私有驻留内存</p>
+<p>扩展：进程内存空间是虚拟内存，区分于物理内存，进程无法直接操作物理内存RAM。必要时，操作系统对其进行映射，使进程能应用到物理内存</p>
+<p>Heap Size</p>
+<p>指占用总内存（Heap 堆）</p>
+<p>Heap Alloc</p>
+<p>指在虚拟地址中分配了这么多空间</p>
+<p>Heap Free</p>
+<p>空闲内存</p>
+<p>参考连接：</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hzcya1995/p/13309149.html">https://www.cnblogs.com/hzcya1995/p/13309149.html</a></p>
+<h3 id="查看包名方式"><a href="#查看包名方式" class="headerlink" title="查看包名方式"></a>查看包名方式</h3><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-comment">//方式一，可以用FILTER去搜索</span><br>adb shell pm list packages <span class="hljs-selector-attr">[-f]</span> <span class="hljs-selector-attr">[-d]</span> <span class="hljs-selector-attr">[-e]</span> <span class="hljs-selector-attr">[-s]</span> <span class="hljs-selector-attr">[-3]</span> <span class="hljs-selector-attr">[-i]</span> <span class="hljs-selector-attr">[-u]</span> <span class="hljs-selector-attr">[--user USER_ID]</span> <span class="hljs-selector-attr">[FILTER]</span><br>参数	显示列表<br>无	所有应用<br>-f	显示应用关联的 apk 文件<br>-d	只显示 disabled 的应用<br>-e	只显示 enabled 的应用<br>-s	只显示系统应用<br>-3	只显示第三方应用<br>-<span class="hljs-selector-tag">i</span>	显示应用的 installer<br>-u	包含已卸载应用<br>&lt;<span class="hljs-attribute">FILTER</span>&gt;	包名包含 &lt;<span class="hljs-attribute">FILTER</span>&gt; 字符串<br>adb -s 7PR4C19912015805 shell pm list packages weixin<br><span class="hljs-comment">//方式二，直接查看活动的应用占用资源情况</span><br>adb -s 7PR4C19912015805 shell <span class="hljs-attribute">top</span>  -d 1<br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/adb/">adb</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/16/%E5%A4%9A%E4%B8%AAdefer%E4%BD%BF%E7%94%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">go defer特点</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/03/%E6%83%B3%E5%81%9A%E6%9C%80%E5%A5%BD%E7%9A%84%E7%AD%96%E5%88%92%E9%85%8D%E8%A1%A8%E6%A3%80%E6%9F%A5%E5%B7%A5%E5%85%B7/">
+                        <span class="hidden-mobile">想做最好的策划配表检查工具</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
