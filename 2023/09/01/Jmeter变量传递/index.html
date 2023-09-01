@@ -17,7 +17,7 @@
   <meta name="author" content="Suixiang Chen">
   <meta name="keywords" content="">
   
-  <title>有一天我会哭 - 陈随想</title>
+  <title>Jmeter变量传递 - 陈随想</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -161,7 +161,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="有一天我会哭">
+            <span class="h2" id="subtitle" title="Jmeter变量传递">
               
             </span>
 
@@ -171,8 +171,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-08-13 23:06" pubdate>
-        2023年8月13日 晚上
+      <time datetime="2023-09-01 23:15" pubdate>
+        2023年9月1日 晚上
       </time>
     </span>
   
@@ -183,7 +183,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      216 字
+      294 字
     </span>
   
 
@@ -193,7 +193,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      4
        分钟
     </span>
   
@@ -223,32 +223,18 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">有一天我会哭</h1>
+            <h1 style="display: none">Jmeter变量传递</h1>
             
             <div class="markdown-body">
-              <p align="center"><b style="font-size:25px">有一天我会哭</b></p>
-<p align="right">陈随想</p>
+              <h6 id="单线程上下文传递："><a href="#单线程上下文传递：" class="headerlink" title="单线程上下文传递："></a>单线程上下文传递：</h6><ul>
+<li>把值赋值进去，拿出来使用<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>在脚本中<br>vars.put(<span class="hljs-string">&quot;value&quot;</span>, value)<br>vars.get(<span class="hljs-string">&quot;value&quot;</span>)<br><span class="hljs-regexp">//</span>在非脚本中使用<br><span class="hljs-variable">$&#123;value&#125;</span><br><span class="hljs-regexp">//</span>其他<br>vars.putObject(<span class="hljs-string">&quot;key&quot;</span>, new Object())<br></code></pre></td></tr></table></figure>
+<h6 id="多线程上下文传递（上一篇中参考地址中涉及到了）："><a href="#多线程上下文传递（上一篇中参考地址中涉及到了）：" class="headerlink" title="多线程上下文传递（上一篇中参考地址中涉及到了）："></a>多线程上下文传递（上一篇中参考地址中涉及到了）：</h6><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>在脚本中<br>props.put(<span class="hljs-string">&quot;value&quot;</span>, value)<br>props.get(<span class="hljs-string">&quot;value&quot;</span>)<br><span class="hljs-regexp">//</span>在非脚本中使用<br><span class="hljs-variable">$&#123;value&#125;</span><br><span class="hljs-regexp">//</span>其他<br>vars.putObject(<span class="hljs-string">&quot;key&quot;</span>, new Object())<br><span class="hljs-regexp">//</span>vars 和props都是变量，均有如下方法<br><span class="hljs-regexp">//</span>https:<span class="hljs-regexp">//</span>jmeter.apache.org<span class="hljs-regexp">/api/</span>org<span class="hljs-regexp">/apache/</span>jmeter<span class="hljs-regexp">/threads/</span>JMeterVariables.html<br></code></pre></td></tr></table></figure>
+<h6 id="json提取器返回数组"><a href="#json提取器返回数组" class="headerlink" title="json提取器返回数组"></a>json提取器返回数组</h6><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs stylus">names of variables: <span class="hljs-attribute">content</span><br>Match No: -<span class="hljs-number">1</span><br>JSON Path: $<span class="hljs-selector-class">.data</span><span class="hljs-selector-class">.content</span><span class="hljs-selector-attr">[*]</span><span class="hljs-selector-class">.id</span><br><span class="hljs-comment">//添加调试取样器</span><br>content_1=<span class="hljs-number">2926567</span><br>content_2=<span class="hljs-number">2926572</span><br>content_ALL=<span class="hljs-number">2926567</span>,<span class="hljs-number">2926572</span><br>content_matchNr=<span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+<h6 id="json提取器返回数组引用"><a href="#json提取器返回数组引用" class="headerlink" title="json提取器返回数组引用"></a>json提取器返回数组引用</h6><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>添加计数器<br>Maxinum value: <span class="hljs-variable">$&#123;content_matchNr&#125;</span><br><span class="hljs-regexp">//</span>引用<br><span class="hljs-variable">$&#123;__V(content_$&#123;num&#125;</span>,)&#125;<br></code></pre></td></tr></table></figure>
+<h6 id="JSR223中获取请求返回"><a href="#JSR223中获取请求返回" class="headerlink" title="JSR223中获取请求返回"></a>JSR223中获取请求返回</h6><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">import groovy.json.JsonOutput;<br>import org.apache.commons.lang3.StringEscapeUtils;<br><span class="hljs-comment">// 字符串的形式读取返回数据</span><br>def data = prev.get<span class="hljs-constructor">ResponseDataAsString()</span>;<br><span class="hljs-comment">// 格式化json数据</span><br>def json = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">JsonOutput</span>.</span></span>pretty<span class="hljs-constructor">Print(<span class="hljs-params">data</span>)</span>;<br><span class="hljs-comment">// 对数据进行Unicode转中文的解码</span><br>def ret = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">StringEscapeUtils</span>.</span></span>unescape<span class="hljs-constructor">Java(<span class="hljs-params">json</span>)</span>;<br><span class="hljs-comment">// 把我们转换后的数据设置为返回结果，编码设置为UTF-8</span><br>prev.set<span class="hljs-constructor">ResponseData(<span class="hljs-params">ret</span>, <span class="hljs-string">&quot;UTF-8&quot;</span>)</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">prev变量<br>https:<span class="hljs-regexp">//</span>jmeter.apache.org<span class="hljs-regexp">/api/</span>org<span class="hljs-regexp">/apache/</span>jmeter<span class="hljs-regexp">/samplers/</span>SampleResult.html<br></code></pre></td></tr></table></figure></li>
+</ul>
 
-<p align="center">有一天我会哭</p>
-<p align="center">眼角沾满了珍珠</p>
-<p align="center">透明了往故</p>
-<p align="center">撩起烟雨</p>
-<p align="center">半遮半捂</p><br>
-
-<p align="center">有一天我在哭</p>
-<p align="center">泪眼看桐梧</p>
-<p align="center">细数过往鸟语</p>
-<p align="center">捧簇淡菊</p>
-<p align="center">年少不复</p><br>
-
-<p align="center">有一天我会禁不住哭</p>
-<p align="center">那些古老的阳光浴</p>
-<p align="center">那轻狂的笑脸颠覆</p>
-<p align="center">我扬起柳枝挥去</p>
-<p align="center">残留黄昏的霞楚</p><br>
-
-<p align="left"><b style="font-size:18px">2023-08-13 跋</b></p>
-小时候有段时间爱写诗。小时候有段时间爱哭。小时候有段时间爱发呆。所以有了此诗。大约记得此诗作于2011年。那是我还是个高中生。某天下午有一节体育课，在课上自由活动的时间里，我坐在某处的楼梯望着天空发呆，思绪万千，有点忍不住眼里硬是多了了几滴泪光。遂作此诗。
             </div>
             <hr>
             <div>
@@ -258,7 +244,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%AF%97%E6%AD%8C/">诗歌</a>
+                      <a class="hover-with-bg" href="/tags/Jmeter/">Jmeter</a>
                     
                   </div>
                 
@@ -275,18 +261,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/01/Jmeter%E5%8F%98%E9%87%8F%E4%BC%A0%E9%80%92/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Jmeter变量传递</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/12/hexo%EF%BC%88%E5%9D%91%E4%B8%80%EF%BC%89/">
-                        <span class="hidden-mobile">hexo（坑一）</span>
+                      <a href="/2023/08/13/%E6%9C%89%E4%B8%80%E5%A4%A9%E6%88%91%E4%BC%9A%E5%93%AD/">
+                        <span class="hidden-mobile">有一天我会哭</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
