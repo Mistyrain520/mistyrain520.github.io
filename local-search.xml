@@ -4,6 +4,38 @@
   
   
   <entry>
+    <title>简单玩一下kafka</title>
+    <link href="/2023/09/03/%E7%AE%80%E5%8D%95%E7%8E%A9%E4%B8%80%E4%B8%8Bkafka/"/>
+    <url>/2023/09/03/%E7%AE%80%E5%8D%95%E7%8E%A9%E4%B8%80%E4%B8%8Bkafka/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>wsl2升级</title>
+    <link href="/2023/09/03/wsl2%E5%8D%87%E7%BA%A7/"/>
+    <url>/2023/09/03/wsl2%E5%8D%87%E7%BA%A7/</url>
+    
+    <content type="html"><![CDATA[<h5 id="wsl一些命令"><a href="#wsl一些命令" class="headerlink" title="wsl一些命令"></a>wsl一些命令</h5><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">//查看版本</span><br>wsl -l -v<br><span class="hljs-comment">// 设置默认版本</span><br> wsl --set-<span class="hljs-keyword">default</span>-version <span class="hljs-number">1</span><br> <span class="hljs-comment">//升级版本</span><br> wsl --set-version Ubuntu<span class="hljs-number">-22.04</span> <span class="hljs-number">2</span><br> <span class="hljs-comment">//关闭</span><br> wsl --shutdown<br></code></pre></td></tr></table></figure><h5 id="wsl更新包"><a href="#wsl更新包" class="headerlink" title="wsl更新包"></a>wsl更新包</h5><p><a href="https://www.catalog.update.microsoft.com/Search.aspx?q=wsl">https://www.catalog.update.microsoft.com/Search.aspx?q=wsl</a></p><h5 id="wsl2为啥更新？wsl1不支持docker"><a href="#wsl2为啥更新？wsl1不支持docker" class="headerlink" title="wsl2为啥更新？wsl1不支持docker"></a>wsl2为啥更新？wsl1不支持docker</h5><ul><li>启用虚拟化,启用hyper-V<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">//</span>家庭版启用Hypver-V，以下保存为命令执行<br>pushd <span class="hljs-string">&quot;%~dp0&quot;</span><br>dir <span class="hljs-string">/b</span> %SystemRoot%\servicing\Packages\*Hyper-V*<span class="hljs-string">.mum</span> &gt;hyper-v.txt<br>for <span class="hljs-string">/f</span> %%i in <span class="hljs-params">(&#x27;findstr /i . hyper-v.txt 2^&gt;nul&#x27;)</span> do dism <span class="hljs-string">/online</span> <span class="hljs-string">/norestart</span> <span class="hljs-string">/add-package</span>:<span class="hljs-string">&quot;%SystemRoot%\servicing\Packages\%%i&quot;</span><br>del hyper-v.txt<br>Dism <span class="hljs-string">/online</span> <span class="hljs-string">/enable-feature</span> <span class="hljs-string">/featurename</span><span class="hljs-function">:Microsoft-Hyper-V-All</span> <span class="hljs-string">/LimitAccess</span> <span class="hljs-string">/ALL</span><br></code></pre></td></tr></table></figure></li><li>不可以使用vmware，vm和wsl2不兼容<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">//启用过vmware的话，升级wsl2总是会提示启用虚拟化，但是实际已经启用了</span><br><span class="hljs-comment">//powershell执行以下命令可以解决</span><br>bcdedit /set hypervisorlaunchtype <span class="hljs-keyword">auto</span><br></code></pre></td></tr></table></figure></li><li>ununtu 22.04启动docker失败<br>原因是因为新版的ubuntu系统使用了iptables-nft<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>先输入下面指令<br>sudo update-alternatives --config iptables<br><span class="hljs-regexp">//</span>接着输入<span class="hljs-number">1</span><br><span class="hljs-number">1</span><br></code></pre></td></tr></table></figure></li></ul><h5 id="开始安装docker"><a href="#开始安装docker" class="headerlink" title="开始安装docker"></a>开始安装docker</h5><p><a href="https://docs.docker.com/engine/install/ubuntu/">https://docs.docker.com/engine/install/ubuntu/</a></p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>参上官网执行，完成安装，步骤此处不写<br><span class="hljs-regexp">//</span>查看状态，启动服务<br>service docker status<br>sudo service docker start<br><span class="hljs-regexp">//</span> 查看状态返回Docker is running<br><span class="hljs-regexp">//</span>测试<br>sudo docker run hello-world<br></code></pre></td></tr></table></figure><h5 id="（重要！）如何在windows上访问wsl2的文件？"><a href="#（重要！）如何在windows上访问wsl2的文件？" class="headerlink" title="（重要！）如何在windows上访问wsl2的文件？"></a>（重要！）如何在windows上访问wsl2的文件？</h5><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams">\\wsl<span class="hljs-symbol">$</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>wsl</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Jmeter变量传递</title>
     <link href="/2023/09/01/Jmeter%E5%8F%98%E9%87%8F%E4%BC%A0%E9%80%92/"/>
     <url>/2023/09/01/Jmeter%E5%8F%98%E9%87%8F%E4%BC%A0%E9%80%92/</url>
