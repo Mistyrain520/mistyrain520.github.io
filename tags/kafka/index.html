@@ -17,25 +17,9 @@
   <meta name="author" content="Suixiang Chen">
   <meta name="keywords" content="">
   
-  <title>简单玩一下kafka - 陈随想</title>
+  <title>标签 - kafka - 陈随想</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
@@ -62,7 +46,7 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -161,50 +145,17 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="简单玩一下kafka">
+            <span class="h2" id="subtitle" title="标签 - kafka">
               
             </span>
 
             
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-09-03 19:15" pubdate>
-        2023年9月3日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      364 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      5
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
           </div>
 
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
           
         </div>
       </div>
@@ -213,105 +164,40 @@
 
   <main>
     
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+  <p class="h4">共计 1 篇文章</p>
+  <hr>
+  
+  
+    
       
+      <p class="h5">2023</p>
+    
+    <a href="/2023/09/03/%E7%AE%80%E5%8D%95%E7%8E%A9%E4%B8%80%E4%B8%8Bkafka/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">简单玩一下kafka</span>
+      <time style="float: right;">09-03</time>
+    </a>
+  
+</div>
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">简单玩一下kafka</h1>
-            
-            <div class="markdown-body">
-              <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>这玩意（中间件）虽然常用，但还真没实际玩一玩，今天搞搞，看看基本玩法</p>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><ul>
-<li>认准下面这两，才是官方镜像。confluentinc就认准这个就对了~~<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">docker</span> pull confluentinc/<span class="hljs-meta">cp</span>-zookeeper<br><span class="hljs-symbol">docker</span> pull confluentinc/<span class="hljs-meta">cp</span>-kafka<br></code></pre></td></tr></table></figure></li>
-<li>启动镜像咯<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">docker <span class="hljs-builtin-name">run</span> -d --name kafka -p 9092:9092 -e <span class="hljs-attribute">KAFKA_BROKER_ID</span>=0 -e <span class="hljs-attribute">KAFKA_ZOOKEEPER_CONNECT</span>=192.168.1.1:2181 -e <span class="hljs-attribute">KAFKA_ADVERTISED_LISTENERS</span>=PLAINTEXT://172.20.224.159:9092 -e <span class="hljs-attribute">KAFKA_LISTENERS</span>=PLAINTEXT://0.0.0.0:9092 confluentinc/cp-kafka<br><br><br>docker <span class="hljs-builtin-name">run</span> -d --name zookeeper -e <span class="hljs-attribute">TZ</span>=<span class="hljs-string">&quot;Asia/Shanghai&quot;</span> -p 2181:2181 -v <span class="hljs-variable">$PWD</span>/data:/data -e <span class="hljs-attribute">ZOOKEEPER_CLIENT_PORT</span>=2181 confluentinc/cp-zookeeper<br><br></code></pre></td></tr></table></figure></li>
-<li>zookeeper启动解释</li>
-</ul>
-<ol>
-<li>-d：以分离模式运行容器，这意味着容器将在后台运行。</li>
-<li>–name zookeeper：为容器指定一个名称，以便以后可以更容易地引用它。</li>
-<li>-p 2181:2181：将容器的 2181 端口映射到宿主机的 2181 端口</li>
-<li>-e ZOOKEEPER_CLIENT_PORT=2181：设置环境变量 ZOOKEEPER_CLIENT_PORT 的值为 2181。这将告诉 Zookeeper 在 2181 端口上监听客户端连接。</li>
-<li>-e TZ=”Asia/Shanghai”设置时区</li>
-<li>-v $PWD/data:/data 将本地目录(文件)挂载到容器指定目录</li>
-</ol>
-<ul>
-<li>kafka启动解释</li>
-</ul>
-<ol>
-<li>-e KAFKA_BROKER_ID=0：设置环境变量 KAFKA_BROKER_ID 的值为 0。这将指定 Kafka broker 的 ID</li>
-<li>-e KAFKA_ZOOKEEPER_CONNECT=192.168.1.1:2181：设置环境变量 KAFKA_ZOOKEEPER_CONNECT 的值为 192.168.1.1:2181。这将指定 Kafka broker 连接的 Zookeeper 地址和端口</li>
-<li>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.1.1:9092：设置环境变量 KAFKA_ADVERTISED_LISTENERS 的值为 PLAINTEXT://192.168.1.1:9092。这将指定 Kafka broker 对外宣布的监听地址和端口</li>
-</ol>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
-                    
-                      <a class="hover-with-bg" href="/tags/kafka/">kafka</a>
-                    
-                  </div>
-                
+
+
+
               </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2023/09/03/wsl2%E5%8D%87%E7%BA%A7/">
-                        <span class="hidden-mobile">wsl2升级</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
             </div>
-
-            
-          </article>
+          </div>
         </div>
       </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
     
 
     
@@ -391,15 +277,9 @@
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 

@@ -8,9 +8,17 @@
     <link href="/2023/09/03/%E7%AE%80%E5%8D%95%E7%8E%A9%E4%B8%80%E4%B8%8Bkafka/"/>
     <url>/2023/09/03/%E7%AE%80%E5%8D%95%E7%8E%A9%E4%B8%80%E4%B8%8Bkafka/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>这玩意（中间件）虽然常用，但还真没实际玩一玩，今天搞搞，看看基本玩法</p><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><ul><li>认准下面这两，才是官方镜像。confluentinc就认准这个就对了~~<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">docker</span> pull confluentinc/<span class="hljs-meta">cp</span>-zookeeper<br><span class="hljs-symbol">docker</span> pull confluentinc/<span class="hljs-meta">cp</span>-kafka<br></code></pre></td></tr></table></figure></li><li>启动镜像咯<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">docker <span class="hljs-builtin-name">run</span> -d --name kafka -p 9092:9092 -e <span class="hljs-attribute">KAFKA_BROKER_ID</span>=0 -e <span class="hljs-attribute">KAFKA_ZOOKEEPER_CONNECT</span>=192.168.1.1:2181 -e <span class="hljs-attribute">KAFKA_ADVERTISED_LISTENERS</span>=PLAINTEXT://172.20.224.159:9092 -e <span class="hljs-attribute">KAFKA_LISTENERS</span>=PLAINTEXT://0.0.0.0:9092 confluentinc/cp-kafka<br><br><br>docker <span class="hljs-builtin-name">run</span> -d --name zookeeper -e <span class="hljs-attribute">TZ</span>=<span class="hljs-string">&quot;Asia/Shanghai&quot;</span> -p 2181:2181 -v <span class="hljs-variable">$PWD</span>/data:/data -e <span class="hljs-attribute">ZOOKEEPER_CLIENT_PORT</span>=2181 confluentinc/cp-zookeeper<br><br></code></pre></td></tr></table></figure></li><li>zookeeper启动解释</li></ul><ol><li>-d：以分离模式运行容器，这意味着容器将在后台运行。</li><li>–name zookeeper：为容器指定一个名称，以便以后可以更容易地引用它。</li><li>-p 2181:2181：将容器的 2181 端口映射到宿主机的 2181 端口</li><li>-e ZOOKEEPER_CLIENT_PORT=2181：设置环境变量 ZOOKEEPER_CLIENT_PORT 的值为 2181。这将告诉 Zookeeper 在 2181 端口上监听客户端连接。</li><li>-e TZ=”Asia/Shanghai”设置时区</li><li>-v $PWD/data:/data 将本地目录(文件)挂载到容器指定目录</li></ol><ul><li>kafka启动解释</li></ul><ol><li>-e KAFKA_BROKER_ID=0：设置环境变量 KAFKA_BROKER_ID 的值为 0。这将指定 Kafka broker 的 ID</li><li>-e KAFKA_ZOOKEEPER_CONNECT=192.168.1.1:2181：设置环境变量 KAFKA_ZOOKEEPER_CONNECT 的值为 192.168.1.1:2181。这将指定 Kafka broker 连接的 Zookeeper 地址和端口</li><li>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.1.1:9092：设置环境变量 KAFKA_ADVERTISED_LISTENERS 的值为 PLAINTEXT://192.168.1.1:9092。这将指定 Kafka broker 对外宣布的监听地址和端口</li></ol>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>中间件</tag>
+      
+      <tag>kafka</tag>
+      
+    </tags>
     
   </entry>
   
