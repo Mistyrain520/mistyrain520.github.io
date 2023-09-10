@@ -183,7 +183,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      455 字
+      755 字
     </span>
   
 
@@ -193,7 +193,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      10
        分钟
     </span>
   
@@ -250,7 +250,16 @@
 </ol>
 <h4 id="直接docker-compose吧，省事"><a href="#直接docker-compose吧，省事" class="headerlink" title="直接docker compose吧，省事"></a>直接docker compose吧，省事</h4><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">version:</span> <span class="hljs-string">&#x27;3&#x27;</span><br><span class="hljs-symbol">services:</span><br><span class="hljs-symbol">  zookeeper:</span><br><span class="hljs-symbol">    image:</span> confluentinc/cp-zookeeper:latest<br><span class="hljs-symbol">    environment:</span><br><span class="hljs-symbol">      ZOOKEEPER_CLIENT_PORT:</span> <span class="hljs-number">2181</span><br><span class="hljs-symbol">      ZOOKEEPER_TICK_TIME:</span> <span class="hljs-number">2000</span><br><span class="hljs-symbol">    ports:</span><br>      - <span class="hljs-number">22181</span>:<span class="hljs-number">2181</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">  kafka:</span><br><span class="hljs-symbol">    image:</span> confluentinc/cp-kafka:latest<br><span class="hljs-symbol">    depends_on:</span><br>      - zookeeper<br><span class="hljs-symbol">    ports:</span><br>      - <span class="hljs-number">29092</span>:<span class="hljs-number">29092</span><br><span class="hljs-symbol">    environment:</span><br><span class="hljs-symbol">      KAFKA_BROKER_ID:</span> <span class="hljs-number">1</span><br><span class="hljs-symbol">      KAFKA_ZOOKEEPER_CONNECT:</span> zookeeper:<span class="hljs-number">2181</span><br><span class="hljs-symbol">      KAFKA_ADVERTISED_LISTENERS:</span> PLAINTEXT:<span class="hljs-comment">//kafka:9092,PLAINTEXT_HOST://localhost:29092</span><br><span class="hljs-symbol">      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP:</span> PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT<br><span class="hljs-symbol">      KAFKA_INTER_BROKER_LISTENER_NAME:</span> PLAINTEXT<br><span class="hljs-symbol">      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR:</span> <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">docker<span class="hljs-literal">-compose</span> <span class="hljs-operator">-f</span> docker<span class="hljs-literal">-compose</span>.yml <span class="hljs-literal">-d</span> up<br></code></pre></td></tr></table></figure>
-<h4 id="先简单使用，再看怎么玩其他的"><a href="#先简单使用，再看怎么玩其他的" class="headerlink" title="先简单使用，再看怎么玩其他的"></a>先简单使用，再看怎么玩其他的</h4>
+<h4 id="先简单使用，再看怎么玩其他的"><a href="#先简单使用，再看怎么玩其他的" class="headerlink" title="先简单使用，再看怎么玩其他的"></a>先简单使用，再看怎么玩其他的</h4><ul>
+<li>咱先进入kafka容器看看<code>docker exec -it xxxxx bash</code></li>
+</ul>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">//</span>先看看帮助，太长就不列出来了<br>kafka-topics <span class="hljs-params">--help</span><br>kafka-console-consumer <span class="hljs-params">--help</span><br>kafka-console-producer <span class="hljs-params">--help</span><br><span class="hljs-string">//</span>注意，根据<span class="hljs-keyword">help</span>，新版kafka已经不用<span class="hljs-params">--zookeeper</span>这个命令参数了，改用<span class="hljs-params">--bootstrap-server</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>看看怎么列出所有主题，然后做个简单创建和消费<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">//</span>创建一个主题<br> kafka-topics <span class="hljs-params">--create</span> raintest <span class="hljs-params">--bootstrap-server</span> localhost<span class="hljs-function">:9092</span><br> <span class="hljs-string">//</span>查看主题<br>kafka-topics <span class="hljs-params">--list</span> <span class="hljs-params">--bootstrap-server</span> localhost<span class="hljs-function">:9092</span><br><span class="hljs-string">//</span>生产<br> kafka-console-producer <span class="hljs-params">--broker-list</span> localhost<span class="hljs-function">:9092</span> <span class="hljs-params">--topic</span> raintest<br> <span class="hljs-string">//</span>消费<br>kafka-console-consumer <span class="hljs-params">--bootstrap-server</span> localhost<span class="hljs-function">:9092</span> <span class="hljs-params">--topic</span> raintest <span class="hljs-params">--from-beginning</span><br><span class="hljs-string">//--from-beginning</span>是一个命令行选项，用于指定消费者从主题的开始处开始消费消息<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="其他发现"><a href="#其他发现" class="headerlink" title="其他发现"></a>其他发现</h4><p>这个docker-compose.yaml用的最新版的kafka，设定了<code>KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181</code>，但是实际上最新版Kafka开始使用自我管理的Quorum代替ZooKeeper来管理元数据。这也意味着新版kafka不需要zookeeper作为必须了。因此查看容器日志发现会有链接失败的信息。但是我尝试创建主题和生产、消费主题并没有问题。而且命令中不需要<code>--zookeeper</code>了。因此<code>zookeeper</code>容器我停掉了。<br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/news/841740">https://cloud.tencent.com/developer/news/841740</a><br><a target="_blank" rel="noopener" href="https://www.confluent.io/blog/kafka-without-zookeeper-a-sneak-peek/">https://www.confluent.io/blog/kafka-without-zookeeper-a-sneak-peek/</a></p>
+
             </div>
             <hr>
             <div>
