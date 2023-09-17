@@ -191,7 +191,9 @@
           
             
           
-          
+          一个kafka实例创建一个主题，设置副本1，分区21kafka-topics --create --topic raintest1 --bootstrap-server localhost:9092 --replication-factor 1 --partitions 2
+生产者测试–一个kafka实例kafka-producer-perf-test --help有空再查看详细参数
+123456
         </a>
       </p>
 
@@ -205,6 +207,15 @@
           </div>
         
         
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+            
+              <a href="/tags/kafka/">kafka</a>
+            
+          </div>
         
       </div>
     </article>
@@ -267,9 +278,14 @@
             
           
           背景这玩意（中间件）虽然常用，但还真没实际玩一玩，今天搞搞，看看基本玩法
+简单理解一些概念
+brocker 一台kafka机器就是一个broker。一个集群包含多个broker。一个brocker包含多个topic
+一个topic有多个分区partition。一个topic有消费者和生产者。
+Consumer消费者。多个消费者组成消费者组Consumer Group
+offset消费位移
+
 安装
-认准下面这两，才是官方镜像。confluentinc就认准这个就对了~~其他镜像不知道谁打包的12docker pull confluentinc/cp-zookeeperdocker pull confluentinc/cp-kafka
-启动镜像咯12345docker run -d --name kafka -p 
+
         </a>
       </p>
 
