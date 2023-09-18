@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>wsl迁移</title>
+    <link href="/2023/09/18/wsl%E8%BF%81%E7%A7%BB/"/>
+    <url>/2023/09/18/wsl%E8%BF%81%E7%A7%BB/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>最近发现这台公司的笔记本C盘占用多了好多G，想来会不会是我装了两个ubuntu的缘故。遂排查。<code>C:\Users\&lt;用户名&gt;\AppData\Local\Packages</code>中发现相关ubuntu两个文件夹，占用很大。<br>继续查看：设置–系统–存储–应用和功能。发现两个ubuntu占用累积16G。这些应用中心的应用默认都是在C盘的，失误了，安装的时候应该关注一下安装位置的。</p><p>没事，来个迁移吧。</p><figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">PS C:<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\s</span>ystem32&gt; wsl -l<br>适用于 Linux 的 Windows 子系统分发版:<br>Ubuntu-18.04 (默认)<br>Ubuntu-22.04<br><br>//导出<br>PS C:<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\s</span>ystem32&gt; wsl --export Ubuntu-22.04 d://ubuntu22-04.tar<br>//注销原有<br>PS C:<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\s</span>ystem32&gt; wsl --unregister Ubuntu-22.04<br>正在注销...<br>//根据导出的文件重新安装到d盘<br>PS C:<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\s</span>ystem32&gt; wsl --import Ubuntu-22.04 d:<span class="hljs-symbol">\w</span>sl<span class="hljs-symbol">\u</span>buntu22.04 D:<span class="hljs-symbol">\u</span>buntu22-04.tar<br><br><br></code></pre></td></tr></table></figure><p>重新登录发现登录账号默认为root了</p><figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">PS C:<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\s</span>ystem32&gt; wsl --shutdown<br>PS C:<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\s</span>ystem32&gt; wsl -l<br>适用于 Linux 的 Windows 子系统分发版:<br>Ubuntu-18.04 (默认)<br>Ubuntu-22.04<br>PS C:<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\s</span>ystem32&gt; Ubuntu2204 config --default-user rain<br></code></pre></td></tr></table></figure><p>猜测规律是Ubuntu2204  Ubuntu1804这样子（对应我两个wsl子系统）</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>wsl</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>kafka压测</title>
     <link href="/2023/09/10/kafka%E5%8E%8B%E6%B5%8B/"/>
     <url>/2023/09/10/kafka%E5%8E%8B%E6%B5%8B/</url>
