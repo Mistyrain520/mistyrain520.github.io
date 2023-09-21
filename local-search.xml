@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>文本标识符</title>
+    <link href="/2023/09/21/%E6%96%87%E6%9C%AC%E6%A0%87%E8%AF%86%E7%AC%A6/"/>
+    <url>/2023/09/21/%E6%96%87%E6%9C%AC%E6%A0%87%E8%AF%86%E7%AC%A6/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>以下是一些文本标识符及其对应的二进制字符串：</p><ul><li><strong>STX</strong> (Start of Text)：<code>\x02</code></li><li><strong>ETX</strong> (End of Text)：<code>\x03</code></li><li><strong>EOT</strong> (End of Transmission)：<code>\x04</code></li><li><strong>ENQ</strong> (Enquiry)：<code>\x05</code></li><li><strong>ACK</strong> (Acknowledgement)：<code>\x06</code></li><li><strong>BEL</strong> (Bell)：<code>\x07</code></li><li><strong>BS</strong> (Backspace)：<code>\x08</code></li><li><strong>HT</strong> (Horizontal Tab)：<code>\x09</code></li><li><strong>LF</strong> (Line Feed)：<code>\x0A</code></li><li><strong>VT</strong> (Vertical Tab)：<code>\x0B</code></li><li><strong>FF</strong> (Form Feed)：<code>\x0C</code></li><li><strong>CR</strong> (Carriage Return)：<code>\x0D</code></li><li><strong>空字符</strong> <code>\x00</code></li></ul><p>在Go中，您可以使用<code>strconv.QuoteToASCII</code>函数将字符串编码为ASCII格式的字符串文字。该函数返回一个双引号括起来的Go字符串文字，其中使用转义序列（例如<code>\\t</code>，<code>\\n</code>，<code>\\xFF</code>，<code>\\u0100</code>）表示非ASCII字符和由IsPrint定义的不可打印字符。以下是一个简单的示例：</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;strconv&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    s := <span class="hljs-string">&quot;\x02&quot;</span><br>    fmt.Println(strconv.QuoteToASCII(s))<br>&#125;<br></code></pre></td></tr></table></figure><p>输出：</p><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-string">&quot;\x02&quot;</span><br></code></pre></td></tr></table></figure><p>如果您想要将<code>\x02</code>转换为<code>\u0002</code>，则可以使用以下代码：</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;strconv&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    s := <span class="hljs-string">&quot;\x02&quot;</span><br>    r := []<span class="hljs-keyword">rune</span>(s)<br>    fmt.Printf(<span class="hljs-string">&quot;\\u%04X&quot;</span>, r[<span class="hljs-number">0</span>])<br>&#125;<br></code></pre></td></tr></table></figure><p>输出：</p><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-string">\u0002</span><br></code></pre></td></tr></table></figure><p>: <a href="https://juejin.cn/post/6993528126554767367">juejin.cn</a></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>ASCII</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>wsl迁移</title>
     <link href="/2023/09/18/wsl%E8%BF%81%E7%A7%BB/"/>
     <url>/2023/09/18/wsl%E8%BF%81%E7%A7%BB/</url>
