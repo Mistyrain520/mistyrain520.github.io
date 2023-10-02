@@ -4,6 +4,65 @@
   
   
   <entry>
+    <title>docker网络</title>
+    <link href="/2023/10/01/docker%E7%BD%91%E7%BB%9C/"/>
+    <url>/2023/10/01/docker%E7%BD%91%E7%BB%9C/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="四种网络"><a href="#四种网络" class="headerlink" title="四种网络"></a>四种网络</h3><p>docker四种网络模式，不说了，用到以后再说，自行百度<br>算了，百度一下</p><p>Docker有四种基本的网络模式：</p><ol><li><p><strong>桥接模式（Bridge Mode）</strong>：当Docker守护进程启动时，会创建一个名为<code>docker0</code>的虚拟桥接²。所有在容器中创建的网络接口都会连接到这个桥接²。它在第二层网络（数据链路层）工作²。IP地址将在<code>docker0</code>的子网中分配，网关是<code>docker0</code>²。如果你使用<code>docker run -p</code>进行端口映射，iptables规则将被创建以在容器和主机之间进行端口映射²。</p></li><li><p><strong>主机模式（Host Mode）</strong>：使用主机模式创建和启动容器时，这个容器不会有一个唯一的网络命名空间，而是与主机共享网络命名空间²。不会创建虚拟网络接口，也不会分配IP地址²。但是文件系统、进程信息与主机是隔离的²。</p></li><li><p><strong>容器模式（Container Mode）</strong>：在这种模式下，新创建的容器将与现有容器共享相同的网络命名空间²。新容器不会创建自己的网络接口和分配新的IP，它与现有容器共享IP地址和端口²。除了网络外，文件系统和进程信息是隔离的²。这种模式非常像Kubernetes的pod基础设施²。</p></li><li><p><strong>无网络模式（None Mode）</strong>：在这种模式下，Docker容器有自己的网络命名空间，但不会为其做任何网络配置，也就是说Docker没有网络接口、IP地址、路由信息²。我们可以在需要时添加这些信息²。</p></li></ol><p>此外，Docker还支持第三方网络插件，这些插件通过提供额外的操作模式来扩展网络系统⁴。</p><p>Source: Conversation with Bing, 2023/10/1<br>(1) Explaining Four Basic Modes of Docker Network - Pivotal. <a href="https://community.pivotal.io/s/article/Explaining-Four-Basic-Modes-of-Docker-Network?language=en_US">https://community.pivotal.io/s/article/Explaining-Four-Basic-Modes-of-Docker-Network?language=en_US</a>.<br>(2) Docker container four network modes - ruraldock.com. <a href="https://www.ruraldock.com/article/81840516">https://www.ruraldock.com/article/81840516</a>.<br>(3) Docker Networking - Basics, Network Types &amp; Examples - Spacelift. <a href="https://spacelift.io/blog/docker-networking">https://spacelift.io/blog/docker-networking</a>.<br>(4) Networking overview | Docker Docs. <a href="https://docs.docker.com/network/">https://docs.docker.com/network/</a>.</p><h3 id="创建网络，让容器之间互相通信"><a href="#创建网络，让容器之间互相通信" class="headerlink" title="创建网络，让容器之间互相通信"></a>创建网络，让容器之间互相通信</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">docker network list<br><span class="hljs-regexp">//</span>run加入参数指定网络<br>--network=my-network<br><span class="hljs-regexp">//</span>让已有的容器加入指定网络<br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>docker</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>wsl2代理</title>
+    <link href="/2023/10/01/wsl2%E4%BB%A3%E7%90%86/"/>
+    <url>/2023/10/01/wsl2%E4%BB%A3%E7%90%86/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>注意写本机地址<br>export ALL_PROXY=<span class="hljs-string">&quot;http://192.168.2.238:7890&quot;</span><br><span class="hljs-regexp">//</span>测试<br>curl https:<span class="hljs-regexp">//</span>www/google.com<br><span class="hljs-regexp">//</span>取消代理<br>export ALL_PROXY=<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>wsl</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>k6系列前置准备--influxDB</title>
+    <link href="/2023/10/01/k6%E7%B3%BB%E5%88%97%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87-influxDB/"/>
+    <url>/2023/10/01/k6%E7%B3%BB%E5%88%97%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87-influxDB/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>创建一个挂载数据用的目录<br>mkdir -p .<span class="hljs-regexp">/influxdb/i</span>nfluxdb-docker-data-volume<br><span class="hljs-regexp">//</span>拉个镜像，就<span class="hljs-number">1.8</span>版本<br>docker pull influxdb:<span class="hljs-number">1.8</span><br><span class="hljs-regexp">//</span>启动一下呗<br>docker run --name influxdb1.<span class="hljs-number">8</span> -d -p <span class="hljs-number">8086</span>:<span class="hljs-number">8086</span> -v <span class="hljs-variable">$PWD</span><span class="hljs-regexp">/influxdb-docker-data-volume:/</span>var<span class="hljs-regexp">/lib/i</span>nfluxdb influxdb:<span class="hljs-number">1.8</span><br><span class="hljs-regexp">//</span>换个最新版的（比旧版麻烦，不用了）<br>docker pull influxdb<br>docker run --name influxdb -d -p <span class="hljs-number">8086</span>:<span class="hljs-number">8086</span> -v <span class="hljs-variable">$PWD</span><span class="hljs-regexp">/influxdb-docker-data-volume:/</span>var<span class="hljs-regexp">/lib/i</span>nfluxdb influxdb:latest<br></code></pre></td></tr></table></figure><h3 id="看看成功了没"><a href="#看看成功了没" class="headerlink" title="看看成功了没"></a>看看成功了没</h3><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-comment">//进入容器</span><br> docker <span class="hljs-built_in">exec</span> -it <span class="hljs-number">1</span>d4796122659 bash<br> <span class="hljs-comment">//以下在容器中执行</span><br> influx<br> <span class="hljs-keyword">create</span> database mydb<br> <span class="hljs-keyword">use</span> mydb<br> <span class="hljs-keyword">show</span> databases<br><br> <span class="hljs-comment">//2.0版本</span><br> influx v1 <span class="hljs-built_in">shell</span><br><br></code></pre></td></tr></table></figure><h3 id="配置token（新版未实验）"><a href="#配置token（新版未实验）" class="headerlink" title="配置token（新版未实验）"></a>配置token（新版未实验）</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>在web界面中找到token，或者重新创建一个<br><span class="hljs-number">7</span>frjrUK9sAY4JJVOF7k5MHmpy3wyx3B-X6D1V8WcPHDLFI2cAv_csnUeTbqpYNQjZOD4vZRDEZcXzzitFB-yqA==<br><br><br><span class="hljs-regexp">//</span>进入容器执行<br>docker exec -it influxdb bash<br>influx config create -n default \<br>  -u http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">8086</span> \<br>  -o my-org \<br>  -t <span class="hljs-number">7</span>frjrUK9sAY4JJVOF7k5MHmpy3wyx3B-X6D1V8WcPHDLFI2cAv_csnUeTbqpYNQjZOD4vZRDEZcXzzitFB-yqA== \<br>  -a<br><br><span class="hljs-regexp">//</span>使用令牌<br>export INFLUX_TOKEN=v-G-UkMhBGwuecu8cE9nJfKvGt3oGh9M47-zyz1Po_3mXIsbMIkcbKo01uRTaxYIYZBYoxdcGanp1L3hE92ViA==<br><span class="hljs-regexp">//</span>注意这里的myBucket是进入web中创建的，my-org是进入web创建的组织名字(我是rain)<br><span class="hljs-regexp">//i</span>nflux org list --token <span class="hljs-variable">$INFLUX_TOKEN</span> 查找组织<br><span class="hljs-regexp">//i</span>nflux org create --name my-org --token <span class="hljs-variable">$INFLUX_TOKEN</span> 创建组织<br>influx write -t  <span class="hljs-variable">$INFLUX_TOKEN</span>  -b myBucket -o rain <span class="hljs-string">&quot;measurement field=1&quot;</span><br><br></code></pre></td></tr></table></figure><h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>1.8版本没有自带web界面，2.0才有</p><h3 id="grafana"><a href="#grafana" class="headerlink" title="grafana"></a>grafana</h3><p>这个简单不说了，照着docker hub上官方的命令跑就行了。<br>然后又发现grafana和influxdb没法通讯似乎，得加一下docker的网络。另起一篇文章写一下docker网络（以前用过，记得有四种模式）</p><h3 id="grafana连接influxdb"><a href="#grafana连接influxdb" class="headerlink" title="grafana连接influxdb"></a>grafana连接influxdb</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>我是旧版<span class="hljs-number">1.8</span>的，命令中没有带创建用户和密码的参数，并且自己手动进入数据库创建了mydb<br>docker run --name influxdb1.<span class="hljs-number">8</span> -d -p <span class="hljs-number">8086</span>:<span class="hljs-number">8086</span> -v <span class="hljs-variable">$PWD</span><span class="hljs-regexp">/influxdb-docker-data-volume:/</span>var<span class="hljs-regexp">/lib/i</span>nfluxdb influxdb:<span class="hljs-number">1.8</span><br><span class="hljs-regexp">//i</span>nfluxdb和grafana两个都是dokcer 而且处在同一个网络中<br><br><span class="hljs-regexp">//</span>特别注意：grafana的influxdb url配置应为<br>http:<span class="hljs-regexp">//i</span>nfluxdb1.<span class="hljs-number">8</span>:<span class="hljs-number">8086</span><br><br><span class="hljs-regexp">//</span>其他基本不需要填写，我没账号密码，只需要再填写一个mydb即可<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>k6</tag>
+      
+      <tag>influxDB</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>文本标识符</title>
     <link href="/2023/09/21/%E6%96%87%E6%9C%AC%E6%A0%87%E8%AF%86%E7%AC%A6/"/>
     <url>/2023/09/21/%E6%96%87%E6%9C%AC%E6%A0%87%E8%AF%86%E7%AC%A6/</url>
