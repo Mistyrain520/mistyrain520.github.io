@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Suixiang Chen">
+  <meta name="keywords" content="">
+  
+  <title>k6系列之scenario - 陈随想</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"mistyrain520.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":140,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>陈随想</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/background1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="k6系列之scenario">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-10-03 22:20" pubdate>
+        2023年10月3日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">k6系列之scenario</h1>
+            
+            <div class="markdown-body">
+              <h2 id="scenario场景"><a href="#scenario场景" class="headerlink" title="scenario场景"></a>scenario场景</h2><p>主要参考地址 <a target="_blank" rel="noopener" href="https://k6.io/docs/using-k6/scenarios/">https://k6.io/docs/using-k6/scenarios/</a><br>先行概念理解</p>
+<ul>
+<li>vus：可以理解为用户数</li>
+<li>iterations：迭代数，也即执行数量，执行几次<h4 id="Per-VU-iterations场景"><a href="#Per-VU-iterations场景" class="headerlink" title="Per VU iterations场景"></a>Per VU iterations场景</h4>每个VU执行特定的iterations，参数如下</li>
+<li>vus 指定vu数 integer default1</li>
+<li>iterations 迭代数 integer default1</li>
+<li>maxDuration 强制停止前的最大场景持续时间（不包括优雅的停止）string 默认 ‘10m’<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> http <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;k6/http&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; sleep &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;k6&#x27;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> options = &#123;<br>  <span class="hljs-attr">discardResponseBodies</span>: <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">scenarios</span>: &#123;<br>    <span class="hljs-attr">contacts</span>: &#123;<br>      <span class="hljs-attr">executor</span>: <span class="hljs-string">&#x27;per-vu-iterations&#x27;</span>,<br>      <span class="hljs-attr">vus</span>: <span class="hljs-number">10</span>,<br>      <span class="hljs-attr">iterations</span>: <span class="hljs-number">20</span>,<br>      <span class="hljs-attr">maxDuration</span>: <span class="hljs-string">&#x27;30s&#x27;</span>,<br>    &#125;,<br>  &#125;,<br>&#125;;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  http.get(<span class="hljs-string">&#x27;https://test.k6.io/contacts.php&#x27;</span>);<br>  <span class="hljs-comment">// Injecting sleep</span><br>  <span class="hljs-comment">// Sleep time is 500ms. Total iteration time is sleep + time to finish request.</span><br>  sleep(<span class="hljs-number">0.5</span>);<br>&#125;<br><br><span class="hljs-comment">//我的写法</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> options = &#123;<br>  <span class="hljs-attr">discardResponseBodies</span>: <span class="hljs-literal">false</span>,<br>  <span class="hljs-attr">scenarios</span>: &#123;<br>    <span class="hljs-attr">contacts</span>: &#123;<br>        <span class="hljs-attr">executor</span>: <span class="hljs-string">&#x27;per-vu-iterations&#x27;</span>,<br>        <span class="hljs-attr">vus</span>: <span class="hljs-number">1</span>,<br>        <span class="hljs-attr">iterations</span>: <span class="hljs-number">1</span>,<br>        <span class="hljs-attr">maxDuration</span>: <span class="hljs-string">&#x27;30s&#x27;</span>,<br>        <span class="hljs-attr">exec</span>: <span class="hljs-string">&#x27;contacts&#x27;</span>,<br>        <span class="hljs-attr">tags</span>: &#123; <span class="hljs-attr">my_custom_tag</span>: <span class="hljs-string">&#x27;contacts&#x27;</span> &#125;,<br>        <span class="hljs-attr">env</span>: &#123; <span class="hljs-attr">MYVAR</span>: <span class="hljs-string">&#x27;contacts&#x27;</span> &#125;,<br>      &#125;,<br>    <span class="hljs-attr">news</span>: &#123;<br>        <span class="hljs-attr">executor</span>: <span class="hljs-string">&#x27;shared-iterations&#x27;</span>,<br>        <span class="hljs-attr">iterations</span>: <span class="hljs-number">1</span>,<br>        <span class="hljs-attr">exec</span>: <span class="hljs-string">&#x27;news&#x27;</span>,<br>        <span class="hljs-attr">tags</span>: &#123; <span class="hljs-attr">my_custom_tag</span>: <span class="hljs-string">&#x27;news&#x27;</span> &#125;,<br>        <span class="hljs-attr">env</span>: &#123; <span class="hljs-attr">MYVAR</span>: <span class="hljs-string">&#x27;news&#x27;</span> &#125;,<br>    &#125;,<br>  &#125;,<br>&#125;;<br><br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">contacts</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (__ENV.MYVAR != <span class="hljs-string">&#x27;contacts&#x27;</span>) fail();<br>  http.get(<span class="hljs-string">&#x27;https://test.k6.io/contacts.php&#x27;</span>);<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">news</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (__ENV.MYVAR != <span class="hljs-string">&#x27;news&#x27;</span>) fail();<br>  <span class="hljs-keyword">const</span> url = <span class="hljs-string">&#x27;http://xxxxxx/api/gateway/login&#x27;</span>;<br>  <span class="hljs-keyword">const</span> payload = <span class="hljs-built_in">JSON</span>.stringify(&#123;<br>    <span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;xxxxx&quot;</span>,<br>    <span class="hljs-string">&quot;password&quot;</span>: <span class="hljs-string">&quot;xxxxx&quot;</span><br>  &#125;);<br><br>  <span class="hljs-keyword">const</span> params = &#123;<br>    <span class="hljs-attr">headers</span>: &#123;<br>      <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,<br>      <span class="hljs-string">&#x27;Accept&#x27;</span>: <span class="hljs-string">&#x27;application/json, text/plain, */*&#x27;</span><br>    &#125;,<br>  &#125;;<br>  <span class="hljs-keyword">const</span> res1 = http.post(url, payload, params);<br>  <span class="hljs-built_in">console</span>.log(res1.body, <span class="hljs-string">&quot;哈哈&quot;</span>)<br><span class="hljs-comment">//   console.log(res1.headers)</span><br>&#125;<br><br><br><span class="hljs-comment">//以下是选项设置解释</span><br><span class="hljs-attr">discardResponseBodies</span>: <span class="hljs-literal">true</span>,代表忽略请求返回体。在性能测试中可以关闭以节省内存，如果需要校验返回body的内容，则需要改为<span class="hljs-literal">false</span><br>exec 代表要执行的函数。如果没有则是<span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span></span><br><span class="hljs-function"><span class="hljs-title">tags</span> <span class="hljs-title">object</span>特定于此场景的标签</span><br></code></pre></td></tr></table></figure>
+<h3 id="shared-iterations"><a href="#shared-iterations" class="headerlink" title="shared-iterations"></a>shared-iterations</h3>特定数量的 VU 完成固定数量的总迭代<br>比如：10个VUe完成100个迭代，最后不是10个VUe每个10迭代，可能第一个VUe是5迭代，而第二个是15.总之总计是100迭代</li>
+<li>vus 指定vu数 integer default1</li>
+<li>iterations 迭代数 integer default1</li>
+<li>maxDuration 强制停止前的最大场景持续时间（不包括优雅的停止）string 默认 ‘10m’<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">export</span> <span class="hljs-string">const</span> <span class="hljs-string">options</span> <span class="hljs-string">=</span> &#123;<br>  <span class="hljs-attr">discardResponseBodies:</span> <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">scenarios:</span> &#123;<br>    <span class="hljs-attr">contacts:</span> &#123;<br>      <span class="hljs-attr">executor:</span> <span class="hljs-string">&#x27;shared-iterations&#x27;</span>,<br>      <span class="hljs-attr">vus:</span> <span class="hljs-number">10</span>,<br>      <span class="hljs-attr">iterations:</span> <span class="hljs-number">200</span>,<br>      <span class="hljs-attr">maxDuration:</span> <span class="hljs-string">&#x27;30s&#x27;</span>,<br>    &#125;,<br>  &#125;,<br>&#125;<span class="hljs-string">;</span><br></code></pre></td></tr></table></figure>
+<h3 id="Constant-VUs"><a href="#Constant-VUs" class="headerlink" title="Constant VUs"></a>Constant VUs</h3>该场景适用于：固定数量的VU，在指定时间内尽可能多的完成迭代数<br>必填参数如下：</li>
+<li>duration(required)    string  no default</li>
+<li>vus  integer  default 1<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">//10个用户在30秒内尽可能多的去执行，看最终能执行几次</span><br><span class="hljs-string">export</span> <span class="hljs-string">const</span> <span class="hljs-string">options</span> <span class="hljs-string">=</span> &#123;<br>  <span class="hljs-attr">discardResponseBodies:</span> <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">scenarios:</span> &#123;<br>    <span class="hljs-attr">contacts:</span> &#123;<br>      <span class="hljs-attr">executor:</span> <span class="hljs-string">&#x27;constant-vus&#x27;</span>,<br>      <span class="hljs-attr">vus:</span> <span class="hljs-number">10</span>,<br>      <span class="hljs-attr">duration:</span> <span class="hljs-string">&#x27;30s&#x27;</span>,<br>    &#125;,<br>  &#125;,<br>&#125;<span class="hljs-string">;</span><br></code></pre></td></tr></table></figure>
+<h3 id="Ramping-VUs"><a href="#Ramping-VUs" class="headerlink" title="Ramping VUs"></a>Ramping VUs</h3>该场景适用于：线性变化的VUs，在指定时间内完成尽可能多的迭代数<br>必填参数如下： </li>
+<li>stages(required) array  default []</li>
+<li>startVUs integer default 1</li>
+<li>gracefulRampDown string ‘30s’<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">/*</span><br><span class="hljs-string">此示例安排了一个两阶段测试，在</span> <span class="hljs-number">20</span> <span class="hljs-string">秒内从</span> <span class="hljs-number">0</span> <span class="hljs-string">VU</span> <span class="hljs-string">增加到</span> <span class="hljs-number">10</span> <span class="hljs-string">个</span> <span class="hljs-string">VU，然后在</span> <span class="hljs-number">10</span> <span class="hljs-string">秒内减少到</span> <span class="hljs-number">0</span> <span class="hljs-string">VU</span><br><span class="hljs-string">gracefulRampDown</span> <span class="hljs-string">这个参数个人理解是，在20s内，线性递增10个用户，每个用户都在尽可能的发请求去完成迭代。</span><br><span class="hljs-string">但是到了第20s之后要开始递减了，准备递减的那个用户又可能刚好还没完成迭代（完成请求）</span><br><span class="hljs-string">该参数设置0s，则意味着不管前面用户身上的迭代是否完成，直接中断迭代，减少该模拟用户。</span><br><span class="hljs-string">设置10s，则意味着10s之后，才执行停止AU数。通常设置为0s，且应用于线性递减的场景。</span><br><span class="hljs-string">*/</span><br><span class="hljs-string">export</span> <span class="hljs-string">const</span> <span class="hljs-string">options</span> <span class="hljs-string">=</span> &#123;<br>  <span class="hljs-attr">discardResponseBodies:</span> <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">scenarios:</span> &#123;<br>    <span class="hljs-attr">contacts:</span> &#123;<br>      <span class="hljs-attr">executor:</span> <span class="hljs-string">&#x27;ramping-vus&#x27;</span>,<br>      <span class="hljs-attr">startVUs:</span> <span class="hljs-number">0</span>,<br>      <span class="hljs-attr">stages:</span> [<br>        &#123; <span class="hljs-attr">duration:</span> <span class="hljs-string">&#x27;20s&#x27;</span>, <span class="hljs-attr">target:</span> <span class="hljs-number">10</span> &#125;,<br>        &#123; <span class="hljs-attr">duration:</span> <span class="hljs-string">&#x27;10s&#x27;</span>, <span class="hljs-attr">target:</span> <span class="hljs-number">0</span> &#125;,<br>      ],<br>      <span class="hljs-attr">gracefulRampDown:</span> <span class="hljs-string">&#x27;0s&#x27;</span>,<br>    &#125;,<br>  &#125;,<br>&#125;<span class="hljs-string">;</span><br></code></pre></td></tr></table></figure>
+<h3 id="Constant-arrival-rate（恒定到达率）"><a href="#Constant-arrival-rate（恒定到达率）" class="headerlink" title="Constant arrival rate（恒定到达率）"></a>Constant arrival rate（恒定到达率）</h3>适用场景：保持一定迭代启动率，比如每秒30次迭代（请求）。具体k6如何分配，需要参考<a target="_blank" rel="noopener" href="https://k6.io/docs/using-k6/scenarios/concepts/arrival-rate-vu-allocation/">Arrival-rate VU allocation</a><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>以下，每秒<span class="hljs-number">30</span>迭代，持续<span class="hljs-number">30</span>s，<br>export const options = &#123;<br>  discardResponseBodies: true,<br>  scenarios: &#123;<br>    contacts: &#123;<br>      executor: <span class="hljs-string">&#x27;constant-arrival-rate&#x27;</span>,<br><br>      <span class="hljs-regexp">//</span> How long the test lasts<br>      duration: <span class="hljs-string">&#x27;30s&#x27;</span>,<br><br>      <span class="hljs-regexp">//</span> How many iterations per timeUnit<br>      rate: <span class="hljs-number">30</span>,<br><br>      <span class="hljs-regexp">//</span> Start `rate` iterations per second<br>      timeUnit: <span class="hljs-string">&#x27;1s&#x27;</span>,<br><br>      <span class="hljs-regexp">//</span> Pre-allocate VUs<br>      <span class="hljs-regexp">//</span>提供<span class="hljs-number">50</span>个VU供分配，VU越多则分配越容易，VU过少就难保持每秒<span class="hljs-number">30</span>迭代<br>      preAllocatedVUs: <span class="hljs-number">50</span>,<br>    &#125;,<br>  &#125;,<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="Ramping-arrival-rate"><a href="#Ramping-arrival-rate" class="headerlink" title="Ramping arrival rate"></a>Ramping arrival rate</h3>阶段到达率，顾名思义，线性提升（降低）到指定到达率（每秒多少迭代），持续一定时间<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs lasso"><span class="hljs-comment">/*从定义的开始起始率startRate，一分钟内每分钟 300 次迭代。</span><br><span class="hljs-comment">一分钟后，迭代速率在接下来的两分钟内增加到每分钟 600 次迭代，</span><br><span class="hljs-comment">并在此速率下再保持四分钟。在最后两分钟，</span><br><span class="hljs-comment">它逐渐下降到每分钟 60 次迭代的目标。*/</span><br><br>export const options = &#123;<br>  discardResponseBodies: <span class="hljs-literal">true</span>,<br><br>  scenarios: &#123;<br>    contacts: &#123;<br>      executor: <span class="hljs-string">&#x27;ramping-arrival-rate&#x27;</span>,<br><br>      <span class="hljs-comment">// Start iterations per `timeUnit`</span><br>      startRate: <span class="hljs-number">300</span>,<br><br>      <span class="hljs-comment">// Start `startRate` iterations per minute</span><br>      timeUnit: <span class="hljs-string">&#x27;1m&#x27;</span>,<br><br>      <span class="hljs-comment">// Pre-allocate necessary VUs.</span><br>      preAllocatedVUs: <span class="hljs-number">50</span>,<br><br>      stages: <span class="hljs-meta">[</span><br>        <span class="hljs-comment">// Start 300 iterations per `timeUnit` for the first minute.</span><br>        &#123; target: <span class="hljs-number">300</span>, <span class="hljs-built_in">duration</span>: <span class="hljs-string">&#x27;1m&#x27;</span> &#125;,<br><br>        <span class="hljs-comment">// Linearly ramp-up to starting 600 iterations per `timeUnit` over the following two minutes.</span><br>        &#123; target: <span class="hljs-number">600</span>, <span class="hljs-built_in">duration</span>: <span class="hljs-string">&#x27;2m&#x27;</span> &#125;,<br><br>        <span class="hljs-comment">// Continue starting 600 iterations per `timeUnit` for the following four minutes.</span><br>        &#123; target: <span class="hljs-number">600</span>, <span class="hljs-built_in">duration</span>: <span class="hljs-string">&#x27;4m&#x27;</span> &#125;,<br><br>        <span class="hljs-comment">// Linearly ramp-down to starting 60 iterations per `timeUnit` over the last two minutes.</span><br>        &#123; target: <span class="hljs-number">60</span>, <span class="hljs-built_in">duration</span>: <span class="hljs-string">&#x27;2m&#x27;</span> &#125;,<br>      <span class="hljs-meta">]</span>,<br>    &#125;,<br>  &#125;,<br>&#125;;<br><br></code></pre></td></tr></table></figure></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/k6/">k6</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/10/01/docker%E7%BD%91%E7%BB%9C/">
+                        <span class="hidden-mobile">docker网络</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> <div id="music_div" style="position: fixed; bottom: 0px; left: 0px; z-index:999;"> <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=330 src="//music.163.com/outchain/player?type=0&id=8738800431&auto=1&height=330"> </iframe> <script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script> <script src="/js/musicshow.js"></script> </div> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

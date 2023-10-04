@@ -183,7 +183,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      557 字
+      620 字
     </span>
   
 
@@ -193,7 +193,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      7
        分钟
     </span>
   
@@ -240,7 +240,7 @@
 </ol>
 <p>此外，Docker还支持第三方网络插件，这些插件通过提供额外的操作模式来扩展网络系统⁴。</p>
 <p>Source: Conversation with Bing, 2023/10/1<br>(1) Explaining Four Basic Modes of Docker Network - Pivotal. <a target="_blank" rel="noopener" href="https://community.pivotal.io/s/article/Explaining-Four-Basic-Modes-of-Docker-Network?language=en_US">https://community.pivotal.io/s/article/Explaining-Four-Basic-Modes-of-Docker-Network?language=en_US</a>.<br>(2) Docker container four network modes - ruraldock.com. <a target="_blank" rel="noopener" href="https://www.ruraldock.com/article/81840516">https://www.ruraldock.com/article/81840516</a>.<br>(3) Docker Networking - Basics, Network Types &amp; Examples - Spacelift. <a target="_blank" rel="noopener" href="https://spacelift.io/blog/docker-networking">https://spacelift.io/blog/docker-networking</a>.<br>(4) Networking overview | Docker Docs. <a target="_blank" rel="noopener" href="https://docs.docker.com/network/">https://docs.docker.com/network/</a>.</p>
-<h3 id="创建网络，让容器之间互相通信"><a href="#创建网络，让容器之间互相通信" class="headerlink" title="创建网络，让容器之间互相通信"></a>创建网络，让容器之间互相通信</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">docker network list<br><span class="hljs-regexp">//</span>run加入参数指定网络<br>--network=my-network<br><span class="hljs-regexp">//</span>让已有的容器加入指定网络<br><br></code></pre></td></tr></table></figure>
+<h3 id="创建网络，让容器之间互相通信"><a href="#创建网络，让容器之间互相通信" class="headerlink" title="创建网络，让容器之间互相通信"></a>创建网络，让容器之间互相通信</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">docker network list<span class="hljs-comment"></span><br><span class="hljs-comment">//run过程中加入参数指定网络</span><br><span class="hljs-comment">--network=my-network</span><span class="hljs-comment"></span><br><span class="hljs-comment">//创建一个网络名字叫k6</span><br>docker network <span class="hljs-built_in">create</span> k6<span class="hljs-comment"></span><br><span class="hljs-comment">//让已有的容器加入</span><br>docker network connect k6 <span class="hljs-number">4</span>b7017ae794f<span class="hljs-comment"></span><br><span class="hljs-comment">//更多用法</span><br>Commands:<br>  connect     Connect <span class="hljs-keyword">a</span> container <span class="hljs-built_in">to</span> <span class="hljs-keyword">a</span> network<br>  <span class="hljs-built_in">create</span>      Create <span class="hljs-keyword">a</span> network<br>  disconnect  Disconnect <span class="hljs-keyword">a</span> container <span class="hljs-built_in">from</span> <span class="hljs-keyword">a</span> network<br>  inspect     Display <span class="hljs-keyword">detailed</span> information <span class="hljs-keyword">on</span> <span class="hljs-title">one</span> <span class="hljs-title">or</span> <span class="hljs-title">more</span> <span class="hljs-title">networks</span><br>  ls          List networks<br>  prune       Remove all unused networks<br>  rm          Remove <span class="hljs-literal">one</span> <span class="hljs-keyword">or</span> more networks<br></code></pre></td></tr></table></figure>
 
 
             </div>
@@ -268,6 +268,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/10/03/k6%E7%B3%BB%E5%88%97%E4%B9%8Bscenario/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">k6系列之scenario</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

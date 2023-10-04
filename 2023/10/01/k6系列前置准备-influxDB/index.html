@@ -183,7 +183,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      460 字
+      486 字
     </span>
   
 
@@ -234,7 +234,7 @@
 
 <h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>1.8版本没有自带web界面，2.0才有</p>
 <h3 id="grafana"><a href="#grafana" class="headerlink" title="grafana"></a>grafana</h3><p>这个简单不说了，照着docker hub上官方的命令跑就行了。<br>然后又发现grafana和influxdb没法通讯似乎，得加一下docker的网络。另起一篇文章写一下docker网络（以前用过，记得有四种模式）</p>
-<h3 id="grafana连接influxdb"><a href="#grafana连接influxdb" class="headerlink" title="grafana连接influxdb"></a>grafana连接influxdb</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>我是旧版<span class="hljs-number">1.8</span>的，命令中没有带创建用户和密码的参数，并且自己手动进入数据库创建了mydb<br>docker run --name influxdb1.<span class="hljs-number">8</span> -d -p <span class="hljs-number">8086</span>:<span class="hljs-number">8086</span> -v <span class="hljs-variable">$PWD</span><span class="hljs-regexp">/influxdb-docker-data-volume:/</span>var<span class="hljs-regexp">/lib/i</span>nfluxdb influxdb:<span class="hljs-number">1.8</span><br><span class="hljs-regexp">//i</span>nfluxdb和grafana两个都是dokcer 而且处在同一个网络中<br><br><span class="hljs-regexp">//</span>特别注意：grafana的influxdb url配置应为<br>http:<span class="hljs-regexp">//i</span>nfluxdb1.<span class="hljs-number">8</span>:<span class="hljs-number">8086</span><br><br><span class="hljs-regexp">//</span>其他基本不需要填写，我没账号密码，只需要再填写一个mydb即可<br></code></pre></td></tr></table></figure>
+<h3 id="grafana连接influxdb"><a href="#grafana连接influxdb" class="headerlink" title="grafana连接influxdb"></a>grafana连接influxdb</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>我是旧版<span class="hljs-number">1.8</span>的，命令中没有带创建用户和密码的参数，并且自己手动进入数据库创建了mydb<br>docker run --name influxdb1.<span class="hljs-number">8</span> -d -p <span class="hljs-number">8086</span>:<span class="hljs-number">8086</span> -v <span class="hljs-variable">$PWD</span><span class="hljs-regexp">/influxdb-docker-data-volume:/</span>var<span class="hljs-regexp">/lib/i</span>nfluxdb influxdb:<span class="hljs-number">1.8</span><br><span class="hljs-regexp">//i</span>nfluxdb和grafana两个都是dokcer 而且处在同一个网络中<br><br><span class="hljs-regexp">//</span>特别注意：grafana的influxdb url配置应为<br>http:<span class="hljs-regexp">//i</span>nfluxdb1.<span class="hljs-number">8</span>:<span class="hljs-number">8086</span><br><span class="hljs-regexp">//</span>不能写localhost！！！也不能写id地址！！！容器之间互相通信直接用容器名字！！！<br><br><span class="hljs-regexp">//</span>其他基本不需要填写，我没账号密码，只需要再填写一个mydb即可<br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
