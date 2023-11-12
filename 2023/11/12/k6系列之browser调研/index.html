@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Suixiang Chen">
+  <meta name="keywords" content="">
+  
+  <title>k6系列之browser调研 - 陈随想</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"mistyrain520.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":140,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>陈随想</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/background1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="k6系列之browser调研">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-11-12 19:41" pubdate>
+        2023年11月12日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">k6系列之browser调研</h1>
+            
+            <div class="markdown-body">
+              <h3 id="调研"><a href="#调研" class="headerlink" title="调研"></a>调研</h3><p><a target="_blank" rel="noopener" href="https://github.com/grafana/xk6-browser/tree/main">github地址</a></p>
+<p>根据源码分析，k6的browser有三个大模块，一是<code>browser</code>，一个是<code>chromium</code>，还有一个是<code>devices</code>。根据官方给的<a target="_blank" rel="noopener" href="https://k6.io/docs/using-k6-browser/running-browser-tests/">例子</a>，第一个模块有详细使用案例。</p>
+<p>由于<code>browser</code>目前处于实验阶段，go源码中的<code>chromium</code>模块并未打包进入k6的二进制文件中。根据下面查看到的源码，可以看到只是注册返回了<code>browser</code> <code> devices</code>两个模块。</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-comment">//register.go</span><br>func init() &#123;<br>	k6modules.Register(<span class="hljs-string">&quot;k6/x/browser&quot;</span>, browser.New())<br>&#125;<br><span class="hljs-comment">//browser/module.go</span><br>func New() *<span class="hljs-class">RootModule </span>&#123;<br>	return <span class="hljs-variable">&amp;</span>RootModule&#123;<br><span class="hljs-symbol">		PidRegistry:</span> <span class="hljs-variable">&amp;</span>pidRegistry&#123;&#125;,<br><span class="hljs-symbol">		initOnce:</span>    <span class="hljs-variable">&amp;sync</span>.Once&#123;&#125;,<br>	&#125;<br>&#125;<br><br>return <span class="hljs-variable">&amp;</span>ModuleInstance&#123;<br><span class="hljs-symbol">		mod:</span> <span class="hljs-variable">&amp;</span>JSModule&#123;<br><span class="hljs-symbol">			Browser:</span> mapBrowserToGoja(moduleVU&#123;<br><span class="hljs-symbol">				VU:</span>                vu,<br><span class="hljs-symbol">				pidRegistry:</span>       m.PidRegistry,<br><span class="hljs-symbol">				browserRegistry:</span>   newBrowserRegistry(vu, m.remoteRegistry, m.PidRegistry),<br><span class="hljs-symbol">				taskQueueRegistry:</span> newTaskQueueRegistry(vu),<br>			&#125;),<br><span class="hljs-symbol">			Devices:</span> common.GetDevices(),<br>		&#125;,<br>	&#125;<br></code></pre></td></tr></table></figure>
+
+<p>也就是说，当你尝试如下，会报错无法使用，因为导入的<code>chromium</code>为空。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; chromium &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;k6/experimental/browser&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> browser = chromium.launch()<br>  <span class="hljs-keyword">const</span> page = browser.newPage()<br>  page.goto(<span class="hljs-string">&#x27;https://test.k6.io/my_messages.php&#x27;</span>);<br>  page.close()<br>  browser.close()<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="browser模块的使用之设置cookie"><a href="#browser模块的使用之设置cookie" class="headerlink" title="browser模块的使用之设置cookie"></a>browser模块的使用之设置cookie</h3><p>由于所在登录网页有svg的验证码，尝试通过解析验证码的方式来登录，结果有点困难；因此转向寻找设置默认cookie来跳过身份识别直接登录网页。<code>playwright</code>也有类似方法。k6本意上<code>browser</code>最终会尽可能和<code>playwright</code>的api一致，来使得大家不需重新学习新的api（官网说的）。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//查看源码common/browser_context.go此处有设置cookies方法，因此需要先行定义一个BrowserContext出来</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(b *BrowserContext)</span> <span class="hljs-title">AddCookies</span><span class="hljs-params">(cookies []*Cookie)</span> <span class="hljs-title">error</span></span> &#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>&#125;<br><span class="hljs-comment">//mapping_test.go看测试代码</span><br><span class="hljs-keyword">type</span> browserAPI <span class="hljs-keyword">interface</span> &#123;<br>	Close()<br>	Context() *common.BrowserContext<br>	CloseContext()<br>	IsConnected() <span class="hljs-keyword">bool</span><br>	NewContext(opts goja.Value) (*common.BrowserContext, error)<br>	NewPage(opts goja.Value) (*common.Page, error)<br>	On(<span class="hljs-keyword">string</span>) (<span class="hljs-keyword">bool</span>, error)<br>	UserAgent() <span class="hljs-keyword">string</span><br>	Version() <span class="hljs-keyword">string</span><br>&#125;<br><span class="hljs-comment">//browser/mapping.go</span><br><span class="hljs-comment">// mapBrowser to the JS module.</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">mapBrowser</span><span class="hljs-params">(vu moduleVU)</span> <span class="hljs-title">mapping</span></span> &#123; <span class="hljs-comment">//nolint:funlen</span><br>	rt := vu.Runtime()<br>	<span class="hljs-keyword">return</span> mapping&#123;<br>		<span class="hljs-string">&quot;context&quot;</span>: <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span> <span class="hljs-params">(*common.BrowserContext, error)</span></span> &#123;<br>		&#125;,<br>		<span class="hljs-string">&quot;closeContext&quot;</span>: <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span> <span class="hljs-title">error</span></span> &#123;<br>		&#125;,<br>		<span class="hljs-string">&quot;isConnected&quot;</span>: <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span> <span class="hljs-params">(<span class="hljs-keyword">bool</span>, error)</span></span> &#123;<br>		&#125;,<br>		<span class="hljs-string">&quot;newContext&quot;</span>: <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(opts goja.Value)</span> <span class="hljs-params">(*goja.Object, error)</span></span> &#123;<br>		&#125;,<br>		<span class="hljs-string">&quot;userAgent&quot;</span>: <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span> <span class="hljs-params">(<span class="hljs-keyword">string</span>, error)</span></span> &#123;<br>		&#125;,<br>		<span class="hljs-string">&quot;version&quot;</span>: <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span> <span class="hljs-params">(<span class="hljs-keyword">string</span>, error)</span></span> &#123;<br>		&#125;,<br>		<span class="hljs-string">&quot;newPage&quot;</span>: <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(opts goja.Value)</span> <span class="hljs-params">(mapping, error)</span></span> &#123;<br>		&#125;,<br>	&#125;<br>&#125;<br><span class="hljs-comment">//根据上面代码可知，应该是调用newContext来返回一个BrowserContext</span><br></code></pre></td></tr></table></figure>
+
+<p>代码实现如下：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>以下代码经过测试没问题<br>import &#123; browser &#125; from <span class="hljs-string">&#x27;k6/experimental/browser&#x27;</span>;<br><br>export const options = &#123;<br>  scenarios: &#123;<br>    ui: &#123;<br>      executor: <span class="hljs-string">&#x27;shared-iterations&#x27;</span>,<br>      options: &#123;<br>        browser: &#123;<br>          type: <span class="hljs-string">&#x27;chromium&#x27;</span>,<br>        &#125;,<br>      &#125;,<br>    &#125;,<br>  &#125;,<br>&#125;<br><br>export default async <span class="hljs-keyword">function</span> () &#123;<br>    const context = browser.newContext();<br>    const page = context.newPage();<br>    context.addCookies([&#123;<br>      name: <span class="hljs-string">&#x27;sessionToken&#x27;</span>,<br>      value: <span class="hljs-string">&#x27;*****&#x27;</span>,<br>      domain: <span class="hljs-string">&#x27;localhost:8088&#x27;</span>,<br>      path: <span class="hljs-string">&#x27;/&#x27;</span>,<br>      expires: <span class="hljs-number">0</span>, <span class="hljs-regexp">//</span> 设置为 <span class="hljs-number">0</span> 表示会话 cookie，你可以设置具体的过期时间<br>      httpOnly: false, <span class="hljs-regexp">//</span> 是否为 HTTP-only cookie<br>      secure: false, <span class="hljs-regexp">//</span> 是否要求安全连接<br>      sameSite: <span class="hljs-string">&#x27;Lax&#x27;</span>, <span class="hljs-regexp">//</span> SameSite 属性，可以是 <span class="hljs-string">&#x27;Lax&#x27;</span>、<span class="hljs-string">&#x27;Strict&#x27;</span> 或 <span class="hljs-string">&#x27;None&#x27;</span><br>    &#125;,&#123;<br>      name: <span class="hljs-string">&#x27;*****&#x27;</span>,<br>      value: <span class="hljs-string">&#x27;*****&#x27;</span>,<br>      domain: <span class="hljs-string">&#x27;localhost:8088&#x27;</span>,<br>      path: <span class="hljs-string">&#x27;/&#x27;</span>,<br>      expires: <span class="hljs-number">0</span>, <span class="hljs-regexp">//</span> 设置为 <span class="hljs-number">0</span> 表示会话 cookie，你可以设置具体的过期时间<br>      httpOnly: false, <span class="hljs-regexp">//</span> 是否为 HTTP-only cookie<br>      secure: false, <span class="hljs-regexp">//</span> 是否要求安全连接<br>      sameSite: <span class="hljs-string">&#x27;Lax&#x27;</span>, <span class="hljs-regexp">//</span> SameSite 属性，可以是 <span class="hljs-string">&#x27;Lax&#x27;</span>、<span class="hljs-string">&#x27;Strict&#x27;</span> 或 <span class="hljs-string">&#x27;None&#x27;</span><br>    &#125;]);<br><br>    console.log(<span class="hljs-string">&#x27;####&#x27;</span>,context.cookies())<br>    <span class="hljs-regexp">//</span> 打开需要登录的页面<br>    await page.goto(<span class="hljs-string">&#x27;http://localhost:8088/****/****/****&#x27;</span>);<br>	<span class="hljs-regexp">//</span>截图看看最后对不对<br>    page.screenshot(&#123; path: <span class="hljs-string">&#x27;screenshot.png&#x27;</span> &#125;);<br>    <span class="hljs-regexp">//</span> 关闭浏览器<br>    page.close();<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>附k6 browser指标的意义：<br>这些指标是 Web Vitals 的一部分，Web Vitals 是一组被 Google 推荐的用于衡量网站性能的指标。</p>
+<ol>
+<li><p><strong><code>browser_web_vital_cls</code>（Cumulative Layout Shift）：</strong> 衡量页面上元素的不稳定性，尤其是在加载期间。CLS 表示在页面生命周期内用户体验中不断发生的不期望的布局变化的累积分数。</p>
+</li>
+<li><p><strong><code>browser_web_vital_fcp</code>（First Contentful Paint）：</strong> 标志着用户能够看到页面内容的时间点。具体来说，它是页面开始加载到浏览器绘制页面的第一个像素的时间。</p>
+</li>
+<li><p><strong><code>browser_web_vital_lcp</code>（Largest Contentful Paint）：</strong> 衡量页面加载期间最大的可见内容块（例如图片或文本块）的渲染时间。LCP 提供了有关页面加载性能的重要信息。</p>
+</li>
+<li><p><strong><code>browser_web_vital_ttfb</code>（Time to First Byte）：</strong> 衡量用户发起请求到接收到来自服务器的第一个字节所花费的时间。它反映了服务器响应的速度。</p>
+</li>
+</ol>
+<h3 id="k6-browser和Playwright区别？"><a href="#k6-browser和Playwright区别？" class="headerlink" title="k6 browser和Playwright区别？"></a>k6 browser和Playwright区别？</h3><p>k6 browser我的理解（至于Playwright先按下不表，没有调查就没有发言权）</p>
+<ul>
+<li>更真实模拟用户，可以多并发用户，以计算整体平均页面性能数据（这个可能是比Playwright更优秀的存在，毕竟单一一次测试结果未必可靠）</li>
+<li>主要关注于整体性能测试，提供了页面级别的性能指标，而不是每个请求的详细数据（也许未来会支持？或者自行改源码）</li>
+<li>支持可视化，对接influxdb和grafana</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/11/13/k6%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8F%AF%E8%A7%86%E5%8C%96%E6%8A%A5%E5%91%8A/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">k6系列之可视化报告</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/12/k6%E7%B3%BB%E5%88%97%E4%B9%8Bchaijs%E7%AF%87/">
+                        <span class="hidden-mobile">k6系列之chaijs篇</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

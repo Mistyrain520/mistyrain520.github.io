@@ -180,6 +180,156 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/11/13/k6%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8F%AF%E8%A7%86%E5%8C%96%E6%8A%A5%E5%91%8A/" target="_self">
+          k6系列之可视化报告
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/11/13/k6%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8F%AF%E8%A7%86%E5%8C%96%E6%8A%A5%E5%91%8A/" target="_self">
+          
+          
+            
+          
+          暂时没空补充先随便写点.\k6.exe run –console-output report.log .\main.js
+https://k6.io/blog/ways-to-visualize-k6-results/
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-13 00:28" pubdate>
+              2023-11-13
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/11/12/k6%E7%B3%BB%E5%88%97%E4%B9%8Bbrowser%E8%B0%83%E7%A0%94/" target="_self">
+          k6系列之browser调研
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/11/12/k6%E7%B3%BB%E5%88%97%E4%B9%8Bbrowser%E8%B0%83%E7%A0%94/" target="_self">
+          
+          
+            
+          
+          调研github地址
+根据源码分析，k6的browser有三个大模块，一是browser，一个是chromium，还有一个是devices。根据官方给的例子，第一个模块有详细使用案例。
+由于browser目前处于实验阶段，go源码中的chromium模块并未打包进入k6的二进制文件中。根据下面查看到的源码，可以看到只是注册返回了browser  devices两个模块。
+1234567891011
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-12 19:41" pubdate>
+              2023-11-12
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/11/12/k6%E7%B3%BB%E5%88%97%E4%B9%8Bchaijs%E7%AF%87/" target="_self">
+          k6系列之chaijs篇
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/11/12/k6%E7%B3%BB%E5%88%97%E4%B9%8Bchaijs%E7%AF%87/" target="_self">
+          
+          
+            
+          
+          
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-12 19:41" pubdate>
+              2023-11-12
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/11/07/elasticsearch%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
+          elasticsearch基础数据类型
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/11/07/elasticsearch%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
+          
+          
+            
+          
+          参考地址：https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html
+long虽然说是数字类型，但是传”1222” [“122”]也是能存储进去，并不会报错。如果你的字符串实际上是数字的文本表示（例如，“123”），Elasticsearch可能会尝试将这个字符串转换为一个long值。如果转换
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-07 19:13" pubdate>
+              2023-11-07
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/10/29/k6%E7%B3%BB%E5%88%97%E4%B9%8B%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%89%A9%E5%B1%95xk6-zap/" target="_self">
           k6系列之我的第一个扩展xk6-zap
         </a>
@@ -398,13 +548,13 @@ Docker有四种基本的网络模式：
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/10/01/k6%E7%B3%BB%E5%88%97%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87-influxDB/" target="_self">
+        <a href="/2023/10/01/k6%E7%B3%BB%E5%88%97%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87-influxDB+grafana/" target="_self">
           k6系列前置准备--influxDB
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2023/10/01/k6%E7%B3%BB%E5%88%97%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87-influxDB/" target="_self">
+        <a href="/2023/10/01/k6%E7%B3%BB%E5%88%97%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87-influxDB+grafana/" target="_self">
           
           
             
@@ -437,194 +587,11 @@ Docker有四种基本的网络模式：
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/09/21/%E6%96%87%E6%9C%AC%E6%A0%87%E8%AF%86%E7%AC%A6/" target="_self">
-          文本标识符
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/09/21/%E6%96%87%E6%9C%AC%E6%A0%87%E8%AF%86%E7%AC%A6/" target="_self">
-          
-          
-            
-          
-          以下是一些文本标识符及其对应的二进制字符串：
-
-STX (Start of Text)：\x02
-ETX (End of Text)：\x03
-EOT (End of Transmission)：\x04
-ENQ (Enquiry)：\x05
-ACK (Acknowledgement)：\x06
-BEL (Bell)：\x07
-BS (Backspace)：\x08
-HT (Horizontal 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-21 17:04" pubdate>
-              2023-09-21
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/ASCII/">ASCII</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/09/18/wsl%E8%BF%81%E7%A7%BB/" target="_self">
-          wsl迁移
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/09/18/wsl%E8%BF%81%E7%A7%BB/" target="_self">
-          
-          
-            
-          
-          最近发现这台公司的笔记本C盘占用多了好多G，想来会不会是我装了两个ubuntu的缘故。遂排查。C:\Users\&lt;用户名&gt;\AppData\Local\Packages中发现相关ubuntu两个文件夹，占用很大。继续查看：设置–系统–存储–应用和功能。发现两个ubuntu占用累积16G。这些应用中心的应用默认都是在C盘的，失误了，安装的时候应该关注一下安装位置的。
-没事，来个迁移吧。
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-18 18:25" pubdate>
-              2023-09-18
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/wsl/">wsl</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/09/10/kafka%E5%8E%8B%E6%B5%8B/" target="_self">
-          kafka压测
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/09/10/kafka%E5%8E%8B%E6%B5%8B/" target="_self">
-          
-          
-            
-          
-          一个kafka实例创建一个主题，设置副本1，分区21kafka-topics --create --topic raintest1 --bootstrap-server localhost:9092 --replication-factor 1 --partitions 2
-生产者测试–一个kafka实例kafka-producer-perf-test --help有空再查看详细参数
-123456
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-10 13:53" pubdate>
-              2023-09-10
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
-            
-              <a href="/tags/kafka/">kafka</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/09/09/%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%B0%8F%E6%8A%80%E5%B7%A7/" target="_self">
-          谷歌浏览器控制台小技巧
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/09/09/%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%B0%8F%E6%8A%80%E5%B7%A7/" target="_self">
-          
-          
-            
-          
-          
-过滤控制台或者网络请求1234567//假设有两个请求 /test   /hello以及其他很多//常规写法过滤testtest//正则写法，两个/之间可以写入正则表达式/test|hello///非正则-/test|hello/
-
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-09 23:59" pubdate>
-              2023-09-09
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

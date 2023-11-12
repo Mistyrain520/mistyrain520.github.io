@@ -180,6 +180,191 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/08/12/go-%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8D%A0%E4%BD%8D%E7%AC%A6%E3%80%81net%E7%94%A8%E6%B3%95/" target="_self">
+          go``中使用占位符、net用法
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/08/12/go-%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8D%A0%E4%BD%8D%E7%AC%A6%E3%80%81net%E7%94%A8%E6%B3%95/" target="_self">
+          
+          
+            
+          
+          go``中使用占位符、net用法12345678910111213141516171819202122232425262728//&#123;&#123;.Itemname&#125;&#125;两个中括号import (	&quot;strconv&quot;    &quot;text/template&quot;    &quot;strings&quot;)type Test struct
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-12 17:37" pubdate>
+              2023-08-12
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/go/">go</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/06/Fiddler%E6%8B%A6%E6%88%AA%E6%93%8D%E4%BD%9C/" target="_self">
+          Fiddler拦截操作
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/06/Fiddler%E6%8B%A6%E6%88%AA%E6%93%8D%E4%BD%9C/" target="_self">
+          
+          
+            
+          
+          Fiddler拦截操作命令
+bps 200 中断200状态的所有请求；bps（不加参数）取消所有bps中断
+bpafter  aaa 中断包含aaa的URL（也可以直接写整个URL），通常用来做中断，修改返回值用
+bpu同bpafter作用相似，同理，bpu不带参数，则是取消所有设置的中断
+go 让当前中断的请求全部继续执行跳过中断
+select可以选择URL，比如select image，选择i
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-06 23:30" pubdate>
+              2022-03-06
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/fiddler/">fiddler</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/06/Jmeter%20Functions%20and%20Variables/" target="_self">
+          转行后首次使用Jmeter----基本使用
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/06/Jmeter%20Functions%20and%20Variables/" target="_self">
+          
+          
+            
+          
+          Jmeter上下文引用变量引用：${para},  比如用于请求头，或者参数化请求body；
+引用jmeter系统变量：**${__property(para)}**
+https://jmeter.apache.org/usermanual/functions.html#__property
+那么jmeter如何设置变量？
+eg: 
+
+jsonpath提取值
+元器：用户参数、信息头管理器
+func
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-06 23:30" pubdate>
+              2022-03-06
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/jmeter/">jmeter</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/03/06/python%E4%B8%AD%E4%B8%89%E9%87%8D%E5%BC%95%E5%8F%B7%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%8D%A0%E4%BD%8D%E7%AC%A6/" target="_self">
+          python中三重引号的使用
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/03/06/python%E4%B8%AD%E4%B8%89%E9%87%8D%E5%BC%95%E5%8F%B7%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%8D%A0%E4%BD%8D%E7%AC%A6/" target="_self">
+          
+          
+            
+          
+          python中三重引号中如何使用占位符12345678910111213141516171819202122from string import Templatedata = &#x27;&#x27;&#x27;&#123;          &quot;name&quot;: $para,          &quot;workspace&quot;: &#123;            &qu
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-03-06 23:30" pubdate>
+              2022-03-06
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python/">python</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/11/25/paramiko%E8%B8%A9%E5%9D%91/" target="_self">
           paramiko踩坑
         </a>
@@ -447,211 +632,11 @@ go通过internal文件夹（包括子目录）来决定是否为内部包
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/08/02/GO%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88VSCODE%E7%AF%87%EF%BC%89/" target="_self">
-          GO环境配置（VSCODE篇）
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/08/02/GO%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88VSCODE%E7%AF%87%EF%BC%89/" target="_self">
-          
-          
-            
-          
-          背景：公司电脑虽然早已配好go环境，但是家里笔记本还没呢。搞一下，顺带记录实操过程。
-go下载安装：官网：https://golang.google.cn/
-建议下载windows安装包，安装过程改路径：D:\Program Files\Go\
-确认系统变量path变量多了：D:\Program Files\Go\bin
-在cmd窗口中执行go，确认go命令生效。
-VS code配置：我在D盘新建
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-02 22:37" pubdate>
-              2021-08-02
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/go/">go</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/08/02/GO%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" target="_self">
-          GO的单元测试
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/08/02/GO%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" target="_self">
-          
-          
-            
-          
-          关键点纪要
-文件必须以  _test.go  结尾，函数名必须以  Test  开头。举栗子：
-1234my2_test.go，func Test2()&#123;&#125;my_test.go, func Test()&#123;&#125;特别注意，根据习惯，很容易犯错如下：my_test2.go, func myTest()&#123;&#125;//注意这是错误的
-比如和测试代码同一个包
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-02 12:19" pubdate>
-              2021-08-02
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/go/">go</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/07/20/%E6%88%B7%E5%A4%96%E5%B1%A5%E5%8E%86/" target="_self">
-          户外履历
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/07/20/%E6%88%B7%E5%A4%96%E5%B1%A5%E5%8E%86/" target="_self">
-          
-          
-            
-          
-          2017年11月–2020年7月city walk为主，主要徒步路线：珠江新城–正佳广场–天河路–中山大道–骏景八匹马，约10公里。徒步时间常为9点过后至10点40左右，最晚徒步时间凌晨1点至3点。
-2020年
-7.11从化天堂顶
-7.19从化鸡枕山
-7.25星溪线，新鞋磨合拉练
-8.8惠州大南山
-8.29莫六公山
-9.05从化桂峰山
-9.12牛塘山，遇云海
-9.26惠州罗浮山
-10.11清远靘雾
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-20 23:40" pubdate>
-              2021-07-20
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%88%B7%E5%A4%96/">户外</a>
-            
-              <a href="/tags/%E7%99%BB%E5%B1%B1/">登山</a>
-            
-              <a href="/tags/%E5%BE%92%E6%AD%A5/">徒步</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/07/20/%E6%B8%B8%E6%88%8F%E5%8D%8F%E8%AE%AE%E5%B7%A5%E5%85%B7/" target="_self">
-          pb数据的使用--游戏协议工具实战
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/07/20/%E6%B8%B8%E6%88%8F%E5%8D%8F%E8%AE%AE%E5%B7%A5%E5%85%B7/" target="_self">
-          
-          
-            
-          
-          前言：其实之前已经用python实现过了（协议工具），最近又用go重构了一遍（刚入门go）。所以本篇会分别从go（详细讲）以及py(粗略讲)两方面讲叙。由于鄙人也是小小白，因此会讲的没那么高大上，尽可能俗一点，让其他刚进入游戏的老铁也能看个明白。
-背景分析：
-通讯协议是使用pb数据，而且没有做进一步的二次封装数据包。如果程序做进一步的数据包封装，去约定一些特定规则，加个头啊加个尾什么的，那么就需要
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-20 23:06" pubdate>
-              2021-07-20
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/go/">go</a>
-            
-              <a href="/tags/%E6%B8%B8%E6%88%8F%E5%8D%8F%E8%AE%AE/">游戏协议</a>
-            
-              <a href="/tags/protobuf/">protobuf</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
