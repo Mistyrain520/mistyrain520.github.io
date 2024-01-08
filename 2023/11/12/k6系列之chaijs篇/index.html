@@ -183,7 +183,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      412 字
     </span>
   
 
@@ -193,7 +193,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      6
        分钟
     </span>
   
@@ -226,12 +226,27 @@
             <h1 style="display: none">k6系列之chaijs篇</h1>
             
             <div class="markdown-body">
-              
+              <h3 id="chaijs接入"><a href="#chaijs接入" class="headerlink" title="chaijs接入"></a>chaijs接入</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>在线接入<br>import &#123; describe, expect &#125; from <span class="hljs-string">&#x27;https://jslib.k6.io/k6chaijs/4.3.4.3/index.js&#x27;</span>;<br><span class="hljs-regexp">//</span>离线<br>直接整个文件复制保存下来即可<br></code></pre></td></tr></table></figure>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="json类"><a href="#json类" class="headerlink" title="json类"></a>json类</h4><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><span class="hljs-comment">//拥有某个key</span><br>expect(res.json()).<span class="hljs-keyword">to</span>.have.<span class="hljs-keyword">property</span>(<span class="hljs-string">&#x27;key1&#x27;</span>, <span class="hljs-string">&#x27;key2&#x27;</span>)<br><span class="hljs-comment">//拥有某个key，并且值等于xx</span><br>expect(myObject).<span class="hljs-keyword">to</span>.have.<span class="hljs-keyword">property</span>(<span class="hljs-string">&#x27;key1&#x27;</span>, <span class="hljs-string">&#x27;value1&#x27;</span>);<br>expect(myObject).<span class="hljs-keyword">to</span>.have.<span class="hljs-keyword">property</span>(<span class="hljs-string">&#x27;key2&#x27;</span>).that.equals(<span class="hljs-string">&#x27;value2&#x27;</span>);<br>expect(myObject).<span class="hljs-keyword">to</span>.deep.include(<span class="hljs-comment">&#123; key1: &#x27;value1&#x27;, key2: &#x27;value2&#x27; &#125;</span>);<span class="hljs-comment">//深度相等</span><br><span class="hljs-comment">//拥有所有key，不多不少</span><br>expect(<span class="hljs-comment">&#123;a: 1, b: 2&#125;</span>).<span class="hljs-keyword">to</span>.have.all.keys(<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>);<br><span class="hljs-comment">//先检查类型在判断</span><br>expect(<span class="hljs-comment">&#123;a: 1, b: 2&#125;</span>).<span class="hljs-keyword">to</span>.be.an(<span class="hljs-string">&#x27;object&#x27;</span>).that.has.all.keys(<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>);<br><span class="hljs-comment">//待实验、补充</span><br><br><br></code></pre></td></tr></table></figure>
+
+
+<h4 id="我怎么接入匹配"><a href="#我怎么接入匹配" class="headerlink" title="我怎么接入匹配"></a>我怎么接入匹配</h4><p>我的目标是，除了检查成功失败，还要能够在报告上体现。报告的<code>status</code>字段可选值<code>passed、broken</code></p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><br><span class="hljs-keyword">export</span> function checkExpectation(expectationFunc) &#123;<br>  <span class="hljs-keyword">try</span> &#123;<br>      expectationFunc();<br>      <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&#x27;pass&#x27;</span>: <span class="hljs-string">&#x27;passed&#x27;</span>&#125;;<br>  &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>      <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&#x27;fail&#x27;</span>: error.message&#125;;<br>  &#125;<br>&#125;<br><span class="hljs-regexp">//</span>然后报告中设置报告结构<br>res.report.steps = [<br>    &#123;<span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;返回状态200或者201&quot;</span>,<br>    <span class="hljs-string">&quot;status&quot;</span>: 	checkExpectation(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> expect([<span class="hljs-number">200</span>,<span class="hljs-number">201</span>]).to.be.an(<span class="hljs-string">&quot;array&quot;</span>).that.includes(res.res.status)).pass || <span class="hljs-string">&#x27;broken&#x27;</span>,<br>    <span class="hljs-string">&quot;parameters&quot;</span>: [&#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;实际结果&#x27;</span>, <span class="hljs-string">&#x27;value&#x27;</span>: checkExpectation(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> expect([<span class="hljs-number">200</span>,<span class="hljs-number">201</span>]).to.be.an(<span class="hljs-string">&quot;array&quot;</span>).that.includes(res.res.status)).fail || res.res.status&#125;]<br>    &#125;,<br>    &#123;<br>    <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;返回包含objectId&quot;</span>,<br>    <span class="hljs-string">&quot;status&quot;</span>: 	checkExpectation(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> expect(res.res.json()).to.have.property(<span class="hljs-string">&quot;objectId&quot;</span>)).pass || <span class="hljs-string">&#x27;broken&#x27;</span>,<br>    <span class="hljs-string">&quot;parameters&quot;</span>: [&#123;<span class="hljs-string">&#x27;name&#x27;</span>: <span class="hljs-string">&#x27;实际结果&#x27;</span>, <span class="hljs-string">&#x27;value&#x27;</span>: checkExpectation(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> expect(res.res.json()).to.have.property(<span class="hljs-string">&quot;objectId&quot;</span>)).fail || res.res.json().objectId&#125;]<br>    &#125;<br>]<br><span class="hljs-regexp">//</span>效果图忘记了，后面再补充<br></code></pre></td></tr></table></figure>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/k6/">k6</a>
+                    
+                      <a class="hover-with-bg" href="/tags/chaijs/">chaijs</a>
+                    
+                  </div>
                 
               </div>
               

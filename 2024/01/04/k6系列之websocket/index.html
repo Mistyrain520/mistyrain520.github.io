@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Suixiang Chen">
+  <meta name="keywords" content="">
+  
+  <title>k6系列之websocket - 陈随想</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"mistyrain520.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":140,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>陈随想</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/background1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="k6系列之websocket">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2024-01-04 20:30" pubdate>
+        2024年1月4日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      803 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">k6系列之websocket</h1>
+            
+            <div class="markdown-body">
+              <h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><p><a target="_blank" rel="noopener" href="https://github.com/grafana/k6/blob/7d131d6e7fee28a6936e437fe235c7c14a807c80/js/jsmodules.go#L36">k6 Module</a><br>k6目前有两个ws的模块，基础<code>k6/ws</code>，实验性<code>k6/experimental/websockets</code></p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">import</span> expws <span class="hljs-string">&quot;github.com/grafana/xk6-websockets/websockets&quot;</span><br><span class="hljs-string">&quot;k6/experimental/websockets&quot;</span>: &amp;expws.RootModule&#123;&#125;,<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;go.k6.io/k6/js/modules/k6/ws&quot;</span><br><span class="hljs-string">&quot;k6/ws&quot;</span>:                      ws.<span class="hljs-keyword">New</span>(),<br></code></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//&quot;go.k6.io/k6/js/modules/k6/ws&quot;</span><br><span class="hljs-comment">//看几个重要方法</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(mi *WS)</span> <span class="hljs-title">Connect</span><span class="hljs-params">(url <span class="hljs-keyword">string</span>, args ...goja.Value)</span> <span class="hljs-params">(*HTTPResponse, error)</span></span> &#123;&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *Socket)</span> <span class="hljs-title">Send</span><span class="hljs-params">(message <span class="hljs-keyword">string</span>)</span></span> &#123;&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *Socket)</span> <span class="hljs-title">SendBinary</span><span class="hljs-params">(message goja.Value)</span></span> &#123;&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-comment">//github.com/grafana/xk6-websockets/websockets</span><br><span class="hljs-comment">//这里实现则是多了一层channel，并发性能会更优</span><br>func (w *webSocket) send(msg goja.Value) &#123;<br>	w<span class="hljs-selector-class">.assertStateOpen</span>()<br><br>	switch o := msg<span class="hljs-selector-class">.Export</span>().(type) &#123;<br>	case string:<br>		w<span class="hljs-selector-class">.bufferedAmount</span> += len(o)<br>		w<span class="hljs-selector-class">.writeQueueCh</span> &lt;- message&#123;<br>			mtype: websocket<span class="hljs-selector-class">.TextMessage</span>,<br>			data:  <span class="hljs-selector-attr">[]</span>byte(o),<br>			t:     <span class="hljs-selector-tag">time</span><span class="hljs-selector-class">.Now</span>(),<br>		&#125;<br>	case *goja<span class="hljs-selector-class">.ArrayBuffer</span>:<br>		<span class="hljs-selector-tag">b</span> := o<span class="hljs-selector-class">.Bytes</span>()<br>		w<span class="hljs-selector-class">.bufferedAmount</span> += len(b)<br>		w<span class="hljs-selector-class">.writeQueueCh</span> &lt;- message&#123;<br>			mtype: websocket<span class="hljs-selector-class">.BinaryMessage</span>,<br>			data:  <span class="hljs-selector-tag">b</span>,<br>			t:     <span class="hljs-selector-tag">time</span><span class="hljs-selector-class">.Now</span>(),<br>		&#125;<br>	case goja<span class="hljs-selector-class">.ArrayBuffer</span>:<br>		<span class="hljs-selector-tag">b</span> := o<span class="hljs-selector-class">.Bytes</span>()<br>		w<span class="hljs-selector-class">.bufferedAmount</span> += len(b)<br>		w<span class="hljs-selector-class">.writeQueueCh</span> &lt;- message&#123;<br>			mtype: websocket<span class="hljs-selector-class">.BinaryMessage</span>,<br>			data:  <span class="hljs-selector-tag">b</span>,<br>			t:     <span class="hljs-selector-tag">time</span><span class="hljs-selector-class">.Now</span>(),<br>		&#125;<br>	default:<br>		common<span class="hljs-selector-class">.Throw</span>(w<span class="hljs-selector-class">.vu</span><span class="hljs-selector-class">.Runtime</span>(), fmt<span class="hljs-selector-class">.Errorf</span>(<span class="hljs-string">&quot;unsupported send type %T&quot;</span>, o))<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>官方建议</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-symbol">Note:</span> A <span class="hljs-keyword">module</span> <span class="hljs-keyword">with</span> a better <span class="hljs-built_in">and</span> standard API exists.<br><br>The <span class="hljs-built_in">new</span> k6/experimental/websockets API partially <span class="hljs-keyword">implements</span> the WebSockets API living standard.<br><br><span class="hljs-keyword">When</span> possible, we recommend <span class="hljs-keyword">using</span> the <span class="hljs-built_in">new</span> API. It uses a <span class="hljs-keyword">global</span> <span class="hljs-keyword">event</span> <span class="hljs-keyword">loop</span> <span class="hljs-keyword">for</span> consistency <span class="hljs-keyword">with</span> other k6 APIs <span class="hljs-built_in">and</span> better performance.<br></code></pre></td></tr></table></figure>
+<h3 id="案例编写"><a href="#案例编写" class="headerlink" title="案例编写"></a>案例编写</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> &#123; randomString, randomIntBetween &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;https://jslib.k6.io/k6-utils/1.1.0/index.js&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; WebSocket &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;k6/experimental/websockets&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; <span class="hljs-built_in">setTimeout</span>, <span class="hljs-built_in">clearTimeout</span>, <span class="hljs-built_in">setInterval</span>, <span class="hljs-built_in">clearInterval</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;k6/experimental/timers&#x27;</span>;<br><br><span class="hljs-keyword">const</span> chatRoomName = <span class="hljs-string">&#x27;publicRoom&#x27;</span>; <span class="hljs-comment">// choose any chat room name</span><br><span class="hljs-keyword">const</span> sessionDuration = randomIntBetween(<span class="hljs-number">5000</span>, <span class="hljs-number">60000</span>); <span class="hljs-comment">// user session between 5s and 1m</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">4</span>; i++) &#123;<br>    startWSWorker(i);<br>  &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">startWSWorker</span>(<span class="hljs-params">id</span>) </span>&#123;<br>  <span class="hljs-comment">// create a new websocket connection</span><br>  <span class="hljs-keyword">const</span> ws = <span class="hljs-keyword">new</span> WebSocket(<span class="hljs-string">`wss://test-api.k6.io/ws/crocochat/<span class="hljs-subst">$&#123;chatRoomName&#125;</span>/`</span>);<br><br>  ws.addEventListener(<span class="hljs-string">&#x27;open&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-comment">// change the user name</span><br>    ws.send(<span class="hljs-built_in">JSON</span>.stringify(&#123; <span class="hljs-attr">event</span>: <span class="hljs-string">&#x27;SET_NAME&#x27;</span>, <span class="hljs-attr">new_name</span>: <span class="hljs-string">`Croc <span class="hljs-subst">$&#123;__VU&#125;</span>:<span class="hljs-subst">$&#123;id&#125;</span>`</span> &#125;));<br><br>    <span class="hljs-comment">// listen for messages/errors and log them into console</span><br>    ws.addEventListener(<span class="hljs-string">&#x27;message&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">const</span> msg = <span class="hljs-built_in">JSON</span>.parse(e.data);<br>      <span class="hljs-keyword">if</span> (msg.event === <span class="hljs-string">&#x27;CHAT_MSG&#x27;</span>) &#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`VU <span class="hljs-subst">$&#123;__VU&#125;</span>:<span class="hljs-subst">$&#123;id&#125;</span> received: <span class="hljs-subst">$&#123;msg.user&#125;</span> says: <span class="hljs-subst">$&#123;msg.message&#125;</span>`</span>);<br>      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (msg.event === <span class="hljs-string">&#x27;ERROR&#x27;</span>) &#123;<br>        <span class="hljs-built_in">console</span>.error(<span class="hljs-string">`VU <span class="hljs-subst">$&#123;__VU&#125;</span>:<span class="hljs-subst">$&#123;id&#125;</span> received:: <span class="hljs-subst">$&#123;msg.message&#125;</span>`</span>);<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`VU <span class="hljs-subst">$&#123;__VU&#125;</span>:<span class="hljs-subst">$&#123;id&#125;</span> received unhandled message: <span class="hljs-subst">$&#123;msg.message&#125;</span>`</span>);<br>      &#125;<br>    &#125;);<br><br>    <span class="hljs-comment">// send a message every 2-8 seconds</span><br>    <span class="hljs-keyword">const</span> intervalId = <span class="hljs-built_in">setInterval</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>      ws.send(<span class="hljs-built_in">JSON</span>.stringify(&#123; <span class="hljs-attr">event</span>: <span class="hljs-string">&#x27;SAY&#x27;</span>, <span class="hljs-attr">message</span>: <span class="hljs-string">`I&#x27;m saying <span class="hljs-subst">$&#123;randomString(<span class="hljs-number">5</span>)&#125;</span>`</span> &#125;));<br>    &#125;, randomIntBetween(<span class="hljs-number">2000</span>, <span class="hljs-number">8000</span>)); <span class="hljs-comment">// say something every 2-8 seconds</span><br><br>    <span class="hljs-comment">// after a sessionDuration stop sending messages and leave the room</span><br>    <span class="hljs-keyword">const</span> timeout1id = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>      <span class="hljs-built_in">clearInterval</span>(intervalId);<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`VU <span class="hljs-subst">$&#123;__VU&#125;</span>:<span class="hljs-subst">$&#123;id&#125;</span>: <span class="hljs-subst">$&#123;sessionDuration&#125;</span>ms passed, leaving the chat`</span>);<br>      ws.send(<span class="hljs-built_in">JSON</span>.stringify(&#123; <span class="hljs-attr">event</span>: <span class="hljs-string">&#x27;LEAVE&#x27;</span> &#125;));<br>    &#125;, sessionDuration);<br><br>    <span class="hljs-comment">// after a sessionDuration + 3s close the connection</span><br>    <span class="hljs-keyword">const</span> timeout2id = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Closing the socket forcefully 3s after graceful LEAVE`</span>);<br>      ws.close();<br>    &#125;, sessionDuration + <span class="hljs-number">3000</span>);<br><br>    <span class="hljs-comment">// when connection is closing, clean up the previously created timers</span><br>    ws.addEventListener(<span class="hljs-string">&#x27;close&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-built_in">clearTimeout</span>(timeout1id);<br>      <span class="hljs-built_in">clearTimeout</span>(timeout2id);<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`VU <span class="hljs-subst">$&#123;__VU&#125;</span>:<span class="hljs-subst">$&#123;id&#125;</span>: disconnected`</span>);<br>    &#125;);<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="k6-experimental-websockets的readyState"><a href="#k6-experimental-websockets的readyState" class="headerlink" title="k6/experimental/websockets的readyState"></a>k6/experimental/websockets的readyState</h3><figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cos"><span class="hljs-comment">//这里要用==1来比较，因为readyState的类型是ReadyState，要用非严格比较</span><br><span class="hljs-keyword">if</span> (!check(ws, &#123;<br>      &#x27;is status <span class="hljs-number">200</span>&#x27;: (<span class="hljs-keyword">r</span>) =&gt; <span class="hljs-keyword">r</span>.readyState == <span class="hljs-number">1</span>,<br>    &#125;))&#123;<br>      ws.<span class="hljs-keyword">close</span>()<br>    &#125;<br><span class="hljs-comment">//无论是看go源码还是js的源码都很轻松分析出</span><br>export enum ReadyState &#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Socket has been created. The connection is not yet open.</span><br><span class="hljs-comment">     */</span><br>    Connecting = <span class="hljs-number">0</span>,<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * The connection is open and ready to communicate.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">Open</span> = <span class="hljs-number">1</span>,<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * The connection is in the process of closing.</span><br><span class="hljs-comment">     */</span><br>    Closing = <span class="hljs-number">2</span>,<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * The connection is closed or couldn&#x27;t be opened.</span><br><span class="hljs-comment">     */</span><br>    Closed = <span class="hljs-number">3</span>,<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="k6-experimental-websockets的bufferedAmount"><a href="#k6-experimental-websockets的bufferedAmount" class="headerlink" title="k6/experimental/websockets的bufferedAmount"></a>k6/experimental/websockets的bufferedAmount</h3><p>表示队列中的数据量，应该是可以用来监测 WebSocket 连接的发送情况</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/k6/">k6</a>
+                    
+                      <a class="hover-with-bg" href="/tags/websocket/">websocket</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/01/04/k6%E7%B3%BB%E5%88%97%E4%B9%8Bwebsocket%E5%AE%9E%E6%88%98-%E5%9C%A8%E7%BA%BF%E5%8D%8F%E5%90%8C%E6%96%87%E6%A1%A3%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BB%A5%E5%8F%8A%E5%8E%8B%E6%B5%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">k6系列之websocket实战--在线协同文档的自动化以及压测</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/11/13/k6%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8F%AF%E8%A7%86%E5%8C%96%E6%8A%A5%E5%91%8A/">
+                        <span class="hidden-mobile">k6系列之可视化报告</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
