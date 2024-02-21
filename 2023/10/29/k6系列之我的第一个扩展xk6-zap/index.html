@@ -183,7 +183,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.3k 字
     </span>
   
 
@@ -193,7 +193,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16
+      18
        分钟
     </span>
   
@@ -260,6 +260,12 @@
 <li>本地打包<br><code>xk6 build --with github.com/Mistyrain520/xk6-zap=.</code></li>
 </ul>
 <h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>除了go可以编写打包为k6扩展之外，k6也支持用es6、ts去编译打包后作为模块包给k6引用。<br><a target="_blank" rel="noopener" href="https://k6.io/docs/using-k6/modules/">详情点击这里</a>，比如<a target="_blank" rel="noopener" href="https://github.com/grafana/k6-jslib-k6chaijs/tree/master">这个check模块包</a><br>笔者试过将uuid、winstom打包，但其中曲折比go麻烦不少，且事实上用go来写扩展包应该是效率更好的。像<code>zap</code>包都是高性能和线程安全的。</p>
+<h3 id="wsl-ubuntu下的编译"><a href="#wsl-ubuntu下的编译" class="headerlink" title="wsl ubuntu下的编译"></a>wsl ubuntu下的编译</h3><ul>
+<li>首先需要保证有go环境，<code>go version</code>能执行通，默认安装路径是<code>/usr/local/go</code></li>
+<li>接下来下载xk6，执行<code>go install go.k6.io/xk6/cmd/xk6@latest</code>,下载完毕默认安装路径是<code>/root/go/bin</code></li>
+<li>尝试把xk6配置到环境变量上。我试过几次失败了，于是跳过这一步</li>
+<li>直接进入<code>/root/go/bin</code>,查看这个目录下有个<code>xk6</code>,直接执行<code>./xk6 build --with github.com/Mistyrain520/xk6-zap@latest --with github.com/grafana/xk6-sql</code>,完成之后目录下多了<code>k6</code>可执行二进制文件</li>
+</ul>
 
             </div>
             <hr>
