@@ -17,7 +17,7 @@
   <meta name="author" content="Suixiang Chen">
   <meta name="keywords" content="">
   
-  <title>go``中使用占位符、net用法 - 陈随想</title>
+  <title>k6系列之生命周期以及变量传递 - 陈随想</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -161,7 +161,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="go``中使用占位符、net用法">
+            <span class="h2" id="subtitle" title="k6系列之生命周期以及变量传递">
               
             </span>
 
@@ -171,8 +171,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-08-12 17:37" pubdate>
-        2023年8月12日 下午
+      <time datetime="2023-03-14 14:25" pubdate>
+        2023年3月14日 下午
       </time>
     </span>
   
@@ -183,7 +183,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      468 字
+      316 字
     </span>
   
 
@@ -193,7 +193,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      5
        分钟
     </span>
   
@@ -223,16 +223,19 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">go``中使用占位符、net用法</h1>
+            <h1 style="display: none">k6系列之生命周期以及变量传递</h1>
             
             <div class="markdown-body">
-              <h3 id="go-中使用占位符、net用法"><a href="#go-中使用占位符、net用法" class="headerlink" title="go``中使用占位符、net用法"></a>go``中使用占位符、net用法</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs go"><br><span class="hljs-comment">//&#123;&#123;.Itemname&#125;&#125;两个中括号</span><br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;strconv&quot;</span><br>    <span class="hljs-string">&quot;text/template&quot;</span><br>    <span class="hljs-string">&quot;strings&quot;</span><br>)<br><span class="hljs-keyword">type</span> Test <span class="hljs-keyword">struct</span> &#123;<br>	Name     <span class="hljs-keyword">string</span><br>	Token    <span class="hljs-keyword">string</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Format</span><span class="hljs-params">(placedata <span class="hljs-keyword">interface</span>&#123;&#125;, data <span class="hljs-keyword">string</span>)</span> <span class="hljs-title">string</span></span> &#123;<br>	s := <span class="hljs-built_in">new</span>(strings.Builder)<br>	temp, _ := template.New(<span class="hljs-string">&quot;tplname&quot;</span>).Parse(data)<br>	err := temp.Execute(s, placedata)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-built_in">panic</span>(err)<br>	&#125;<br>	<span class="hljs-keyword">return</span> s.String()<br>&#125;<br>haha := <span class="hljs-string">`</span><br><span class="hljs-string">	&#123;</span><br><span class="hljs-string">		&quot;name&quot;: &quot;&#123;&#123;.Name&#125;&#125;&quot;,</span><br><span class="hljs-string">        &quot;test&quot;: &quot;&#123;&#123;.Token&#125;&#125;&quot;</span><br><span class="hljs-string">        &#125;`</span><br>data := ItemTestdata&#123;<span class="hljs-string">&quot;你好哦哦哦AA&quot;</span>, <span class="hljs-string">&quot;我佛了&quot;</span>&#125;<br>postdata := Format(data, haha)<br></code></pre></td></tr></table></figure>
-
-
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//空接口不可以直接引用，要先判定类型</span><br><span class="hljs-comment">//通过.(stirng)或者.([]interface&#123;&#125;)等来判定字符串或者切片等</span><br><span class="hljs-keyword">var</span> result1 <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">interface</span>&#123;&#125;<br>test_id, _ := result1[<span class="hljs-string">&quot;objectId&quot;</span>].(<span class="hljs-keyword">string</span>)<br></code></pre></td></tr></table></figure>
-
-
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//&quot;net/http&quot;的使用</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Get</span><span class="hljs-params">(yoururl <span class="hljs-keyword">string</span>, data <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">string</span>)</span> <span class="hljs-title">map</span>[<span class="hljs-title">string</span>]<span class="hljs-title">interface</span></span>&#123;&#125; &#123;<br>	request, err := http.NewRequest(<span class="hljs-string">&quot;GET&quot;</span>, yoururl, <span class="hljs-literal">nil</span>)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Println(<span class="hljs-string">&quot;err-&gt;&quot;</span>, err)<br>	&#125;<br>	<span class="hljs-comment">//加入get参数</span><br>	q := request.URL.Query()<br>	<span class="hljs-keyword">for</span> key, value := <span class="hljs-keyword">range</span> data &#123;<br>		q.Add(key, value)<br>	&#125;<br>	request.URL.RawQuery = q.Encode()<br>	resp, err := http.DefaultClient.Do(request)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Println(<span class="hljs-string">&quot;err-&gt;&quot;</span>, err)<br>	&#125;<br>	<span class="hljs-keyword">defer</span> resp.Body.Close()<br>	data1, err := ioutil.ReadAll(resp.Body)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Println(<span class="hljs-string">&quot;err-&gt;&quot;</span>, err)<br>	&#125;<br>	rdata := <span class="hljs-keyword">string</span>(data1)<br>	result := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">interface</span>&#123;&#125;)<br>	err1 := json.Unmarshal([]<span class="hljs-keyword">byte</span>(rdata), &amp;result)<br>	<span class="hljs-keyword">if</span> err1 != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(err)<br>	&#125;<br>	<span class="hljs-comment">// log.Print(&quot;GET请求 &quot;, request.URL, &quot; &quot;, resp.Status)</span><br>	<span class="hljs-keyword">return</span> result<br><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Post</span><span class="hljs-params">(yoururl <span class="hljs-keyword">string</span>, data <span class="hljs-keyword">string</span>, yourheader <span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">string</span>)</span> <span class="hljs-params">(<span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">interface</span>&#123;&#125;, *http.Response)</span></span> &#123;<br>	data2 := strings.NewReader(data)<br>	request, err := http.NewRequest(<span class="hljs-string">&quot;POST&quot;</span>, yoururl, data2)<br>	<span class="hljs-keyword">for</span> key, value := <span class="hljs-keyword">range</span> yourheader &#123;<br>		request.Header.Set(key, value)<br>	&#125;<br>	<span class="hljs-comment">// request.Header.Set(&quot;Content-Type&quot;, &quot;text/plain&quot;)</span><br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Println(<span class="hljs-string">&quot;err-&gt;&quot;</span>, err)<br>	&#125;<br>	resp1, err := http.DefaultClient.Do(request)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Println(<span class="hljs-string">&quot;err-&gt;&quot;</span>, err)<br>	&#125;<br>	<span class="hljs-keyword">defer</span> resp1.Body.Close()<br>	data1, err := ioutil.ReadAll(resp1.Body)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Println(<span class="hljs-string">&quot;err-&gt;&quot;</span>, err)<br>	&#125;<br>	rdata := <span class="hljs-keyword">string</span>(data1)<br>	<span class="hljs-comment">//转成map为了后续方便用</span><br>	result := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">map</span>[<span class="hljs-keyword">string</span>]<span class="hljs-keyword">interface</span>&#123;&#125;)<br>	err1 := json.Unmarshal([]<span class="hljs-keyword">byte</span>(rdata), &amp;result)<br>	<span class="hljs-keyword">if</span> err1 != <span class="hljs-literal">nil</span> &#123;<br>		fmt.Println(err)<br>	&#125;<br>	<span class="hljs-keyword">return</span> result, resp1<br>&#125;<br><br></code></pre></td></tr></table></figure>
+              <h3 id="官网参考资料"><a href="#官网参考资料" class="headerlink" title="官网参考资料"></a>官网参考资料</h3><p><a target="_blank" rel="noopener" href="https://www.postgresql.org/docs/9.6/functions-json.html">https://www.postgresql.org/docs/9.6/functions-json.html</a></p>
+<h3 id="查询相关语法"><a href="#查询相关语法" class="headerlink" title="查询相关语法"></a>查询相关语法</h3><p>假设存了一个（Item表values列）jsonb数据如下</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br>	<span class="hljs-attr">&quot;Text23&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>	<span class="hljs-attr">&quot;Number1&quot;</span>: <span class="hljs-number">1</span>,<br>	<span class="hljs-attr">&quot;Number2&quot;</span>: <span class="hljs-number">0</span>,<br>	<span class="hljs-attr">&quot;ItemCode&quot;</span>: <span class="hljs-string">&quot;man-hour-2023&quot;</span>,<br>	<span class="hljs-attr">&quot;LongText&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>	<span class="hljs-attr">&quot;User3321&quot;</span>: [&#123;<br>		<span class="hljs-attr">&quot;label&quot;</span>: <span class="hljs-string">&quot;ds(dsdsdsdsds)&quot;</span>,<br>		<span class="hljs-attr">&quot;value&quot;</span>: <span class="hljs-string">&quot;I2GgCsDDSM&quot;</span>,<br>		<span class="hljs-attr">&quot;deleted&quot;</span>: <span class="hljs-literal">false</span>,<br>		<span class="hljs-attr">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,<br>		<span class="hljs-attr">&quot;nickname&quot;</span>: <span class="hljs-string">&quot;ds&quot;</span>,<br>		<span class="hljs-attr">&quot;username&quot;</span>: <span class="hljs-string">&quot;dsdsdsdsds&quot;</span><br>	&#125;],<br>	<span class="hljs-attr">&quot;assignee&quot;</span>: [&#123;<br>		<span class="hljs-attr">&quot;label&quot;</span>: <span class="hljs-string">&quot;Gitee_test(Gitee_test)&quot;</span>,<br>		<span class="hljs-attr">&quot;value&quot;</span>: <span class="hljs-string">&quot;QWUqDqFNj8&quot;</span>,<br>		<span class="hljs-attr">&quot;deleted&quot;</span>: <span class="hljs-literal">false</span>,<br>		<span class="hljs-attr">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,<br>		<span class="hljs-attr">&quot;nickname&quot;</span>: <span class="hljs-string">&quot;Gitee_test&quot;</span>,<br>		<span class="hljs-attr">&quot;username&quot;</span>: <span class="hljs-string">&quot;Gitee_test&quot;</span><br>	&#125;],<br>	<span class="hljs-attr">&quot;priority&quot;</span>: <span class="hljs-string">&quot;596efbfe-9129-4d51-a64c-33b0bc261f22&quot;</span>,<br>	<span class="hljs-attr">&quot;Formula22&quot;</span>: <span class="hljs-number">1</span>,<br>	<span class="hljs-attr">&quot;StoryPoint&quot;</span>: <span class="hljs-literal">null</span>,<br>	<span class="hljs-attr">&quot;file_transfer&quot;</span>: [<span class="hljs-string">&quot;安装ftp客户端&quot;</span>],<br>	<span class="hljs-attr">&quot;r_man_hour_plugin_date&quot;</span>: <span class="hljs-number">1676304000000</span>,<br>	<span class="hljs-attr">&quot;r_man_hour_plugin_type&quot;</span>: <span class="hljs-number">1</span>,<br>	<span class="hljs-attr">&quot;r_man_hour_plugin_overHours&quot;</span>: <span class="hljs-number">1</span>,<br>	<span class="hljs-attr">&quot;r_man_hour_plugin_normalHours&quot;</span>: <span class="hljs-number">1</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>查询values中包含man_hour字符串<br><code>select * from &quot;Item&quot; where &quot;values&quot;::text like &#39;%&quot;man_hour&quot;%&#39;;</code></li>
+<li>查询指定某个字段等于某个值<br><code>select * from &quot;Item&quot; where  (&quot;Item&quot;.values-&gt;&gt;&#39;r_man_hour_plugin_date&#39;)::int8 = 1679500800000;</code></li>
+<li>查询指定某个字段大于某个值<br><code>select * from &quot;Item&quot; where  (&quot;Item&quot;.values-&gt;&gt;&#39;r_man_hour_plugin_date&#39;)::int8 &gt; 1679500700000;</code></li>
+<li>查询r_man_hour_plugin_date<br><code>select values-&gt;&gt;&#39;DataQuotecrtttt&#39;, values-&gt;&gt;&#39;remote_data_quote_field_type123&#39; from &quot;Item&quot;  </code><br>假设数据为[{“status”: “approved”, “comment”: “”, “approver”: “I719aTBelK”, “approvalTime”: 1697018720199}]</li>
+<li>查询approvalTime<br><code>SELECT aa-&gt;0-&gt;&#39;approvalTime&#39; AS approvalTime FROM your_table;</code></li>
+</ul>
 
             </div>
             <hr>
@@ -243,7 +246,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/go/">go</a>
+                      <a class="hover-with-bg" href="/tags/pgsql/">pgsql</a>
                     
                   </div>
                 
@@ -260,9 +263,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/08/12/web%E6%80%A7%E8%83%BD/">
+                      <a href="/2023/08/12/go-%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8D%A0%E4%BD%8D%E7%AC%A6%E3%80%81net%E7%94%A8%E6%B3%95/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">web性能</span>
+                        <span class="hidden-mobile">go``中使用占位符、net用法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -270,8 +273,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/14/%E7%8E%A9%E8%BD%ACpgsql%E8%AF%AD%E6%B3%95/">
-                        <span class="hidden-mobile">k6系列之生命周期以及变量传递</span>
+                      <a href="/2022/03/06/Fiddler%E6%8B%A6%E6%88%AA%E6%93%8D%E4%BD%9C/">
+                        <span class="hidden-mobile">Fiddler拦截操作</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

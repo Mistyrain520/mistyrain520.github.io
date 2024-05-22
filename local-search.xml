@@ -36,6 +36,25 @@
   
   
   <entry>
+    <title>UI自动化系列之playwright 内置方法踩坑</title>
+    <link href="/2024/02/11/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E7%B3%BB%E5%88%97%E4%B9%8Bplaywright-%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95%E8%B8%A9%E5%9D%91/"/>
+    <url>/2024/02/11/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E7%B3%BB%E5%88%97%E4%B9%8Bplaywright-%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95%E8%B8%A9%E5%9D%91/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="class-Page"><a href="#class-Page" class="headerlink" title="class Page"></a>class Page</h3><h5 id="get-by-role-和-get-by-text"><a href="#get-by-role-和-get-by-text" class="headerlink" title="get_by_role 和 get_by_text"></a>get_by_role 和 get_by_text</h5><p>会查找页面中包含指定文本的元素。它不仅仅匹配单个节点中的文本，而是会将元素及其所有子元素的文本内容合并在一起进行匹配。比如<code>get_by_role(&#39;link&#39;, name=&quot;A B&quot;)</code>，如果有父元素是A，子元素是B，那么也能查找到。而不会仅仅查找一个元素包含<code>A B</code>。这个时候建议先<code>self.page.locator(&#39;//div[contains(@class, &quot;xxxx&quot;)]&#39;)</code>来缩小选择范围。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>playwright</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>UI自动化系列之环境篇</title>
     <link href="/2024/02/11/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E7%B3%BB%E5%88%97%E4%B9%8B%E7%8E%AF%E5%A2%83%E7%AF%87/"/>
     <url>/2024/02/11/UI%E8%87%AA%E5%8A%A8%E5%8C%96%E7%B3%BB%E5%88%97%E4%B9%8B%E7%8E%AF%E5%A2%83%E7%AF%87/</url>
@@ -491,6 +510,25 @@
     <tags>
       
       <tag>go</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>k6系列之生命周期以及变量传递</title>
+    <link href="/2023/03/14/%E7%8E%A9%E8%BD%ACpgsql%E8%AF%AD%E6%B3%95/"/>
+    <url>/2023/03/14/%E7%8E%A9%E8%BD%ACpgsql%E8%AF%AD%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="官网参考资料"><a href="#官网参考资料" class="headerlink" title="官网参考资料"></a>官网参考资料</h3><p><a href="https://www.postgresql.org/docs/9.6/functions-json.html">https://www.postgresql.org/docs/9.6/functions-json.html</a></p><h3 id="查询相关语法"><a href="#查询相关语法" class="headerlink" title="查询相关语法"></a>查询相关语法</h3><p>假设存了一个（Item表values列）jsonb数据如下</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br><span class="hljs-attr">&quot;Text23&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br><span class="hljs-attr">&quot;Number1&quot;</span>: <span class="hljs-number">1</span>,<br><span class="hljs-attr">&quot;Number2&quot;</span>: <span class="hljs-number">0</span>,<br><span class="hljs-attr">&quot;ItemCode&quot;</span>: <span class="hljs-string">&quot;man-hour-2023&quot;</span>,<br><span class="hljs-attr">&quot;LongText&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br><span class="hljs-attr">&quot;User3321&quot;</span>: [&#123;<br><span class="hljs-attr">&quot;label&quot;</span>: <span class="hljs-string">&quot;ds(dsdsdsdsds)&quot;</span>,<br><span class="hljs-attr">&quot;value&quot;</span>: <span class="hljs-string">&quot;I2GgCsDDSM&quot;</span>,<br><span class="hljs-attr">&quot;deleted&quot;</span>: <span class="hljs-literal">false</span>,<br><span class="hljs-attr">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,<br><span class="hljs-attr">&quot;nickname&quot;</span>: <span class="hljs-string">&quot;ds&quot;</span>,<br><span class="hljs-attr">&quot;username&quot;</span>: <span class="hljs-string">&quot;dsdsdsdsds&quot;</span><br>&#125;],<br><span class="hljs-attr">&quot;assignee&quot;</span>: [&#123;<br><span class="hljs-attr">&quot;label&quot;</span>: <span class="hljs-string">&quot;Gitee_test(Gitee_test)&quot;</span>,<br><span class="hljs-attr">&quot;value&quot;</span>: <span class="hljs-string">&quot;QWUqDqFNj8&quot;</span>,<br><span class="hljs-attr">&quot;deleted&quot;</span>: <span class="hljs-literal">false</span>,<br><span class="hljs-attr">&quot;enabled&quot;</span>: <span class="hljs-literal">true</span>,<br><span class="hljs-attr">&quot;nickname&quot;</span>: <span class="hljs-string">&quot;Gitee_test&quot;</span>,<br><span class="hljs-attr">&quot;username&quot;</span>: <span class="hljs-string">&quot;Gitee_test&quot;</span><br>&#125;],<br><span class="hljs-attr">&quot;priority&quot;</span>: <span class="hljs-string">&quot;596efbfe-9129-4d51-a64c-33b0bc261f22&quot;</span>,<br><span class="hljs-attr">&quot;Formula22&quot;</span>: <span class="hljs-number">1</span>,<br><span class="hljs-attr">&quot;StoryPoint&quot;</span>: <span class="hljs-literal">null</span>,<br><span class="hljs-attr">&quot;file_transfer&quot;</span>: [<span class="hljs-string">&quot;安装ftp客户端&quot;</span>],<br><span class="hljs-attr">&quot;r_man_hour_plugin_date&quot;</span>: <span class="hljs-number">1676304000000</span>,<br><span class="hljs-attr">&quot;r_man_hour_plugin_type&quot;</span>: <span class="hljs-number">1</span>,<br><span class="hljs-attr">&quot;r_man_hour_plugin_overHours&quot;</span>: <span class="hljs-number">1</span>,<br><span class="hljs-attr">&quot;r_man_hour_plugin_normalHours&quot;</span>: <span class="hljs-number">1</span><br>&#125;<br></code></pre></td></tr></table></figure><ul><li>查询values中包含man_hour字符串<br><code>select * from &quot;Item&quot; where &quot;values&quot;::text like &#39;%&quot;man_hour&quot;%&#39;;</code></li><li>查询指定某个字段等于某个值<br><code>select * from &quot;Item&quot; where  (&quot;Item&quot;.values-&gt;&gt;&#39;r_man_hour_plugin_date&#39;)::int8 = 1679500800000;</code></li><li>查询指定某个字段大于某个值<br><code>select * from &quot;Item&quot; where  (&quot;Item&quot;.values-&gt;&gt;&#39;r_man_hour_plugin_date&#39;)::int8 &gt; 1679500700000;</code></li><li>查询r_man_hour_plugin_date<br><code>select values-&gt;&gt;&#39;DataQuotecrtttt&#39;, values-&gt;&gt;&#39;remote_data_quote_field_type123&#39; from &quot;Item&quot;  </code><br>假设数据为[{“status”: “approved”, “comment”: “”, “approver”: “I719aTBelK”, “approvalTime”: 1697018720199}]</li><li>查询approvalTime<br><code>SELECT aa-&gt;0-&gt;&#39;approvalTime&#39; AS approvalTime FROM your_table;</code></li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>pgsql</tag>
       
     </tags>
     
