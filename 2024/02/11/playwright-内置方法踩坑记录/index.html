@@ -17,7 +17,7 @@
   <meta name="author" content="Suixiang Chen">
   <meta name="keywords" content="">
   
-  <title>UI自动化系列之playwright 内置方法踩坑 - 陈随想</title>
+  <title>playwright-内置方法踩坑记录 - 陈随想</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -161,7 +161,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="UI自动化系列之playwright 内置方法踩坑">
+            <span class="h2" id="subtitle" title="playwright-内置方法踩坑记录">
               
             </span>
 
@@ -223,7 +223,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">UI自动化系列之playwright 内置方法踩坑</h1>
+            <h1 style="display: none">playwright-内置方法踩坑记录</h1>
             
             <div class="markdown-body">
               <h3 id="class-Page"><a href="#class-Page" class="headerlink" title="class Page"></a>class Page</h3><h5 id="get-by-role-和-get-by-text"><a href="#get-by-role-和-get-by-text" class="headerlink" title="get_by_role 和 get_by_text"></a>get_by_role 和 get_by_text</h5><p>会查找页面中包含指定文本的元素。它不仅仅匹配单个节点中的文本，而是会将元素及其所有子元素的文本内容合并在一起进行匹配。比如<code>get_by_role(&#39;link&#39;, name=&quot;A B&quot;)</code>，如果有父元素是A，子元素是B，那么也能查找到。而不会仅仅查找一个元素包含<code>A B</code>。这个时候建议先<code>self.page.locator(&#39;//div[contains(@class, &quot;xxxx&quot;)]&#39;)</code>来缩小选择范围。</p>
@@ -238,6 +238,8 @@
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/playwright/">playwright</a>
+                    
+                      <a class="hover-with-bg" href="/tags/UI%E8%87%AA%E5%8A%A8%E5%8C%96/">UI自动化</a>
                     
                   </div>
                 

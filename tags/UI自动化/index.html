@@ -17,25 +17,9 @@
   <meta name="author" content="Suixiang Chen">
   <meta name="keywords" content="">
   
-  <title>Fiddler拦截操作 - 陈随想</title>
+  <title>标签 - UI自动化 - 陈随想</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
@@ -62,7 +46,7 @@
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -161,50 +145,17 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Fiddler拦截操作">
+            <span class="h2" id="subtitle" title="标签 - UI自动化">
               
             </span>
 
             
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-06 23:30" pubdate>
-        2022年3月6日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      241 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      2
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
           </div>
 
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
           
         </div>
       </div>
@@ -213,98 +164,40 @@
 
   <main>
     
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+  <p class="h4">共计 1 篇文章</p>
+  <hr>
+  
+  
+    
       
+      <p class="h5">2024</p>
+    
+    <a href="/2024/02/11/playwright-%E5%86%85%E7%BD%AE%E6%96%B9%E6%B3%95%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">playwright-内置方法踩坑记录</span>
+      <time style="float: right;">02-11</time>
+    </a>
+  
+</div>
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">Fiddler拦截操作</h1>
-            
-            <div class="markdown-body">
-              <h3 id="Fiddler拦截操作"><a href="#Fiddler拦截操作" class="headerlink" title="Fiddler拦截操作"></a>Fiddler拦截操作</h3><h4 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h4><ul>
-<li>bps 200 中断200状态的所有请求；bps（不加参数）取消所有bps中断</li>
-<li>bpafter  aaa 中断包含aaa的URL（也可以直接写整个URL），通常用来做中断，修改返回值用</li>
-<li>bpu同bpafter作用相似，同理，bpu不带参数，则是取消所有设置的中断</li>
-<li>go 让当前中断的请求全部继续执行跳过中断</li>
-<li>select可以选择URL，比如select image，选择image的URL</li>
-</ul>
-<h4 id="拦截请求修改返回的几种方法"><a href="#拦截请求修改返回的几种方法" class="headerlink" title="拦截请求修改返回的几种方法"></a>拦截请求修改返回的几种方法</h4><h5 id="方式一：先bpafter-url；重新加载请求后会在该url中断，修改Inspectors下TextView的值即可；不需要更改content-length；"><a href="#方式一：先bpafter-url；重新加载请求后会在该url中断，修改Inspectors下TextView的值即可；不需要更改content-length；" class="headerlink" title="方式一：先bpafter url；重新加载请求后会在该url中断，修改Inspectors下TextView的值即可；不需要更改content-length；"></a>方式一：先bpafter url；重新加载请求后会在该url中断，修改Inspectors下TextView的值即可；不需要更改content-length；</h5><h5 id="方式二（推荐）"><a href="#方式二（推荐）" class="headerlink" title="方式二（推荐）:"></a>方式二（推荐）:</h5><p>save ResponseBody，然后AutoRespender中启用即可，可以随意更改返回json中的内容；不建议用Entire ResponseBody，因为实际使用增加了接口返回长度，需要修改content-length，否则会导致返回内容被截断。</p>
-<p><img src="/img/image-20220130171807524.png" srcset="/img/loading.gif" lazyload alt="image-20220130171807524"></p>
-<p><img src="/img/image-20220130172101062.png" srcset="/img/loading.gif" lazyload alt="image-20220130172101062"></p>
-<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42380194/article/details/84314181">https://blog.csdn.net/weixin_42380194/article/details/84314181</a></p>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/fiddler/">fiddler</a>
-                    
-                  </div>
-                
+
+
+
               </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2023/03/14/pgsql%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">k6系列之生命周期以及变量传递</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2022/03/06/Jmeter%20Functions%20and%20Variables/">
-                        <span class="hidden-mobile">转行后首次使用Jmeter----基本使用</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
             </div>
-
-            
-          </article>
+          </div>
         </div>
       </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
     
 
     
@@ -384,15 +277,9 @@
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 
