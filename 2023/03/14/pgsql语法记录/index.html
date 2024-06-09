@@ -183,7 +183,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      316 字
+      359 字
     </span>
   
 
@@ -193,7 +193,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      6
        分钟
     </span>
   
@@ -235,6 +235,7 @@
 <li>查询指定某个字段大于某个值<br><code>select * from &quot;Item&quot; where  (&quot;Item&quot;.values-&gt;&gt;&#39;r_man_hour_plugin_date&#39;)::int8 &gt; 1679500700000;</code></li>
 <li>查询r_man_hour_plugin_date<br><code>select values-&gt;&gt;&#39;DataQuotecrtttt&#39;, values-&gt;&gt;&#39;remote_data_quote_field_type123&#39; from &quot;Item&quot;  </code><br>假设数据为[{“status”: “approved”, “comment”: “”, “approver”: “I719aTBelK”, “approvalTime”: 1697018720199}]</li>
 <li>查询approvalTime<br><code>SELECT aa-&gt;0-&gt;&#39;approvalTime&#39; AS approvalTime FROM your_table;</code></li>
+<li>多层嵌套json查询<br><code>SELECT * FROM my_table  WHERE (my_table.item -&gt; &#39;itemType&#39; -&gt;&gt; &#39;objectId&#39;)::int = 1;</code><br><code>SELECT * FROM my_table  WHERE (my_table.item -&gt;&gt; &#39;itemType&#39;)::json -&gt;&gt; &#39;objectId&#39; = &#39;1&#39;;</code></li>
 </ul>
 
             </div>
