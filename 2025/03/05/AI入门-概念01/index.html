@@ -17,7 +17,7 @@
   <meta name="author" content="Suixiang Chen">
   <meta name="keywords" content="">
   
-  <title>我的工具篇 - 陈随想</title>
+  <title>AI入门-- 概念01 - 陈随想</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -161,7 +161,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="我的工具篇">
+            <span class="h2" id="subtitle" title="AI入门-- 概念01">
               
             </span>
 
@@ -171,8 +171,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2024-08-06 22:09" pubdate>
-        2024年8月6日 晚上
+      <time datetime="2025-03-05 22:09" pubdate>
+        2025年3月5日 晚上
       </time>
     </span>
   
@@ -183,7 +183,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      208 字
+      1.1k 字
     </span>
   
 
@@ -193,7 +193,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      13
        分钟
     </span>
   
@@ -223,41 +223,43 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">我的工具篇</h1>
+            <h1 style="display: none">AI入门-- 概念01</h1>
             
             <div class="markdown-body">
-              <h3 id="效率"><a href="#效率" class="headerlink" title="效率"></a>效率</h3><ul>
-<li><p><a target="_blank" rel="noopener" href="https://apps.microsoft.com/detail/9mspc6mp8fm4?SilentAuth=1&wa=wsignin1.0&hl=zh-cn&gl=CN">whiteboard</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://zh.snipaste.com/">snipaste</a></p>
-</li>
-<li><p>xmind</p>
-</li>
-<li><p>winmerge 差异对比</p>
-</li>
+              <h3 id="AI分类"><a href="#AI分类" class="headerlink" title="AI分类"></a>AI分类</h3><ol>
+<li>NLP（Natural Language Processing）: 是AI的一个子领域，专注于使计算机能够理解、解释和生成人类语言。GPT和ChatGPT都是NLP领域的技术成果。</li>
+<li>LLM（Large Language Model）: 是指包含数亿甚至更多参数的语言模型，它们在大量文本数据上进行训练，以理解和生成自然语言。GPT系列模型就是LLM的代表。</li>
+<li>GPT（Generative Pre-trained Transformer）: 是一种自然语言处理（NLP）的模型，由OpenAI开发。GPT的目标是理解和生成人类的自然语言，通过在大量文本数据上进行预训练，学习语言的各种模式和知识。</li>
+<li>ChatGPT: 是基于GPT模型构建的聊天机器人，能够生成文本，回答问题和进行自然语言对话。它是GPT模型的一个具体应用实例，用于实现对话任务。除了 GPT 还有其他的很多优秀的模型，如 Google 的 Genmini，Meta 开源的 Llama 等等。</li>
+<li>AIGC（AI Generated Content）: 是指利用AI技术自动生成的内容，例如文本、图像、音乐等。这是一种应用AI技术生成新内容的方法，可以看作是AI在创意产业中的应用。</li>
+<li>LangChain : 是一个AI 开发框架，专注于构建由语言模型驱动的应用程序。它提供了一系列的组件和用例特定链，以帮助开发者创建聊天机器人、智能问答工具、摘要服务等应用程序。LangChain 可以与大型语言模型（如 GPT-3）结合使用，通过提供 Prompt templates、LLMs、Agents 和 Memory 等模块化的抽象组件，来构建高级的 AI 应用</li>
+<li>Ollama 是一个开源的大型语言模型服务工具，它允许用户快速在本地运行大语言模型（如 Llama 3）。Ollama 旨在简化 AI 模型的开发和使用过程，使得无论是 AI 专业人士还是新手都能轻松地使用和开发 AI 应用。Ollama 支持多种主流模型，并且提供了与 OpenAI API 兼容的框架，让开发者可以更容易地将现有应用程序与 Ollama 相连接<br>AGI（Artificial General Intelligence）: 是指能够执行任何人类智能任务的机器智能，是一种理论上的AI形式，目前还未实现。AGI与目前普遍存在的专用或窄AI（ANI）不同，后者只能在特定任务上表现出智能</li>
+</ol>
+<h3 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h3><ul>
+<li>base LLM。这类是说，预测下一个最可能出现的词。假如你给一个指令，法国的首都是什么。根据网上文章，LLM可能会给你：法国最大的城市是什么。</li>
+<li>instruction TunedLLM。这个就是指令学习LLM。遵循指令返回。假如你给一个指令，法国的首都是什么，它就告诉你是巴黎。这类是目前大多数的研究方向。</li>
 </ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><ul>
-<li><p><a target="_blank" rel="noopener" href="https://www.docker.com/products/docker-desktop/">docker</a></p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository</span><br><span class="hljs-comment"># https://docs.docker.com/desktop/install/ubuntu/</span><br>sudo apt-get update<br>sudo apt-get install ca-certificates curl<br>sudo install -m <span class="hljs-number">0755</span> -d <span class="hljs-regexp">/etc/</span>apt/keyrings<br><br>curl -fsSL https:<span class="hljs-regexp">//</span>download.docker.com<span class="hljs-regexp">/linux/u</span>buntu<span class="hljs-regexp">/gpg | sudo gpg --dearmor -o /u</span>sr<span class="hljs-regexp">/share/</span>keyrings/docker-archive-keyring.gpg<br><br>echo \<br>  <span class="hljs-string">&quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \</span><br><span class="hljs-string">  $(. /etc/os-release &amp;&amp; echo &quot;</span><span class="hljs-variable">$VERSION_CODENAME</span><span class="hljs-string">&quot;) stable&quot;</span> | \<br>  sudo tee <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list.d/</span>docker.list &gt; <span class="hljs-regexp">/dev/</span>null<br><br>sudo apt-get update<br>sudo apt-get install docker-ce<br><br></code></pre></td></tr></table></figure></li>
-<li><p>wsl2</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim"># http<span class="hljs-variable">s:</span>//learn.microsoft.<span class="hljs-keyword">com</span>/zh-<span class="hljs-keyword">cn</span>/windows/wsl/install<br>wsl --install<br></code></pre></td></tr></table></figure></li>
-<li><p><a target="_blank" rel="noopener" href="https://www.python.org/downloads/">python</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://go.dev/doc/install">go</a><br><a target="_blank" rel="noopener" href="https://chensuixiang.cn/2021/08/02/GO%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88VSCODE%E7%AF%87%EF%BC%89/">环境配置</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://git-scm.com/downloads">git</a></p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta"># https:<span class="hljs-comment">//juejin.cn/post/6999630383130083358</span></span><br><br></code></pre></td></tr></table></figure>
-<h3 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h3></li>
-<li><p>vscode<br><a target="_blank" rel="noopener" href="https://code.visualstudio.com/">下载地址</a><br>设置 PYTHONIOENCODING 环境变量：<br>在“系统变量”或“用户变量”中，点击“新建”。<br>变量名输入 PYTHONIOENCODING，变量值输入 utf-8。</p>
-</li>
-<li><p>apifox<br><a target="_blank" rel="noopener" href="https://apifox.com/">下载地址</a></p>
-</li>
-<li><p>datagrip</p>
-</li>
+<p>这里提到了一种叫做 RLHF 的技术用来完善LLM训练强化学习。暂时不清楚啥是RLHF。暂且放一边。</p>
+<h3 id="提示工程-prompts"><a href="#提示工程-prompts" class="headerlink" title="提示工程 prompts"></a>提示工程 prompts</h3><p><a target="_blank" rel="noopener" href="https://learn.deeplearning.ai/courses/chatgpt-prompt-eng/lesson/zi9lz/guidelines">官网传递</a>《面向开发者的 ChatGPT 提示工程》教程<br>建议食用方式：bilibili搜同名教程</p>
+<p>根据视频总结，如何写清晰具体的prompts</p>
+<h5 id="清晰具体的指令"><a href="#清晰具体的指令" class="headerlink" title="清晰具体的指令"></a>清晰具体的指令</h5><ol>
+<li>分隔符（看官方例子很好理解，就是具体让模型知道具体的指令文字，避免被干扰）</li>
+</ol>
+<ul>
+<li>Triple quotes (“”””) (三引号)</li>
+<li>Triple backticks (“```”) (三个反引号)</li>
+<li>Triple dashes (“—“) (三个短横线)</li>
+<li>Angle brackets (“&lt; &gt;”) (尖括号)</li>
+<li>XML tags (“<tag> </tag>“) (XML 标签)<br>XML标签是XML语言中的基本组成单元，用于标记和描述数据。XML标签通常成对出现，包括开始标签和结束标签。</li>
 </ul>
-<h3 id="办公"><a href="#办公" class="headerlink" title="办公"></a>办公</h3><ul>
-<li>微软365 <a href="https://link.zhihu.com/?target=https://c2rsetup.officeapps.live.com/c2r/download.aspx?productReleaseID=O365BusinessRetail&platform=X64&language=zh-cn">下载地址</a></li>
-<li>金山办公校园青春版</li>
+<ol start="2">
+<li>结构化输出（这个更好理解了，让它返回JSON XML之类的格式）</li>
+<li>要求检查条件是否满足</li>
+<li>简要提示语（其实就是，你是一个资深律师，现在你XX）<br>总结，不如看这个： <a target="_blank" rel="noopener" href="https://github.com/RUCAIBox/LLMSurvey/blob/main/Prompts/README.md">https://github.com/RUCAIBox/LLMSurvey/blob/main/Prompts/README.md</a><h5 id="给LLM更多时间思考"><a href="#给LLM更多时间思考" class="headerlink" title="给LLM更多时间思考"></a>给LLM更多时间思考</h5></li>
+</ol>
+<ul>
+<li>让模型按照某些步骤来做<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs applescript">Your task <span class="hljs-keyword">is</span> <span class="hljs-keyword">to</span> perform <span class="hljs-keyword">the</span> following actions:<br><br>Summarize <span class="hljs-keyword">the</span> following <span class="hljs-built_in">text</span> delimited <span class="hljs-keyword">by</span> &lt;&gt;&lt;&gt; <span class="hljs-keyword">with</span> <span class="hljs-number">1</span> sentence.<br><br>Translate <span class="hljs-keyword">the</span> summary <span class="hljs-keyword">into</span> French.<br><br>List each <span class="hljs-built_in">name</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> French summary.<br><br>Output a json object <span class="hljs-keyword">that</span> <span class="hljs-keyword">contains</span> <span class="hljs-keyword">the</span> following keys: french_summary, num_names.<br><br>Use <span class="hljs-keyword">the</span> following format:<br><br>Text: &lt;<span class="hljs-built_in">text</span> <span class="hljs-keyword">to</span> <span class="hljs-built_in">summarize</span>&gt;<br><br>Summary: &lt;summary&gt;<br><br>Translation: &lt;summary translation&gt;<br><br>Names: &lt;<span class="hljs-built_in">list</span> <span class="hljs-keyword">of</span> names <span class="hljs-keyword">in</span> Italian summary&gt;<br><br>Output JSON: &lt;json <span class="hljs-keyword">with</span> summary <span class="hljs-keyword">and</span> num_names&gt;<br><br>Text: &lt;&#123;<span class="hljs-built_in">text</span>&#125;&gt;<br></code></pre></td></tr></table></figure></li>
+<li>Instruct the model to work out its own solution before rushing to a conclusion 指示模型在匆忙得出结论之前，先独立思考并找出自己的解决方案</li>
 </ul>
 
             </div>
@@ -265,6 +267,13 @@
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/transformers/">transformers</a>
+                    
+                  </div>
                 
               </div>
               
@@ -279,18 +288,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/08/07/wsl%E9%83%A8%E7%BD%B2k8s/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">wsl部署k8s</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/09/k6%E7%B3%BB%E5%88%97%E4%B9%8Bwebsocket%E5%AE%9E%E6%88%98-%E5%9C%A8%E7%BA%BF%E5%8D%8F%E5%90%8C%E6%96%87%E6%A1%A3%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E4%BB%A5%E5%8F%8A%E5%8E%8B%E6%B5%8B/">
-                        <span class="hidden-mobile">k6系列之websocket实战--在线协同文档的自动化以及压测</span>
+                      <a href="/2025/03/05/AI%E5%85%A5%E9%97%A8-%E9%A2%84%E8%AE%AD%E7%BB%8302/">
+                        <span class="hidden-mobile">transformers pipeline Trainer类</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

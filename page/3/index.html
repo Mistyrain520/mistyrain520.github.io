@@ -180,6 +180,146 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/10/01/wsl2%E4%BB%A3%E7%90%86/" target="_self">
+          wsl2代理
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/10/01/wsl2%E4%BB%A3%E7%90%86/" target="_self">
+          
+          
+            
+          
+          123456//注意写本机地址export ALL_PROXY=&quot;http://192.168.2.238:7890&quot;//测试curl https://www:google.com//取消代理export ALL_PROXY=
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-01 14:40" pubdate>
+              2023-10-01
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/wsl/">wsl</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/01/k6%E7%B3%BB%E5%88%97%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87-influxDB+grafana/" target="_self">
+          k6系列前置准备--influxDB
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/10/01/k6%E7%B3%BB%E5%88%97%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87-influxDB+grafana/" target="_self">
+          
+          
+            
+          
+          安装123456789//创建一个挂载数据用的目录mkdir -p ./influxdb/influxdb-docker-data-volume//拉个镜像，就1.8版本docker pull influxdb:1.8//启动一下呗docker run --name influxdb1.8 -d -p 8086:8086 -v $PWD/influxdb-docker-data-volume:/v
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-01 13:19" pubdate>
+              2023-10-01
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/k6/">k6</a>
+            
+              <a href="/tags/influxDB/">influxDB</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/09/21/%E6%96%87%E6%9C%AC%E6%A0%87%E8%AF%86%E7%AC%A6/" target="_self">
+          文本标识符
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/09/21/%E6%96%87%E6%9C%AC%E6%A0%87%E8%AF%86%E7%AC%A6/" target="_self">
+          
+          
+            
+          
+          以下是一些文本标识符及其对应的二进制字符串：
+
+STX (Start of Text)：\x02
+ETX (End of Text)：\x03
+EOT (End of Transmission)：\x04
+ENQ (Enquiry)：\x05
+ACK (Acknowledgement)：\x06
+BEL (Bell)：\x07
+BS (Backspace)：\x08
+HT (Horizontal 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-21 17:04" pubdate>
+              2023-09-21
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/ASCII/">ASCII</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/09/18/wsl%E8%BF%81%E7%A7%BB/" target="_self">
           wsl迁移
         </a>
@@ -506,139 +646,6 @@ wsl2为啥
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E8%AF%97%E6%AD%8C/">诗歌</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/12/hexo%EF%BC%88%E5%9D%91%E4%B8%80%EF%BC%89/" target="_self">
-          hexo（坑一）
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/08/12/hexo%EF%BC%88%E5%9D%91%E4%B8%80%EF%BC%89/" target="_self">
-          
-          
-            
-          
-          转载来自https://rs11.xyz/articles/2.html“hexo d” 部署的时候遇到权限问题，报错无法读取远程仓库
-1234- sudo rm -rf .deploy_git- hexo clean- hexo g- hexo d
-访问4040，没有配置CNAME方式一：github  setting  Pages Custom domain方式二： 在source下新建CNA
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-12 18:45" pubdate>
-              2023-08-12
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/hexo%E8%B8%A9%E5%9D%91/">hexo踩坑</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/12/web%E6%80%A7%E8%83%BD/" target="_self">
-          web性能
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/08/12/web%E6%80%A7%E8%83%BD/" target="_self">
-          
-          
-            
-          
-          什么是内存泄露不再用到的对象内存，没有及时被回收时,就会产生内存泄露
-常见的内存泄漏
-不正常闭包1234567891011function fn2()&#123;  let test = new Array(1000).fill(&#x27;isboyjc&#x27;)  return function()&#123;    console.log(test)    return test  &#
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-12 17:38" pubdate>
-              2023-08-12
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%80%A7%E8%83%BD/">性能</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/08/12/go-%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8D%A0%E4%BD%8D%E7%AC%A6%E3%80%81net%E7%94%A8%E6%B3%95/" target="_self">
-          go``中使用占位符、net用法
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/08/12/go-%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8D%A0%E4%BD%8D%E7%AC%A6%E3%80%81net%E7%94%A8%E6%B3%95/" target="_self">
-          
-          
-            
-          
-          go``中使用占位符、net用法12345678910111213141516171819202122232425262728//&#123;&#123;.Itemname&#125;&#125;两个中括号import (	&quot;strconv&quot;    &quot;text/template&quot;    &quot;strings&quot;)type Test struct
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-12 17:37" pubdate>
-              2023-08-12
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/go/">go</a>
             
           </div>
         
