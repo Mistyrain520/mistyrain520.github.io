@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Suixiang Chen">
+  <meta name="keywords" content="">
+  
+  <title>k6+k8s分布式 - 陈随想</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"mistyrain520.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":140,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>陈随想</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/background1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="k6+k8s分布式">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2025-12-07 22:10" pubdate>
+        2025年12月7日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      568 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">k6+k8s分布式</h1>
+            
+            <div class="markdown-body">
+              <h4 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h4><ul>
+<li>wsl2</li>
+<li>kind</li>
+<li>k8s</li>
+<li>k6 Operator(方案1)</li>
+<li>k8s worker deoployment（方案2）<h4 id="阿里云镜像仓库"><a href="#阿里云镜像仓库" class="headerlink" title="阿里云镜像仓库"></a>阿里云镜像仓库</h4>由于经常遇到<code>time out</code>问题，故在阿里云留个档。<br><code>https://cr.console.aliyun.com/cn-guangzhou/instance/repositories</code><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">$ docker login --username=dingtalk_yqsosa crpi-mstj0ugnrdkhzm1r<span class="hljs-selector-class">.cn-guangzhou</span><span class="hljs-selector-class">.personal</span><span class="hljs-selector-class">.cr</span><span class="hljs-selector-class">.aliyuncs</span><span class="hljs-selector-class">.com</span><br>$ docker tag <span class="hljs-selector-attr">[ImageId]</span> crpi-mstj0ugnrdkhzm1r<span class="hljs-selector-class">.cn-guangzhou</span><span class="hljs-selector-class">.personal</span><span class="hljs-selector-class">.cr</span><span class="hljs-selector-class">.aliyuncs</span>.com/chensuixaing/k6:<span class="hljs-selector-attr">[镜像版本号]</span><br>$ docker push crpi-mstj0ugnrdkhzm1r<span class="hljs-selector-class">.cn-guangzhou</span><span class="hljs-selector-class">.personal</span><span class="hljs-selector-class">.cr</span><span class="hljs-selector-class">.aliyuncs</span>.com/chensuixaing/k6:<span class="hljs-selector-attr">[镜像版本号]</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="多cluster部署"><a href="#多cluster部署" class="headerlink" title="多cluster部署"></a>多cluster部署</h4><h6 id="wsl2中尝试"><a href="#wsl2中尝试" class="headerlink" title="wsl2中尝试"></a>wsl2中尝试</h6><ul>
+<li><code>kind create cluster --name k6-kind-cluster --config kind-3nodes.yaml</code></li>
+<li>kind delete cluster –name k6-kind-cluster<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">//尝试在wsl2中通过kind创建集群，结果</span> <span class="hljs-string">get</span> <span class="hljs-string">node一直notready，最终放弃改换其他方式了</span><br><span class="hljs-attr">kind:</span> <span class="hljs-string">Cluster</span><br><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">kind.x-k8s.io/v1alpha4</span><br><span class="hljs-attr">nodes:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">role:</span> <span class="hljs-string">control-plane</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">role:</span> <span class="hljs-string">worker</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">role:</span> <span class="hljs-string">worker</span><br></code></pre></td></tr></table></figure>
+<h6 id="docker-desktop中尝试"><a href="#docker-desktop中尝试" class="headerlink" title="docker desktop中尝试"></a>docker desktop中尝试</h6></li>
+<li>设置中可以直接开启，看日志也是pull这个镜像来实现的。需要梯子，最好手动pull。<code>docker pull docker/desktop-cloud-provider-kind:v0.3.0-desktop.3</code></li>
+<li>无法找到docker-desktop集群<code>kubectl config use-context docker-desktop</code><figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig">//解决方式<br><span class="hljs-string">1</span>、确认<span class="hljs-string">docker</span> <span class="hljs-string">desktop</span>中<span class="hljs-string">node</span>节点均正常<br><span class="hljs-string">2</span>、设置-<span class="hljs-string">resources-wsl</span> <span class="hljs-string">integration</span>中必须启用 <span class="hljs-string">ubuntu</span><br><span class="hljs-string">3</span>、临时测试 <span class="hljs-string">kubectl</span> <span class="hljs-built_in">--kubeconfig</span> /<span class="hljs-string">mnt</span>/<span class="hljs-string">c</span>/<span class="hljs-string">Users</span>/<span class="hljs-string">12986</span>/.<span class="hljs-string">kube</span>/<span class="hljs-string">config</span> <span class="hljs-string">get</span> <span class="hljs-string">node</span><br><span class="hljs-string">4</span>、<span class="hljs-string">echo</span> <span class="hljs-string">&#x27;export KUBECONFIG=&quot;/mnt/c/Users/12986/.kube/config&quot;&#x27;</span> &gt;&gt; ~/.<span class="hljs-string">bashrc</span><br><span class="hljs-string">5</span>、<span class="hljs-string">source</span> ~/.<span class="hljs-string">bashrc</span><br><br><span class="hljs-string">kubectl</span> <span class="hljs-string">config</span> <span class="hljs-built_in">get-contexts</span><br><span class="hljs-string">kubectl</span> <span class="hljs-string">config</span> <span class="hljs-string">use-context</span> <span class="hljs-string">docker-desktop</span><br></code></pre></td></tr></table></figure>
+<h4 id="应用部署"><a href="#应用部署" class="headerlink" title="应用部署"></a>应用部署</h4><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><br>kubectl <span class="hljs-built_in">apply</span> -f k6-worker-deployment.yaml<br>kubectl <span class="hljs-built_in">apply</span> -f k6-worker-service.yaml<br>kubectl <span class="hljs-built_in">delete</span> -f k6-worker-deployment.yaml<br>kubectl <span class="hljs-built_in">delete</span> -f k6-worker-service.yaml<br>kubectl <span class="hljs-built_in">get</span> deployments<br>kubectl <span class="hljs-built_in">get</span> services<br></code></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-comment">// k6-worker-deployment.yaml</span><br><span class="hljs-symbol">apiVersion:</span> apps/v1<br><span class="hljs-symbol">kind:</span> Deployment<br><span class="hljs-symbol">metadata:</span><br><span class="hljs-symbol">  name:</span> k6-workers<br><span class="hljs-symbol">spec:</span><br><span class="hljs-symbol">  replicas:</span> <span class="hljs-number">3</span><br><span class="hljs-symbol">  selector:</span><br><span class="hljs-symbol">    matchLabels:</span><br><span class="hljs-symbol">      app:</span> k6-worker<br><span class="hljs-symbol">  template:</span><br><span class="hljs-symbol">    metadata:</span><br><span class="hljs-symbol">      labels:</span><br><span class="hljs-symbol">        app:</span> k6-worker<br><span class="hljs-symbol">    spec:</span><br><span class="hljs-symbol">      containers:</span><br>      - name: k6-worker-container<br><span class="hljs-symbol">        image:</span> crpi-mstj0ugnrdkhzm1r.cn-guangzhou.personal.cr.aliyuncs.com<span class="hljs-meta-keyword">/chensuixaing/</span>k6:<span class="hljs-number">20251206</span><br><span class="hljs-symbol">        command:</span> [<span class="hljs-string">&quot;./k6&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>, <span class="hljs-string">&quot;dummy.js&quot;</span>]<br><span class="hljs-symbol">        imagePullPolicy:</span> Always<br><span class="hljs-symbol">        env:</span><br>        - name: K6_WORKER<br><span class="hljs-symbol">          value:</span> <span class="hljs-string">&quot;true&quot;</span><br><span class="hljs-symbol">        ports:</span><br>        - containerPort: <span class="hljs-number">6565</span><br><span class="hljs-symbol">          name:</span> k6-dist-port<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-string">//</span> <span class="hljs-string">k6-worker-service.yaml</span><br><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span><br><span class="hljs-attr">kind:</span> <span class="hljs-string">Service</span><br><span class="hljs-attr">metadata:</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">k6-worker-service</span><br><span class="hljs-attr">spec:</span><br>  <span class="hljs-attr">selector:</span><br>    <span class="hljs-attr">app:</span> <span class="hljs-string">k6-worker</span><br>  <span class="hljs-attr">ports:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">protocol:</span> <span class="hljs-string">TCP</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-number">6565</span><br>    <span class="hljs-attr">targetPort:</span> <span class="hljs-number">6565</span><br><br></code></pre></td></tr></table></figure>
+<h4 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h4></li>
+</ul>
+<ol>
+<li>我想要手动执行压测，而不是apply之后直接执行</li>
+</ol>
+<ul>
+<li>k6 Operator似乎可以实现，但由于wsl2环境未能打通，暂未执行</li>
+<li>实际上不一定要追求手动同时触发，多个pods同时执行，相差不了多少时间。</li>
+<li>k8s Job 或 CronJob</li>
+</ul>
+<ol start="2">
+<li>日志的聚合</li>
+</ol>
+<ul>
+<li>官网有相关<code>https://grafana.com/docs/k6/latest/set-up/set-up-distributed-k6/usage/extensions/</code></li>
+<li>应该单独起个influxdb，然后通过grafana进行聚合。dcokerfile中应当调整run命令，增加<code>--out influxdb=http://&lt;host&gt;:&lt;port&gt;/&lt;database&gt;</code>去尝试。有待实际行动。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/k6/">k6</a>
+                    
+                      <a class="hover-with-bg" href="/tags/k8s/">k8s</a>
+                    
+                      <a class="hover-with-bg" href="/tags/grpc/">grpc</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/12/06/k6-grpc/">
+                        <span class="hidden-mobile">k6 grpc</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

@@ -17,7 +17,7 @@
   <meta name="author" content="Suixiang Chen">
   <meta name="keywords" content="">
   
-  <title>AI入门-- 概念01 - 陈随想</title>
+  <title>k6 grpc - 陈随想</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -161,7 +161,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="AI入门-- 概念01">
+            <span class="h2" id="subtitle" title="k6 grpc">
               
             </span>
 
@@ -171,8 +171,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2025-03-05 22:09" pubdate>
-        2025年3月5日 晚上
+      <time datetime="2025-12-06 18:09" pubdate>
+        2025年12月6日 晚上
       </time>
     </span>
   
@@ -183,7 +183,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      534 字
     </span>
   
 
@@ -193,7 +193,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      8
        分钟
     </span>
   
@@ -223,43 +223,19 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">AI入门-- 概念01</h1>
+            <h1 style="display: none">k6 grpc</h1>
             
             <div class="markdown-body">
-              <h3 id="AI分类"><a href="#AI分类" class="headerlink" title="AI分类"></a>AI分类</h3><ol>
-<li>NLP（Natural Language Processing）: 是AI的一个子领域，专注于使计算机能够理解、解释和生成人类语言。GPT和ChatGPT都是NLP领域的技术成果。</li>
-<li>LLM（Large Language Model）: 是指包含数亿甚至更多参数的语言模型，它们在大量文本数据上进行训练，以理解和生成自然语言。GPT系列模型就是LLM的代表。</li>
-<li>GPT（Generative Pre-trained Transformer）: 是一种自然语言处理（NLP）的模型，由OpenAI开发。GPT的目标是理解和生成人类的自然语言，通过在大量文本数据上进行预训练，学习语言的各种模式和知识。</li>
-<li>ChatGPT: 是基于GPT模型构建的聊天机器人，能够生成文本，回答问题和进行自然语言对话。它是GPT模型的一个具体应用实例，用于实现对话任务。除了 GPT 还有其他的很多优秀的模型，如 Google 的 Genmini，Meta 开源的 Llama 等等。</li>
-<li>AIGC（AI Generated Content）: 是指利用AI技术自动生成的内容，例如文本、图像、音乐等。这是一种应用AI技术生成新内容的方法，可以看作是AI在创意产业中的应用。</li>
-<li>LangChain : 是一个AI 开发框架，专注于构建由语言模型驱动的应用程序。它提供了一系列的组件和用例特定链，以帮助开发者创建聊天机器人、智能问答工具、摘要服务等应用程序。LangChain 可以与大型语言模型（如 GPT-3）结合使用，通过提供 Prompt templates、LLMs、Agents 和 Memory 等模块化的抽象组件，来构建高级的 AI 应用</li>
-<li>Ollama 是一个开源的大型语言模型服务工具，它允许用户快速在本地运行大语言模型（如 Llama 3）。Ollama 旨在简化 AI 模型的开发和使用过程，使得无论是 AI 专业人士还是新手都能轻松地使用和开发 AI 应用。Ollama 支持多种主流模型，并且提供了与 OpenAI API 兼容的框架，让开发者可以更容易地将现有应用程序与 Ollama 相连接<br>AGI（Artificial General Intelligence）: 是指能够执行任何人类智能任务的机器智能，是一种理论上的AI形式，目前还未实现。AGI与目前普遍存在的专用或窄AI（ANI）不同，后者只能在特定任务上表现出智能</li>
-</ol>
-<h3 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h3><ul>
-<li>base LLM。这类是说，预测下一个最可能出现的词。假如你给一个指令，法国的首都是什么。根据网上文章，LLM可能会给你：法国最大的城市是什么。</li>
-<li>instruction TunedLLM。这个就是指令学习LLM。遵循指令返回。假如你给一个指令，法国的首都是什么，它就告诉你是巴黎。这类是目前大多数的研究方向。</li>
-</ul>
-<p>这里提到了一种叫做 RLHF 的技术用来完善LLM训练强化学习。暂时不清楚啥是RLHF。暂且放一边。</p>
-<h3 id="提示工程-prompts"><a href="#提示工程-prompts" class="headerlink" title="提示工程 prompts"></a>提示工程 prompts</h3><p><a target="_blank" rel="noopener" href="https://learn.deeplearning.ai/courses/chatgpt-prompt-eng/lesson/zi9lz/guidelines">官网传递</a>《面向开发者的 ChatGPT 提示工程》教程<br>建议食用方式：bilibili搜同名教程</p>
-<p>根据视频总结，如何写清晰具体的prompts</p>
-<h5 id="清晰具体的指令"><a href="#清晰具体的指令" class="headerlink" title="清晰具体的指令"></a>清晰具体的指令</h5><ol>
-<li>分隔符（看官方例子很好理解，就是具体让模型知道具体的指令文字，避免被干扰）</li>
-</ol>
-<ul>
-<li>Triple quotes (“”””) (三引号)</li>
-<li>Triple backticks (“```”) (三个反引号)</li>
-<li>Triple dashes (“—“) (三个短横线)</li>
-<li>Angle brackets (“&lt; &gt;”) (尖括号)</li>
-<li>XML tags (“<tag> </tag>“) (XML 标签)<br>XML标签是XML语言中的基本组成单元，用于标记和描述数据。XML标签通常成对出现，包括开始标签和结束标签。</li>
-</ul>
-<ol start="2">
-<li>结构化输出（这个更好理解了，让它返回JSON XML之类的格式）</li>
-<li>要求检查条件是否满足</li>
-<li>简要提示语（其实就是，你是一个资深律师，现在你XX）<br>总结，不如看这个： <a target="_blank" rel="noopener" href="https://github.com/RUCAIBox/LLMSurvey/blob/main/Prompts/README.md">https://github.com/RUCAIBox/LLMSurvey/blob/main/Prompts/README.md</a><h5 id="给LLM更多时间思考"><a href="#给LLM更多时间思考" class="headerlink" title="给LLM更多时间思考"></a>给LLM更多时间思考</h5></li>
-</ol>
-<ul>
-<li>让模型按照某些步骤来做<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs applescript">Your task <span class="hljs-keyword">is</span> <span class="hljs-keyword">to</span> perform <span class="hljs-keyword">the</span> following actions:<br><br>Summarize <span class="hljs-keyword">the</span> following <span class="hljs-built_in">text</span> delimited <span class="hljs-keyword">by</span> &lt;&gt;&lt;&gt; <span class="hljs-keyword">with</span> <span class="hljs-number">1</span> sentence.<br><br>Translate <span class="hljs-keyword">the</span> summary <span class="hljs-keyword">into</span> French.<br><br>List each <span class="hljs-built_in">name</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">the</span> French summary.<br><br>Output a json object <span class="hljs-keyword">that</span> <span class="hljs-keyword">contains</span> <span class="hljs-keyword">the</span> following keys: french_summary, num_names.<br><br>Use <span class="hljs-keyword">the</span> following format:<br><br>Text: &lt;<span class="hljs-built_in">text</span> <span class="hljs-keyword">to</span> <span class="hljs-built_in">summarize</span>&gt;<br><br>Summary: &lt;summary&gt;<br><br>Translation: &lt;summary translation&gt;<br><br>Names: &lt;<span class="hljs-built_in">list</span> <span class="hljs-keyword">of</span> names <span class="hljs-keyword">in</span> Italian summary&gt;<br><br>Output JSON: &lt;json <span class="hljs-keyword">with</span> summary <span class="hljs-keyword">and</span> num_names&gt;<br><br>Text: &lt;&#123;<span class="hljs-built_in">text</span>&#125;&gt;<br></code></pre></td></tr></table></figure></li>
-<li>Instruct the model to work out its own solution before rushing to a conclusion 指示模型在匆忙得出结论之前，先独立思考并找出自己的解决方案</li>
+              <h4 id="k6-grpc（基于wsl2环境）"><a href="#k6-grpc（基于wsl2环境）" class="headerlink" title="k6 grpc（基于wsl2环境）"></a>k6 grpc（基于wsl2环境）</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">//起个服务做测试</span><br><span class="hljs-keyword">package</span> server<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;context&quot;</span><br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;log&quot;</span><br>	<span class="hljs-string">&quot;net&quot;</span><br><br>	pb <span class="hljs-string">&quot;golearn/grpc/helloworld&quot;</span> <span class="hljs-comment">// 替换为你的模块路径</span><br><br>	<span class="hljs-string">&quot;google.golang.org/grpc&quot;</span><br>	<span class="hljs-string">&quot;google.golang.org/grpc/reflection&quot;</span><br>)<br><br><span class="hljs-keyword">const</span> (<br>	port = <span class="hljs-string">&quot;:50051&quot;</span><br>)<br><br><span class="hljs-comment">// server 是用于实现 helloworld.Greeter 服务的服务器。</span><br><span class="hljs-keyword">type</span> server <span class="hljs-keyword">struct</span> &#123;<br>	pb.UnimplementedGreeterServer<br>&#125;<br><br><span class="hljs-comment">// SayHello 实现了 Greeter 服务中的 SayHello 方法。</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(s *server)</span> <span class="hljs-title">SayHello</span><span class="hljs-params">(ctx context.Context, in *pb.HelloRequest)</span> <span class="hljs-params">(*pb.HelloReply, error)</span></span> &#123;<br>	log.Printf(<span class="hljs-string">&quot;Received: %v&quot;</span>, in.GetName())<br>	<span class="hljs-keyword">return</span> &amp;pb.HelloReply&#123;Message: <span class="hljs-string">&quot;返回给你: &quot;</span> + in.GetName()&#125;, <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Run</span><span class="hljs-params">()</span></span> &#123;<br>	lis, err := net.Listen(<span class="hljs-string">&quot;tcp&quot;</span>, port)<br>	<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatalf(<span class="hljs-string">&quot;failed to listen: %v&quot;</span>, err)<br>	&#125;<br>	s := grpc.NewServer()<br>	pb.RegisterGreeterServer(s, &amp;server&#123;&#125;)<br><br>	<span class="hljs-comment">// 在 gRPC 服务器上注册 reflection 服务.</span><br>	reflection.Register(s)<br><br>	fmt.Printf(<span class="hljs-string">&quot;Server listening at %v\n&quot;</span>, lis.Addr())<br>	<span class="hljs-keyword">if</span> err := s.Serve(lis); err != <span class="hljs-literal">nil</span> &#123;<br>		log.Fatalf(<span class="hljs-string">&quot;failed to serve: %v&quot;</span>, err)<br>	&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs abnf">//helloworld.proto<br><span class="hljs-attribute">syntax</span> = <span class="hljs-string">&quot;proto3&quot;</span><span class="hljs-comment">;</span><br><br>package helloworld<span class="hljs-comment">;</span><br>option go_package = <span class="hljs-string">&quot;helloworld/helloworld&quot;</span><span class="hljs-comment">;</span><br>service Greeter &#123;<br>  rpc SayHello (HelloRequest) returns (HelloReply) &#123;&#125;<br>&#125;<br><br>message HelloRequest &#123;<br>  string name = <span class="hljs-number">1</span><span class="hljs-comment">;</span><br>&#125;<br><br>message HelloReply &#123;<br>  string message = <span class="hljs-number">1</span><span class="hljs-comment">;</span><br>&#125;<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//cilent.js</span><br><span class="hljs-keyword">const</span> client = createClient();<br>client.load([<span class="hljs-string">&#x27;./grpc&#x27;</span>], <span class="hljs-string">&#x27;helloworld.proto&#x27;</span>);<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createClient</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> grpc.Client();<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">client_test</span> (<span class="hljs-params">message=<span class="hljs-string">&#x27;none message&#x27;</span></span>)</span>&#123;<br>  client.connect(<span class="hljs-string">&#x27;192.168.31.179:50051&#x27;</span>,&#123;<span class="hljs-attr">plaintext</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">timeout</span>: <span class="hljs-string">&#x27;5s&#x27;</span> &#125;);<br>  <br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;connect success&quot;</span>)<br>  <span class="hljs-keyword">const</span> data = &#123;<span class="hljs-string">&#x27;name&#x27;</span>: message&#125;;<br>  <span class="hljs-keyword">const</span> response = client.invoke(<span class="hljs-string">&#x27;helloworld.Greeter/SayHello&#x27;</span>, data);<br><br>  check(response, &#123;<br>    <span class="hljs-string">&#x27;status is OK&#x27;</span>: <span class="hljs-function">(<span class="hljs-params">r</span>) =&gt;</span> r &amp;&amp; r.status === grpc.StatusOK,<br>  &#125;);<br>  <br><br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(response.message));<br><br>  client.close();<br>  sleep(<span class="hljs-number">1</span>);<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h4 id="一些注意"><a href="#一些注意" class="headerlink" title="一些注意"></a>一些注意</h4><ul>
+<li><code>client</code>和<code>load</code>是要在<code>init</code>中的，因此不能写在<code>function</code>或者<code>setup/teardown</code>中。避免在 VU 运行期间发生文件 I/O 操作，从而提高性能和稳定性</li>
+<li>尝试将<code>client</code>和<code>load</code>放在<code>main</code>中，尝试传参<code>client</code>又总是报错<code>object</code>，似乎未能正确识别</li>
+<li>当模拟更多连接，似乎应该每个<code>VU</code>一个连接；不过服务端通常会有连接池概念。</li>
+<li>AI说每个<code>VU</code>多个迭代会共享一个连接池，但是我未证实，权且相信。需要进一步的监控测试才能确认。实际压测估计得调试调试。</li>
+<li>本地机子太容易端口不够报错了，wsl2中用docker，几千都没啥问题。</li>
 </ul>
 
             </div>
@@ -271,7 +247,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/transformers/">transformers</a>
+                      <a class="hover-with-bg" href="/tags/k6/">k6</a>
+                    
+                      <a class="hover-with-bg" href="/tags/grpc/">grpc</a>
                     
                   </div>
                 
@@ -288,9 +266,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/12/06/k6-grpc/">
+                      <a href="/2025/12/07/k6-k8s%E5%88%86%E5%B8%83%E5%BC%8F/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">k6 grpc</span>
+                        <span class="hidden-mobile">k6+k8s分布式</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -298,8 +276,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/05/AI%E5%85%A5%E9%97%A8-%E9%A2%84%E8%AE%AD%E7%BB%8302/">
-                        <span class="hidden-mobile">AI 预训练-02</span>
+                      <a href="/2025/03/05/AI%E5%85%A5%E9%97%A8-%E6%A6%82%E5%BF%B501/">
+                        <span class="hidden-mobile">AI入门-- 概念01</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
